@@ -1,0 +1,33 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "title": "내 Shopify 테마에 오신 것을 환영합니다!",
+        "subtitle": "이것은 제가 만든 첫 번째 섹션입니다",
+        "button_text": "더 알아보기",
+        "button_link": "/",
+        "background_color": "#667eea",
+        "title_color": "#ffffff",
+        "subtitle_color": "#e0e7ff",
+        "button_color": "#5a67d8"
+      }
+    },
+    "main": {
+      "type": "hello-world",
+      "settings": {}
+    },
+  },
+  "order": [
+    "main",
+    "hero"  ]
+}
