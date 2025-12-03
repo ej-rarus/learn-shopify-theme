@@ -12,19 +12,23 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "title": "새로운 컬렉션에 오신 것을 환영합니다",
-        "title_size": 56,
+        "badge": "독립 출판물",
+        "title": "독립 창작자들의 이야기",
+        "subtitle": "당신의 목소리를 세상에 전하세요",
+        "description": "독립 출판물, 아티스트북, 잡지와 더 많은 창작물들을 발견하세요. 소규모 출판사와 개인 창작자들의 독특한 작품 세계.",
+        "background_color": "#2d2d2d",
+        "background_image": null,
+        "overlay_opacity": 50,
         "title_color": "#ffffff",
-        "subtitle": "최신 트렌드를 만나보세요",
-        "subtitle_size": 18,
-        "subtitle_color": "#f0f0f0",
-        "background_color": "#667eea",
-        "overlay_opacity": 30,
-        "height": 600,
-        "button_text": "쇼핑하기",
-        "button_link": "/collections/all",
-        "button_color": "#ffffff",
-        "button_text_color": "#1a202c"
+        "subtitle_color": "#e0e0e0",
+        "description_color": "#c0c0c0",
+        "accent_color": "#c4a36a",
+        "button_1_text": "컬렉션 보기",
+        "button_1_link": "/collections/all",
+        "button_2_text": "아티스트 소개",
+        "button_2_link": "/pages/about",
+        "button_text_color": "#2d2d2d",
+        "show_scroll_indicator": true
       }
     }
   },

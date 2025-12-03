@@ -1,225 +1,347 @@
 {% comment %}
-  Modern Hero Banner Section
-  Full-width hero with background image/color, title, subtitle, and CTA button
+  Independent Publishing Hero Banner
+  Perfect for indie bookstores, zines, and self-published authors
+  Features sophisticated typography and book-focused layout
 {% endcomment %}
 
-<section class="hero-section" style="--hero-height: {{ section.settings.height }}px; --overlay-opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};">
-  <!-- Background Image/Color -->
-  {% if section.settings.background_image %}
-    <img src="{{ section.settings.background_image | image_url: width: 1920 }}"
-         alt="{{ section.settings.background_image.alt }}"
-         class="hero-background-image"
-         srcset="{{ section.settings.background_image | image_url: width: 600 }} 600w,
-                 {{ section.settings.background_image | image_url: width: 1200 }} 1200w,
-                 {{ section.settings.background_image | image_url: width: 1920 }} 1920w"
-         sizes="100vw">
-  {% else %}
-    <div class="hero-background-color" style="background-color: {{ section.settings.background_color }};"></div>
-  {% endif %}
-
-  <!-- Overlay -->
-  <div class="hero-overlay"></div>
+<section class="indie-hero" style="--hero-bg: {{ section.settings.background_color }}; --text-accent: {{ section.settings.accent_color }};">
+  <!-- Background Section -->
+  <div class="indie-hero__background">
+    {% if section.settings.background_image %}
+      <img
+        src="{{ section.settings.background_image | image_url: width: 1920 }}"
+        alt="{{ section.settings.background_image.alt }}"
+        class="indie-hero__image"
+        srcset="{{ section.settings.background_image | image_url: width: 600 }} 600w,
+                {{ section.settings.background_image | image_url: width: 1200 }} 1200w,
+                {{ section.settings.background_image | image_url: width: 1920 }} 1920w"
+        sizes="100vw">
+      <div class="indie-hero__overlay" style="background-color: rgba(0, 0, 0, {{ section.settings.overlay_opacity | divided_by: 100.0 }});"></div>
+    {% else %}
+      <div class="indie-hero__color-bg" style="background-color: var(--hero-bg);"></div>
+    {% endif %}
+  </div>
 
   <!-- Content -->
-  <div class="hero-content">
-    <div class="hero-content-inner">
+  <div class="indie-hero__content">
+    <div class="indie-hero__container">
+      <!-- Badge/Tag -->
+      {% if section.settings.badge != blank %}
+        <div class="indie-hero__badge" style="color: var(--text-accent); border-color: var(--text-accent);">
+          {{ section.settings.badge }}
+        </div>
+      {% endif %}
+
+      <!-- Main Title -->
       {% if section.settings.title != blank %}
-        <h1 class="hero-title" style="color: {{ section.settings.title_color }}; font-size: {{ section.settings.title_size }}px;">
+        <h1 class="indie-hero__title" style="color: {{ section.settings.title_color }};">
           {{ section.settings.title }}
         </h1>
       {% endif %}
 
+      <!-- Subtitle/Tagline -->
       {% if section.settings.subtitle != blank %}
-        <p class="hero-subtitle" style="color: {{ section.settings.subtitle_color }}; font-size: {{ section.settings.subtitle_size }}px;">
+        <p class="indie-hero__subtitle" style="color: {{ section.settings.subtitle_color }};">
           {{ section.settings.subtitle }}
         </p>
       {% endif %}
 
-      {% if section.settings.button_text != blank and section.settings.button_link != blank %}
-        <a href="{{ section.settings.button_link }}"
-           class="hero-button"
-           style="background-color: {{ section.settings.button_color }}; color: {{ section.settings.button_text_color }};">
-          {{ section.settings.button_text }}
-        </a>
+      <!-- Description -->
+      {% if section.settings.description != blank %}
+        <div class="indie-hero__description" style="color: {{ section.settings.description_color }};">
+          {{ section.settings.description }}
+        </div>
+      {% endif %}
+
+      <!-- CTA Buttons -->
+      <div class="indie-hero__buttons">
+        {% if section.settings.button_1_text != blank and section.settings.button_1_link != blank %}
+          <a
+            href="{{ section.settings.button_1_link }}"
+            class="indie-hero__button indie-hero__button--primary"
+            style="background-color: var(--text-accent); color: {{ section.settings.button_text_color }};">
+            {{ section.settings.button_1_text }}
+          </a>
+        {% endif %}
+
+        {% if section.settings.button_2_text != blank and section.settings.button_2_link != blank %}
+          <a
+            href="{{ section.settings.button_2_link }}"
+            class="indie-hero__button indie-hero__button--secondary"
+            style="color: var(--text-accent); border-color: var(--text-accent);">
+            {{ section.settings.button_2_text }}
+          </a>
+        {% endif %}
+      </div>
+
+      <!-- Scroll Indicator -->
+      {% if section.settings.show_scroll_indicator %}
+        <div class="indie-hero__scroll" style="color: {{ section.settings.subtitle_color }};">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 5v14M5 12l7 7 7-7"/>
+          </svg>
+        </div>
       {% endif %}
     </div>
   </div>
 </section>
 
 {% stylesheet %}
-  .hero-section {
+  .indie-hero {
     position: relative;
     width: 100%;
-    height: var(--hero-height, 600px);
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
   }
 
-  .hero-background-image {
+  .indie-hero__background {
     position: absolute;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .indie-hero__image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: 1;
   }
 
-  .hero-background-color {
+  .indie-hero__overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
   }
 
-  .hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
+  .indie-hero__color-bg {
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, var(--overlay-opacity));
-    z-index: 2;
   }
 
-  .hero-content {
+  /* Content */
+  .indie-hero__content {
     position: relative;
-    z-index: 3;
+    z-index: 2;
     width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .indie-hero__container {
+    max-width: 800px;
+    width: 100%;
+    padding: 2rem;
     text-align: center;
   }
 
-  .hero-content-inner {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    align-items: center;
+  /* Badge */
+  .indie-hero__badge {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 0.5rem 1.2rem;
+    border: 1px solid;
+    border-radius: 2px;
+    margin-bottom: 2rem;
   }
 
-  .hero-title {
-    margin: 0;
+  /* Title */
+  .indie-hero__title {
+    margin: 0 0 1.5rem 0;
+    font-size: 4rem;
     font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: -0.5px;
+    line-height: 1.1;
+    letter-spacing: -1px;
   }
 
-  .hero-subtitle {
-    margin: 0;
+  /* Subtitle */
+  .indie-hero__subtitle {
+    margin: 0 0 1.5rem 0;
+    font-size: 1.5rem;
     font-weight: 400;
-    line-height: 1.6;
-    max-width: 600px;
+    line-height: 1.5;
+    letter-spacing: 0.5px;
   }
 
-  .hero-button {
+  /* Description */
+  .indie-hero__description {
+    margin: 0 0 2rem 0;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Buttons */
+  .indie-hero__buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+
+  .indie-hero__button {
     display: inline-block;
     padding: 1rem 2.5rem;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: 600;
     font-size: 1rem;
-    border: 2px solid transparent;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 2px;
     cursor: pointer;
     transition: all 0.3s ease;
+    border: 2px solid transparent;
   }
 
-  .hero-button:hover {
+  .indie-hero__button--primary {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .indie-hero__button--primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .indie-hero__button--secondary {
+    background: transparent;
+    border: 2px solid;
+  }
+
+  .indie-hero__button--secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Scroll Indicator */
+  .indie-hero__scroll {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateX(-50%) translateY(0);
+    }
+    50% {
+      transform: translateX(-50%) translateY(-10px);
+    }
   }
 
   /* Responsive */
   @media (max-width: 768px) {
-    .hero-section {
-      height: var(--hero-height, 400px);
+    .indie-hero {
+      min-height: 80vh;
     }
 
-    .hero-content {
-      padding: 0 1.5rem;
+    .indie-hero__title {
+      font-size: 2.5rem;
     }
 
-    .hero-title {
-      font-size: 2rem;
+    .indie-hero__subtitle {
+      font-size: 1.2rem;
     }
 
-    .hero-subtitle {
+    .indie-hero__description {
       font-size: 1rem;
     }
 
-    .hero-button {
-      padding: 0.75rem 2rem;
-      font-size: 0.95rem;
+    .indie-hero__buttons {
+      gap: 1rem;
+    }
+
+    .indie-hero__button {
+      padding: 0.75rem 1.5rem;
+      font-size: 0.9rem;
     }
   }
 
   @media (max-width: 480px) {
-    .hero-section {
-      height: var(--hero-height, 300px);
+    .indie-hero {
+      min-height: 70vh;
     }
 
-    .hero-title {
-      font-size: 1.5rem;
+    .indie-hero__container {
+      padding: 1.5rem;
     }
 
-    .hero-subtitle {
+    .indie-hero__badge {
+      font-size: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .indie-hero__title {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .indie-hero__subtitle {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .indie-hero__description {
       font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .indie-hero__buttons {
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .indie-hero__button {
+      padding: 0.65rem 1.2rem;
+      font-size: 0.85rem;
+      width: 100%;
+    }
+
+    .indie-hero__scroll {
+      bottom: 1rem;
     }
   }
 {% endstylesheet %}
 
 {% schema %}
 {
-  "name": "Hero Banner",
+  "name": "Indie Publishing Hero",
   "settings": [
     {
       "type": "text",
-      "id": "title",
-      "label": "제목",
-      "default": "새로운 컬렉션에 오신 것을 환영합니다"
-    },
-    {
-      "type": "range",
-      "id": "title_size",
-      "label": "제목 크기",
-      "min": 24,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "default": 56
-    },
-    {
-      "type": "color",
-      "id": "title_color",
-      "label": "제목 색상",
-      "default": "#ffffff"
+      "id": "badge",
+      "label": "배지/태그",
+      "default": "독립 출판물"
     },
     {
       "type": "textarea",
+      "id": "title",
+      "label": "제목",
+      "default": "독립 창작자들의 이야기"
+    },
+    {
+      "type": "text",
       "id": "subtitle",
       "label": "부제목",
-      "default": "최신 트렌드를 만나보세요"
+      "default": "당신의 목소리를 세상에 전하세요"
     },
     {
-      "type": "range",
-      "id": "subtitle_size",
-      "label": "부제목 크기",
-      "min": 14,
-      "max": 32,
-      "step": 2,
-      "unit": "px",
-      "default": 18
-    },
-    {
-      "type": "color",
-      "id": "subtitle_color",
-      "label": "부제목 색상",
-      "default": "#f0f0f0"
+      "type": "textarea",
+      "id": "description",
+      "label": "설명",
+      "default": "독립 출판물, 아티스트북, 잡지와 더 많은 창작물들을 발견하세요. 소규모 출판사와 개인 창작자들의 독특한 작품 세계."
     },
     {
       "type": "image_picker",
@@ -229,56 +351,81 @@
     {
       "type": "color",
       "id": "background_color",
-      "label": "배경 색상 (이미지가 없을 때)",
-      "default": "#667eea"
+      "label": "배경 색상",
+      "default": "#2d2d2d"
     },
     {
       "type": "range",
       "id": "overlay_opacity",
-      "label": "오버레이 투명도",
+      "label": "이미지 오버레이 투명도",
       "min": 0,
       "max": 100,
       "step": 10,
       "unit": "%",
-      "default": 30
-    },
-    {
-      "type": "range",
-      "id": "height",
-      "label": "섹션 높이",
-      "min": 300,
-      "max": 800,
-      "step": 50,
-      "unit": "px",
-      "default": 600
-    },
-    {
-      "type": "text",
-      "id": "button_text",
-      "label": "버튼 텍스트",
-      "default": "쇼핑하기"
-    },
-    {
-      "type": "url",
-      "id": "button_link",
-      "label": "버튼 링크"
+      "default": 50
     },
     {
       "type": "color",
-      "id": "button_color",
-      "label": "버튼 배경색",
+      "id": "title_color",
+      "label": "제목 색상",
       "default": "#ffffff"
     },
     {
       "type": "color",
+      "id": "subtitle_color",
+      "label": "부제목 색상",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "설명 색상",
+      "default": "#c0c0c0"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "강조 색상 (배지, 버튼 테두리)",
+      "default": "#c4a36a"
+    },
+    {
+      "type": "text",
+      "id": "button_1_text",
+      "label": "첫 번째 버튼 텍스트",
+      "default": "컬렉션 보기"
+    },
+    {
+      "type": "url",
+      "id": "button_1_link",
+      "label": "첫 번째 버튼 링크"
+    },
+    {
+      "type": "text",
+      "id": "button_2_text",
+      "label": "두 번째 버튼 텍스트",
+      "default": "아티스트 소개"
+    },
+    {
+      "type": "url",
+      "id": "button_2_link",
+      "label": "두 번째 버튼 링크"
+    },
+    {
+      "type": "color",
       "id": "button_text_color",
-      "label": "버튼 텍스트 색상",
-      "default": "#1a202c"
+      "label": "주요 버튼 텍스트 색상",
+      "default": "#2d2d2d"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_scroll_indicator",
+      "label": "스크롤 표시 보이기",
+      "default": true
     }
   ],
   "presets": [
     {
-      "name": "Hero Banner"
+      "name": "Indie Publishing Hero"
     }
   ]
 }
