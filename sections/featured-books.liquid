@@ -1,0 +1,516 @@
+{% comment %}
+  Featured Books Section
+  Display curated books with product cards
+  Perfect for indie publishing bookstores
+{% endcomment %}
+
+<section class="featured-books">
+  <div class="featured-books__container">
+    <!-- Header -->
+    <div class="featured-books__header">
+      {% if section.settings.title != blank %}
+        <h2 class="featured-books__title" style="color: {{ section.settings.title_color }};">
+          {{ section.settings.title }}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.subtitle != blank %}
+        <p class="featured-books__subtitle" style="color: {{ section.settings.subtitle_color }};">
+          {{ section.settings.subtitle }}
+        </p>
+      {% endif %}
+    </div>
+
+    <!-- Books Grid -->
+    <div class="featured-books__grid">
+      {% for block in section.blocks %}
+        {% if block.type == 'book' %}
+          <div class="book-card" {{ block.shopify_attributes }}>
+            <!-- Book Image -->
+            <div class="book-card__image-wrapper">
+              {% if block.settings.image %}
+                <img
+                  src="{{ block.settings.image | image_url: width: 400 }}"
+                  alt="{{ block.settings.title }}"
+                  class="book-card__image"
+                  loading="lazy">
+              {% else %}
+                <div class="book-card__image-placeholder">
+                  <svg width="100%" height="100%" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="300" height="400" fill="#e2e8f0"/>
+                    <text x="150" y="200" font-size="18" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle">
+                      이미지 없음
+                    </text>
+                  </svg>
+                </div>
+              {% endif %}
+
+              <!-- Overlay Badge -->
+              {% if block.settings.badge != blank %}
+                <div class="book-card__badge" style="background-color: {{ section.settings.accent_color }}; color: {{ section.settings.badge_text_color }};">
+                  {{ block.settings.badge }}
+                </div>
+              {% endif %}
+            </div>
+
+            <!-- Book Info -->
+            <div class="book-card__content">
+              <!-- Title -->
+              <h3 class="book-card__title" style="color: {{ section.settings.text_color }};">
+                {{ block.settings.title }}
+              </h3>
+
+              <!-- Author -->
+              {% if block.settings.author != blank %}
+                <p class="book-card__author" style="color: {{ section.settings.author_color }};">
+                  {{ block.settings.author }}
+                </p>
+              {% endif %}
+
+              <!-- Description -->
+              {% if block.settings.description != blank %}
+                <p class="book-card__description" style="color: {{ section.settings.text_color }};">
+                  {{ block.settings.description }}
+                </p>
+              {% endif %}
+
+              <!-- Price -->
+              <div class="book-card__footer">
+                {% if block.settings.price != blank %}
+                  <span class="book-card__price" style="color: {{ section.settings.accent_color }};">
+                    {{ block.settings.price }}
+                  </span>
+                {% endif %}
+
+                <!-- Link Button -->
+                {% if block.settings.link != blank %}
+                  <a
+                    href="{{ block.settings.link }}"
+                    class="book-card__link"
+                    style="color: {{ section.settings.accent_color }}; border-color: {{ section.settings.accent_color }};">
+                    자세히 보기
+                  </a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <!-- Empty State -->
+    {% if section.blocks.size == 0 %}
+      <div class="featured-books__empty">
+        <p>도서를 추가해주세요.</p>
+      </div>
+    {% endif %}
+
+    <!-- View All Button -->
+    {% if section.settings.view_all_link != blank and section.settings.view_all_text != blank %}
+      <div class="featured-books__footer">
+        <a
+          href="{{ section.settings.view_all_link }}"
+          class="featured-books__button"
+          style="color: {{ section.settings.accent_color }}; border-color: {{ section.settings.accent_color }};">
+          {{ section.settings.view_all_text }}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .featured-books {
+    width: 100%;
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px 0;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  .featured-books__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* Header */
+  .featured-books__header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .featured-books__title {
+    margin: 0 0 0.5rem 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .featured-books__subtitle {
+    margin: 0;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  /* Grid */
+  .featured-books__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  /* Book Card */
+  .book-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .book-card:hover {
+    transform: translateY(-8px);
+  }
+
+  .book-card__image-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 133.33%;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+    border-radius: 4px;
+    background-color: #f5f5f5;
+  }
+
+  .book-card__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .book-card:hover .book-card__image {
+    transform: scale(1.05);
+  }
+
+  .book-card__image-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Badge */
+  .book-card__badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 2px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    z-index: 2;
+  }
+
+  /* Content */
+  .book-card__content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .book-card__title {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .book-card__author {
+    margin: 0 0 0.75rem 0;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .book-card__description {
+    margin: 0 0 1rem 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
+  }
+
+  /* Footer */
+  .book-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e5e7eb;
+  }
+
+  .book-card__price {
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+
+  .book-card__link {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  .book-card__link:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  /* Empty State */
+  .featured-books__empty {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #999;
+  }
+
+  /* Footer Button */
+  .featured-books__footer {
+    text-align: center;
+  }
+
+  .featured-books__button {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 2px solid;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+  }
+
+  .featured-books__button:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .featured-books__container {
+      padding: 0 1.5rem;
+    }
+
+    .featured-books__title {
+      font-size: 2rem;
+    }
+
+    .featured-books__grid {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .book-card__title {
+      font-size: 1.1rem;
+    }
+
+    .book-card__description {
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .featured-books {
+      padding: 2rem 0;
+    }
+
+    .featured-books__container {
+      padding: 0 1rem;
+    }
+
+    .featured-books__title {
+      font-size: 1.5rem;
+    }
+
+    .featured-books__subtitle {
+      font-size: 1rem;
+    }
+
+    .featured-books__grid {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+    }
+
+    .book-card__title {
+      font-size: 1rem;
+    }
+
+    .book-card__author {
+      font-size: 0.8rem;
+    }
+
+    .book-card__description {
+      display: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Featured Books",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "섹션 제목",
+      "default": "추천 도서"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "섹션 부제목",
+      "default": "우리가 엄선한 독립 출판물"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "제목 색상",
+      "default": "#2d2d2d"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "부제목 색상",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "텍스트 색상",
+      "default": "#2d2d2d"
+    },
+    {
+      "type": "color",
+      "id": "author_color",
+      "label": "작가명 색상",
+      "default": "#999999"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "강조 색상",
+      "default": "#c4a36a"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "배지 텍스트 색상",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "배경 색상",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "위쪽 여백",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "아래쪽 여백",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "label": "모두 보기 버튼 텍스트",
+      "default": "모든 도서 보기"
+    },
+    {
+      "type": "url",
+      "id": "view_all_link",
+      "label": "모두 보기 링크"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "book",
+      "name": "도서",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "도서명",
+          "default": "도서 제목"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "작가명",
+          "default": "작가명"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "도서 이미지"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "설명",
+          "default": "도서에 대한 간단한 설명을 입력하세요."
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "가격",
+          "default": "$20"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "배지 (예: New, Sale)",
+          "default": ""
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "도서 링크"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Books"
+    }
+  ]
+}
+{% endschema %}
