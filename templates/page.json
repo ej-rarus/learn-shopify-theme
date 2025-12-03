@@ -17,7 +17,7 @@
       "type": "custom-list",
       "settings": {
         "title": "블로그",
-        "subtitle": "",
+        "subtitle": "최신 소식",
         "show_sample_items": true
       }
     }
