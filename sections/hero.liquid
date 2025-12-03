@@ -1,104 +1,231 @@
 {% comment %}
-  Independent Publishing Hero Banner
-  Perfect for indie bookstores, zines, and self-published authors
-  Features sophisticated typography and book-focused layout
+  Hero Slider Section
+  Multiple slides with swipe/arrow navigation
+  Perfect for indie publishing showcase
 {% endcomment %}
 
-<section class="indie-hero" style="--hero-bg: {{ section.settings.background_color }}; --text-accent: {{ section.settings.accent_color }}; --hero-height: {{ section.settings.height }}px;">
-  <!-- Background Section -->
-  <div class="indie-hero__background">
-    {% if section.settings.background_image %}
-      <img
-        src="{{ section.settings.background_image | image_url: width: 1920 }}"
-        alt="{{ section.settings.background_image.alt }}"
-        class="indie-hero__image"
-        srcset="{{ section.settings.background_image | image_url: width: 600 }} 600w,
-                {{ section.settings.background_image | image_url: width: 1200 }} 1200w,
-                {{ section.settings.background_image | image_url: width: 1920 }} 1920w"
-        sizes="100vw">
-      <div class="indie-hero__overlay" style="background-color: rgba(0, 0, 0, {{ section.settings.overlay_opacity | divided_by: 100.0 }});"></div>
-    {% else %}
-      <div class="indie-hero__color-bg" style="background-color: var(--hero-bg);"></div>
-    {% endif %}
+<section class="hero-slider" data-slider-speed="{{ section.settings.autoplay_speed }}">
+  <!-- Slides -->
+  <div class="hero-slider__wrapper">
+    {% for block in section.blocks %}
+      {% if block.type == 'slide' %}
+        <div class="hero-slide" {{ block.shopify_attributes }}>
+          <!-- Background -->
+          <div class="hero-slide__background">
+            {% if block.settings.background_image %}
+              <img
+                src="{{ block.settings.background_image | image_url: width: 1920 }}"
+                alt="{{ block.settings.background_image.alt }}"
+                class="hero-slide__image"
+                srcset="{{ block.settings.background_image | image_url: width: 600 }} 600w,
+                        {{ block.settings.background_image | image_url: width: 1200 }} 1200w,
+                        {{ block.settings.background_image | image_url: width: 1920 }} 1920w"
+                sizes="100vw">
+              <div class="hero-slide__overlay" style="background-color: rgba(0, 0, 0, {{ block.settings.overlay_opacity | divided_by: 100.0 }});"></div>
+            {% else %}
+              <div class="hero-slide__color-bg" style="background-color: {{ block.settings.background_color }};"></div>
+            {% endif %}
+          </div>
+
+          <!-- Content -->
+          <div class="hero-slide__content">
+            <div class="hero-slide__container">
+              {% if block.settings.badge != blank %}
+                <div class="hero-slide__badge" style="color: {{ section.settings.accent_color }}; border-color: {{ section.settings.accent_color }};">
+                  {{ block.settings.badge }}
+                </div>
+              {% endif %}
+
+              {% if block.settings.title != blank %}
+                <h1 class="hero-slide__title" style="color: {{ block.settings.title_color }};">
+                  {{ block.settings.title }}
+                </h1>
+              {% endif %}
+
+              {% if block.settings.subtitle != blank %}
+                <p class="hero-slide__subtitle" style="color: {{ block.settings.subtitle_color }};">
+                  {{ block.settings.subtitle }}
+                </p>
+              {% endif %}
+
+              {% if block.settings.description != blank %}
+                <div class="hero-slide__description" style="color: {{ block.settings.description_color }};">
+                  {{ block.settings.description }}
+                </div>
+              {% endif %}
+
+              <div class="hero-slide__buttons">
+                {% if block.settings.button_1_text != blank and block.settings.button_1_link != blank %}
+                  <a
+                    href="{{ block.settings.button_1_link }}"
+                    class="hero-slide__button hero-slide__button--primary"
+                    style="background-color: {{ section.settings.accent_color }}; color: {{ block.settings.button_text_color }};">
+                    {{ block.settings.button_1_text }}
+                  </a>
+                {% endif %}
+
+                {% if block.settings.button_2_text != blank and block.settings.button_2_link != blank %}
+                  <a
+                    href="{{ block.settings.button_2_link }}"
+                    class="hero-slide__button hero-slide__button--secondary"
+                    style="color: {{ section.settings.accent_color }}; border-color: {{ section.settings.accent_color }};">
+                    {{ block.settings.button_2_text }}
+                  </a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
   </div>
 
-  <!-- Content -->
-  <div class="indie-hero__content">
-    <div class="indie-hero__container">
-      <!-- Badge/Tag -->
-      {% if section.settings.badge != blank %}
-        <div class="indie-hero__badge" style="color: var(--text-accent); border-color: var(--text-accent);">
-          {{ section.settings.badge }}
-        </div>
-      {% endif %}
+  <!-- Navigation Arrows -->
+  {% if section.blocks.size > 1 %}
+    <button class="hero-slider__prev" aria-label="Previous slide">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M15 19l-7-7 7-7"/>
+      </svg>
+    </button>
+    <button class="hero-slider__next" aria-label="Next slide">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M9 19l7-7-7-7"/>
+      </svg>
+    </button>
 
-      <!-- Main Title -->
-      {% if section.settings.title != blank %}
-        <h1 class="indie-hero__title" style="color: {{ section.settings.title_color }};">
-          {{ section.settings.title }}
-        </h1>
-      {% endif %}
-
-      <!-- Subtitle/Tagline -->
-      {% if section.settings.subtitle != blank %}
-        <p class="indie-hero__subtitle" style="color: {{ section.settings.subtitle_color }};">
-          {{ section.settings.subtitle }}
-        </p>
-      {% endif %}
-
-      <!-- Description -->
-      {% if section.settings.description != blank %}
-        <div class="indie-hero__description" style="color: {{ section.settings.description_color }};">
-          {{ section.settings.description }}
-        </div>
-      {% endif %}
-
-      <!-- CTA Buttons -->
-      <div class="indie-hero__buttons">
-        {% if section.settings.button_1_text != blank and section.settings.button_1_link != blank %}
-          <a
-            href="{{ section.settings.button_1_link }}"
-            class="indie-hero__button indie-hero__button--primary"
-            style="background-color: var(--text-accent); color: {{ section.settings.button_text_color }};">
-            {{ section.settings.button_1_text }}
-          </a>
+    <!-- Dots -->
+    <div class="hero-slider__dots">
+      {% for block in section.blocks %}
+        {% if block.type == 'slide' %}
+          <button class="hero-slider__dot" data-slide="{{ forloop.index0 }}" aria-label="Go to slide {{ forloop.index }}" {% if forloop.first %}class="hero-slider__dot active"{% endif %}></button>
         {% endif %}
-
-        {% if section.settings.button_2_text != blank and section.settings.button_2_link != blank %}
-          <a
-            href="{{ section.settings.button_2_link }}"
-            class="indie-hero__button indie-hero__button--secondary"
-            style="color: var(--text-accent); border-color: var(--text-accent);">
-            {{ section.settings.button_2_text }}
-          </a>
-        {% endif %}
-      </div>
-
-      <!-- Scroll Indicator -->
-      {% if section.settings.show_scroll_indicator %}
-        <div class="indie-hero__scroll" style="color: {{ section.settings.subtitle_color }};">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 5v14M5 12l7 7 7-7"/>
-          </svg>
-        </div>
-      {% endif %}
+      {% endfor %}
     </div>
-  </div>
+  {% endif %}
 </section>
 
+{% javascript %}
+  class HeroSlider {
+    constructor(element) {
+      this.slider = element;
+      this.wrapper = this.slider.querySelector('.hero-slider__wrapper');
+      this.slides = this.slider.querySelectorAll('.hero-slide');
+      this.prevBtn = this.slider.querySelector('.hero-slider__prev');
+      this.nextBtn = this.slider.querySelector('.hero-slider__next');
+      this.dots = this.slider.querySelectorAll('.hero-slider__dot');
+
+      this.currentIndex = 0;
+      this.slideCount = this.slides.length;
+      this.autoplaySpeed = parseInt(this.slider.dataset.sliderSpeed) || 5000;
+      this.autoplayTimer = null;
+
+      if (this.slideCount <= 1) return;
+
+      this.init();
+    }
+
+    init() {
+      this.prevBtn?.addEventListener('click', () => this.prev());
+      this.nextBtn?.addEventListener('click', () => this.next());
+      this.dots.forEach(dot => {
+        dot.addEventListener('click', (e) => this.goToSlide(parseInt(e.target.dataset.slide)));
+      });
+
+      this.wrapper.addEventListener('touchstart', (e) => this.handleTouchStart(e));
+      this.wrapper.addEventListener('touchend', (e) => this.handleTouchEnd(e));
+
+      this.startAutoplay();
+      this.slider.addEventListener('mouseenter', () => this.stopAutoplay());
+      this.slider.addEventListener('mouseleave', () => this.startAutoplay());
+    }
+
+    updateSlider() {
+      const offset = -this.currentIndex * 100;
+      this.wrapper.style.transform = `translateX(${offset}%)`;
+
+      this.dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === this.currentIndex);
+      });
+    }
+
+    next() {
+      this.currentIndex = (this.currentIndex + 1) % this.slideCount;
+      this.updateSlider();
+      this.resetAutoplay();
+    }
+
+    prev() {
+      this.currentIndex = (this.currentIndex - 1 + this.slideCount) % this.slideCount;
+      this.updateSlider();
+      this.resetAutoplay();
+    }
+
+    goToSlide(index) {
+      this.currentIndex = index;
+      this.updateSlider();
+      this.resetAutoplay();
+    }
+
+    handleTouchStart(e) {
+      this.touchStartX = e.touches[0].clientX;
+    }
+
+    handleTouchEnd(e) {
+      const touchEndX = e.changedTouches[0].clientX;
+      const diff = this.touchStartX - touchEndX;
+
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) this.next();
+        else this.prev();
+      }
+    }
+
+    startAutoplay() {
+      if (this.autoplaySpeed > 0) {
+        this.autoplayTimer = setInterval(() => this.next(), this.autoplaySpeed);
+      }
+    }
+
+    stopAutoplay() {
+      if (this.autoplayTimer) {
+        clearInterval(this.autoplayTimer);
+        this.autoplayTimer = null;
+      }
+    }
+
+    resetAutoplay() {
+      this.stopAutoplay();
+      this.startAutoplay();
+    }
+  }
+
+  document.querySelectorAll('.hero-slider').forEach(slider => new HeroSlider(slider));
+{% endjavascript %}
+
 {% stylesheet %}
-  .indie-hero {
+  .hero-slider {
     position: relative;
     width: 100%;
-    min-height: var(--hero-height, 500px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
     overflow: hidden;
     margin-bottom: 60px;
   }
 
-  .indie-hero__background {
+  .hero-slider__wrapper {
+    display: flex;
+    transition: transform 0.6s ease-in-out;
+  }
+
+  .hero-slide {
+    position: relative;
+    width: 100%;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .hero-slide__background {
     position: absolute;
     top: 0;
     left: 0;
@@ -107,13 +234,13 @@
     z-index: 1;
   }
 
-  .indie-hero__image {
+  .hero-slide__image {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
-  .indie-hero__overlay {
+  .hero-slide__overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -121,13 +248,13 @@
     height: 100%;
   }
 
-  .indie-hero__color-bg {
+  .hero-slide__color-bg {
     width: 100%;
     height: 100%;
   }
 
   /* Content */
-  .indie-hero__content {
+  .hero-slide__content {
     position: relative;
     z-index: 2;
     width: 100%;
@@ -137,15 +264,14 @@
     justify-content: center;
   }
 
-  .indie-hero__container {
+  .hero-slide__container {
     max-width: 800px;
     width: 100%;
     padding: 2rem;
     text-align: center;
   }
 
-  /* Badge */
-  .indie-hero__badge {
+  .hero-slide__badge {
     display: inline-block;
     font-size: 0.85rem;
     font-weight: 600;
@@ -157,8 +283,7 @@
     margin-bottom: 2rem;
   }
 
-  /* Title */
-  .indie-hero__title {
+  .hero-slide__title {
     margin: 0 0 1.5rem 0;
     font-size: 4rem;
     font-weight: 700;
@@ -166,8 +291,7 @@
     letter-spacing: -1px;
   }
 
-  /* Subtitle */
-  .indie-hero__subtitle {
+  .hero-slide__subtitle {
     margin: 0 0 1.5rem 0;
     font-size: 1.5rem;
     font-weight: 400;
@@ -175,8 +299,7 @@
     letter-spacing: 0.5px;
   }
 
-  /* Description */
-  .indie-hero__description {
+  .hero-slide__description {
     margin: 0 0 2rem 0;
     font-size: 1.1rem;
     line-height: 1.7;
@@ -185,16 +308,14 @@
     margin-right: auto;
   }
 
-  /* Buttons */
-  .indie-hero__buttons {
+  .hero-slide__buttons {
     display: flex;
     gap: 1.5rem;
     justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: 3rem;
   }
 
-  .indie-hero__button {
+  .hero-slide__button {
     display: inline-block;
     padding: 1rem 2.5rem;
     font-size: 1rem;
@@ -206,111 +327,152 @@
     border: 2px solid transparent;
   }
 
-  .indie-hero__button--primary {
+  .hero-slide__button--primary {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   }
 
-  .indie-hero__button--primary:hover {
+  .hero-slide__button--primary:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   }
 
-  .indie-hero__button--secondary {
+  .hero-slide__button--secondary {
     background: transparent;
     border: 2px solid;
   }
 
-  .indie-hero__button--secondary:hover {
+  .hero-slide__button--secondary:hover {
     background: rgba(255, 255, 255, 0.1);
   }
 
-  /* Scroll Indicator */
-  .indie-hero__scroll {
+  /* Navigation */
+  .hero-slider__prev,
+  .hero-slider__next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 48px;
+    height: 48px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-slider__prev {
+    left: 2rem;
+  }
+
+  .hero-slider__next {
+    right: 2rem;
+  }
+
+  .hero-slider__prev:hover,
+  .hero-slider__next:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+
+  /* Dots */
+  .hero-slider__dots {
     position: absolute;
     bottom: 2rem;
     left: 50%;
     transform: translateX(-50%);
-    animation: bounce 2s infinite;
+    display: flex;
+    gap: 0.75rem;
+    z-index: 10;
   }
 
-  @keyframes bounce {
-    0%, 100% {
-      transform: translateX(-50%) translateY(0);
-    }
-    50% {
-      transform: translateX(-50%) translateY(-10px);
-    }
+  .hero-slider__dot {
+    width: 12px;
+    height: 12px;
+    border: none;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .hero-slider__dot.active {
+    background-color: white;
+    width: 32px;
+    border-radius: 6px;
   }
 
   /* Responsive */
   @media (max-width: 768px) {
-    .indie-hero {
-      min-height: calc(var(--hero-height, 500px) * 0.9);
+    .hero-slide {
+      min-height: 400px;
     }
 
-    .indie-hero__title {
+    .hero-slide__title {
       font-size: 2.5rem;
     }
 
-    .indie-hero__subtitle {
+    .hero-slide__subtitle {
       font-size: 1.2rem;
     }
 
-    .indie-hero__description {
-      font-size: 1rem;
+    .hero-slider__prev,
+    .hero-slider__next {
+      width: 40px;
+      height: 40px;
     }
 
-    .indie-hero__buttons {
-      gap: 1rem;
+    .hero-slider__prev {
+      left: 1rem;
     }
 
-    .indie-hero__button {
-      padding: 0.75rem 1.5rem;
-      font-size: 0.9rem;
+    .hero-slider__next {
+      right: 1rem;
     }
   }
 
   @media (max-width: 480px) {
-    .indie-hero {
-      min-height: calc(var(--hero-height, 500px) * 0.8);
+    .hero-slide {
+      min-height: 300px;
     }
 
-    .indie-hero__container {
+    .hero-slide__container {
       padding: 1.5rem;
     }
 
-    .indie-hero__badge {
-      font-size: 0.75rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .indie-hero__title {
+    .hero-slide__title {
       font-size: 1.75rem;
-      margin-bottom: 1rem;
     }
 
-    .indie-hero__subtitle {
+    .hero-slide__subtitle {
       font-size: 1rem;
-      margin-bottom: 1rem;
     }
 
-    .indie-hero__description {
+    .hero-slide__description {
       font-size: 0.9rem;
-      margin-bottom: 1.5rem;
     }
 
-    .indie-hero__buttons {
+    .hero-slide__buttons {
       gap: 0.75rem;
-      margin-bottom: 2rem;
     }
 
-    .indie-hero__button {
+    .hero-slide__button {
       padding: 0.65rem 1.2rem;
       font-size: 0.85rem;
       width: 100%;
     }
 
-    .indie-hero__scroll {
+    .hero-slider__prev,
+    .hero-slider__next {
+      width: 36px;
+      height: 36px;
+      display: none;
+    }
+
+    .hero-slider__dots {
       bottom: 1rem;
     }
   }
@@ -318,71 +480,8 @@
 
 {% schema %}
 {
-  "name": "Indie Publishing Hero",
+  "name": "Hero Slider",
   "settings": [
-    {
-      "type": "text",
-      "id": "badge",
-      "label": "배지/태그",
-      "default": "독립 출판물"
-    },
-    {
-      "type": "textarea",
-      "id": "title",
-      "label": "제목",
-      "default": "독립 창작자들의 이야기"
-    },
-    {
-      "type": "text",
-      "id": "subtitle",
-      "label": "부제목",
-      "default": "당신의 목소리를 세상에 전하세요"
-    },
-    {
-      "type": "textarea",
-      "id": "description",
-      "label": "설명",
-      "default": "독립 출판물, 아티스트북, 잡지와 더 많은 창작물들을 발견하세요. 소규모 출판사와 개인 창작자들의 독특한 작품 세계."
-    },
-    {
-      "type": "image_picker",
-      "id": "background_image",
-      "label": "배경 이미지"
-    },
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "배경 색상",
-      "default": "#2d2d2d"
-    },
-    {
-      "type": "range",
-      "id": "overlay_opacity",
-      "label": "이미지 오버레이 투명도",
-      "min": 0,
-      "max": 100,
-      "step": 10,
-      "unit": "%",
-      "default": 50
-    },
-    {
-      "type": "color",
-      "id": "title_color",
-      "label": "제목 색상",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "subtitle_color",
-      "label": "부제목 색상",
-      "default": "#e0e0e0"
-    },
-    {
-      "type": "color",
-      "id": "description_color",
-      "label": "설명 색상",
-      "default": "#c0c0c0"
-    },
     {
       "type": "color",
       "id": "accent_color",
@@ -390,53 +489,118 @@
       "default": "#c4a36a"
     },
     {
-      "type": "text",
-      "id": "button_1_text",
-      "label": "첫 번째 버튼 텍스트",
-      "default": "컬렉션 보기"
-    },
-    {
-      "type": "url",
-      "id": "button_1_link",
-      "label": "첫 번째 버튼 링크"
-    },
-    {
-      "type": "text",
-      "id": "button_2_text",
-      "label": "두 번째 버튼 텍스트",
-      "default": "아티스트 소개"
-    },
-    {
-      "type": "url",
-      "id": "button_2_link",
-      "label": "두 번째 버튼 링크"
-    },
-    {
-      "type": "color",
-      "id": "button_text_color",
-      "label": "주요 버튼 텍스트 색상",
-      "default": "#2d2d2d"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_scroll_indicator",
-      "label": "스크롤 표시 보이기",
-      "default": true
-    },
-    {
       "type": "range",
-      "id": "height",
-      "label": "섹션 높이",
-      "min": 300,
-      "max": 800,
-      "step": 50,
-      "unit": "px",
-      "default": 500
+      "id": "autoplay_speed",
+      "label": "자동 슬라이드 속도 (ms, 0=자동슬라이드 비활성화)",
+      "min": 0,
+      "max": 10000,
+      "step": 1000,
+      "unit": "ms",
+      "default": 5000
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "슬라이드",
+      "settings": [
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "배지/태그",
+          "default": "독립 출판물"
+        },
+        {
+          "type": "textarea",
+          "id": "title",
+          "label": "제목",
+          "default": "독립 창작자들의 이야기"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "부제목",
+          "default": "당신의 목소리를 세상에 전하세요"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "설명",
+          "default": "독립 출판물, 아티스트북, 잡지와 더 많은 창작물들을 발견하세요."
+        },
+        {
+          "type": "image_picker",
+          "id": "background_image",
+          "label": "배경 이미지"
+        },
+        {
+          "type": "color",
+          "id": "background_color",
+          "label": "배경 색상",
+          "default": "#2d2d2d"
+        },
+        {
+          "type": "range",
+          "id": "overlay_opacity",
+          "label": "이미지 오버레이 투명도",
+          "min": 0,
+          "max": 100,
+          "step": 10,
+          "unit": "%",
+          "default": 50
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "label": "제목 색상",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "subtitle_color",
+          "label": "부제목 색상",
+          "default": "#e0e0e0"
+        },
+        {
+          "type": "color",
+          "id": "description_color",
+          "label": "설명 색상",
+          "default": "#c0c0c0"
+        },
+        {
+          "type": "text",
+          "id": "button_1_text",
+          "label": "첫 번째 버튼 텍스트",
+          "default": "컬렉션 보기"
+        },
+        {
+          "type": "url",
+          "id": "button_1_link",
+          "label": "첫 번째 버튼 링크"
+        },
+        {
+          "type": "text",
+          "id": "button_2_text",
+          "label": "두 번째 버튼 텍스트",
+          "default": "아티스트 소개"
+        },
+        {
+          "type": "url",
+          "id": "button_2_link",
+          "label": "두 번째 버튼 링크"
+        },
+        {
+          "type": "color",
+          "id": "button_text_color",
+          "label": "주요 버튼 텍스트 색상",
+          "default": "#2d2d2d"
+        }
+      ]
     }
   ],
   "presets": [
     {
-      "name": "Indie Publishing Hero"
+      "name": "Hero Slider"
     }
   ]
 }
