@@ -8,6 +8,27 @@
  * ------------------------------------------------------------
  */
 {
-  "sections": {},
-  "order": []
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "title": "새로운 컬렉션에 오신 것을 환영합니다",
+        "title_size": 56,
+        "title_color": "#ffffff",
+        "subtitle": "최신 트렌드를 만나보세요",
+        "subtitle_size": 18,
+        "subtitle_color": "#f0f0f0",
+        "background_color": "#667eea",
+        "overlay_opacity": 30,
+        "height": 600,
+        "button_text": "쇼핑하기",
+        "button_link": "/collections/all",
+        "button_color": "#ffffff",
+        "button_text_color": "#1a202c"
+      }
+    }
+  },
+  "order": [
+    "hero"
+  ]
 }
