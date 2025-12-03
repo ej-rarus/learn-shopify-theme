@@ -4,7 +4,7 @@
   Features sophisticated typography and book-focused layout
 {% endcomment %}
 
-<section class="indie-hero" style="--hero-bg: {{ section.settings.background_color }}; --text-accent: {{ section.settings.accent_color }};">
+<section class="indie-hero" style="--hero-bg: {{ section.settings.background_color }}; --text-accent: {{ section.settings.accent_color }}; --hero-height: {{ section.settings.height }}px;">
   <!-- Background Section -->
   <div class="indie-hero__background">
     {% if section.settings.background_image %}
@@ -90,7 +90,7 @@
   .indie-hero {
     position: relative;
     width: 100%;
-    min-height: 100vh;
+    min-height: var(--hero-height, 500px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -244,7 +244,7 @@
   /* Responsive */
   @media (max-width: 768px) {
     .indie-hero {
-      min-height: 80vh;
+      min-height: calc(var(--hero-height, 500px) * 0.9);
     }
 
     .indie-hero__title {
@@ -271,7 +271,7 @@
 
   @media (max-width: 480px) {
     .indie-hero {
-      min-height: 70vh;
+      min-height: calc(var(--hero-height, 500px) * 0.8);
     }
 
     .indie-hero__container {
@@ -421,6 +421,16 @@
       "id": "show_scroll_indicator",
       "label": "스크롤 표시 보이기",
       "default": true
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "label": "섹션 높이",
+      "min": 300,
+      "max": 800,
+      "step": 50,
+      "unit": "px",
+      "default": 500
     }
   ],
   "presets": [

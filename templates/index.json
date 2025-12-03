@@ -28,7 +28,8 @@
         "button_2_text": "아티스트 소개",
         "button_2_link": "/pages/about",
         "button_text_color": "#2d2d2d",
-        "show_scroll_indicator": true
+        "show_scroll_indicator": true,
+        "height": 500
       }
     }
   },
