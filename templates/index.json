@@ -31,9 +31,61 @@
         "show_scroll_indicator": true,
         "height": 500
       }
+    },
+    "featured_books": {
+      "type": "featured-books",
+      "blocks": {
+        "book_1": {
+          "type": "book",
+          "settings": {
+            "title": "독립 출판의 시작",
+            "author": "김아티스트",
+            "description": "개인 출판사를 시작하기 위한 완벽한 가이드북. 실용적인 조언과 성공 사례를 담았습니다.",
+            "price": "$24.99",
+            "badge": "New"
+          }
+        },
+        "book_2": {
+          "type": "book",
+          "settings": {
+            "title": "자유로운 창작",
+            "author": "박작가",
+            "description": "예술가들의 독립 출판 경험담. 자신의 목소리를 찾는 방법에 대해 이야기합니다.",
+            "price": "$18.99",
+            "badge": "-"
+          }
+        },
+        "book_3": {
+          "type": "book",
+          "settings": {
+            "title": "북 디자인 입문",
+            "author": "이디자이너",
+            "description": "아름다운 책을 만들기 위한 디자인 원칙. 초보자부터 전문가까지 모두를 위한 책.",
+            "price": "$22.99",
+            "badge": "Sale"
+          }
+        }
+      },
+      "block_order": ["book_1", "book_2", "book_3"],
+      "settings": {
+        "title": "추천 도서",
+        "subtitle": "우리가 엄선한 독립 출판물",
+        "title_color": "#2d2d2d",
+        "subtitle_color": "#666666",
+        "text_color": "#2d2d2d",
+        "author_color": "#999999",
+        "accent_color": "#c4a36a",
+        "badge_text_color": "#ffffff",
+        "background_color": "#ffffff",
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "view_all_text": "모든 도서 보기",
+        "view_all_link": "/collections/all"
+      }
     }
   },
   "order": [
-    "hero"
+    "hero",
+    "featured_books"
   ]
 }
