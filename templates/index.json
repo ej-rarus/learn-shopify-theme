@@ -11,66 +11,6 @@
   "sections": {
     "hero": {
       "type": "hero",
-      "blocks": {
-        "slide_1": {
-          "type": "slide",
-          "settings": {
-            "badge": "독립 출판물",
-            "title": "독립 창작자들의 이야기",
-            "subtitle": "당신의 목소리를 세상에 전하세요",
-            "description": "독립 출판물, 아티스트북, 잡지와 더 많은 창작물들을 발견하세요.",
-            "background_color": "#2d2d2d",
-            "overlay_opacity": 50,
-            "title_color": "#ffffff",
-            "subtitle_color": "#e0e0e0",
-            "description_color": "#c0c0c0",
-            "button_1_text": "컬렉션 보기",
-            "button_1_link": "/collections/all",
-            "button_2_text": "아티스트 소개",
-            "button_2_link": "/pages/about",
-            "button_text_color": "#2d2d2d"
-          }
-        },
-        "slide_2": {
-          "type": "slide",
-          "settings": {
-            "badge": "새로운 컬렉션",
-            "title": "아티스트의 시선",
-            "subtitle": "독립 예술가들의 창작 세계",
-            "description": "소수의 초판본부터 한정판 아티스트북까지, 각 작품이 담은 이야기를 만나보세요.",
-            "background_color": "#1a1a1a",
-            "overlay_opacity": 40,
-            "title_color": "#ffffff",
-            "subtitle_color": "#f0f0f0",
-            "description_color": "#d0d0d0",
-            "button_1_text": "새 책 발견하기",
-            "button_1_link": "/collections/all",
-            "button_2_text": "기획전 보기",
-            "button_2_link": "/pages/about",
-            "button_text_color": "#1a1a1a"
-          }
-        },
-        "slide_3": {
-          "type": "slide",
-          "settings": {
-            "badge": "특별 기획",
-            "title": "출판의 미래",
-            "subtitle": "독자와 작가가 만나는 곳",
-            "description": "디지털 시대, 인쇄의 가치를 재발견하다. 독립 출판사들과 함께 새로운 형태의 책을 만들어갑니다.",
-            "background_color": "#3d3d3d",
-            "overlay_opacity": 45,
-            "title_color": "#ffffff",
-            "subtitle_color": "#e0e0e0",
-            "description_color": "#c0c0c0",
-            "button_1_text": "전체 보기",
-            "button_1_link": "/collections/all",
-            "button_2_text": "문의하기",
-            "button_2_link": "/pages/about",
-            "button_text_color": "#ffffff"
-          }
-        }
-      },
-      "block_order": ["slide_1", "slide_2", "slide_3"],
       "settings": {
         "accent_color": "#c4a36a",
         "autoplay_speed": 5000
