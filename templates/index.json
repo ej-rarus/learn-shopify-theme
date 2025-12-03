@@ -11,6 +11,28 @@
   "sections": {
     "hero": {
       "type": "hero",
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "badge": "독립 출판물",
+            "title": "독립 창작자들의 이야기",
+            "subtitle": "당신의 목소리를 세상에 전하세요",
+            "description": "독립 출판물, 아티스트북, 잡지와 더 많은 창작물들을 발견하세요.",
+            "background_color": "#2d2d2d",
+            "overlay_opacity": 50,
+            "title_color": "#ffffff",
+            "subtitle_color": "#e0e0e0",
+            "description_color": "#c0c0c0",
+            "button_1_text": "컬렉션 보기",
+            "button_1_link": "/collections/all",
+            "button_2_text": "아티스트 소개",
+            "button_2_link": "/pages/about",
+            "button_text_color": "#2d2d2d"
+          }
+        }
+      },
+      "block_order": ["slide_1"],
       "settings": {
         "accent_color": "#c4a36a",
         "autoplay_speed": 5000
