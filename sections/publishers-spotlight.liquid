@@ -1,0 +1,419 @@
+{% comment %}
+  Publishers Spotlight Section
+  Showcase independent publishers and creators
+  Perfect for highlighting partner organizations
+{% endcomment %}
+
+<section class="publishers-spotlight">
+  <div class="publishers-spotlight__container">
+    <!-- Header -->
+    <div class="publishers-spotlight__header">
+      {% if section.settings.title != blank %}
+        <h2 class="publishers-spotlight__title" style="color: {{ section.settings.title_color }};">
+          {{ section.settings.title }}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.subtitle != blank %}
+        <p class="publishers-spotlight__subtitle" style="color: {{ section.settings.subtitle_color }};">
+          {{ section.settings.subtitle }}
+        </p>
+      {% endif %}
+    </div>
+
+    <!-- Publishers Grid -->
+    {% if section.blocks.size > 0 %}
+      <div class="publishers-grid">
+        {% for block in section.blocks %}
+          {% if block.type == 'publisher' %}
+            <div class="publisher-card" {{ block.shopify_attributes }}>
+              <!-- Publisher Logo/Image -->
+              <div class="publisher-card__image-wrapper">
+                {% if block.settings.logo %}
+                  <img
+                    src="{{ block.settings.logo | image_url: width: 300 }}"
+                    alt="{{ block.settings.name }}"
+                    class="publisher-card__image"
+                    loading="lazy">
+                {% else %}
+                  <div class="publisher-card__image-placeholder">
+                    <svg width="100%" height="100%" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="300" height="300" fill="#f0f0f0"/>
+                      <text x="150" y="150" font-size="18" fill="#999999" text-anchor="middle" dominant-baseline="middle">
+                        로고 없음
+                      </text>
+                    </svg>
+                  </div>
+                {% endif %}
+              </div>
+
+              <!-- Publisher Info -->
+              <div class="publisher-card__content">
+                <!-- Name -->
+                <h3 class="publisher-card__name" style="color: {{ section.settings.text_color }};">
+                  {{ block.settings.name }}
+                </h3>
+
+                <!-- Category/Type -->
+                {% if block.settings.category != blank %}
+                  <p class="publisher-card__category" style="color: {{ section.settings.category_color }};">
+                    {{ block.settings.category }}
+                  </p>
+                {% endif %}
+
+                <!-- Description -->
+                {% if block.settings.description != blank %}
+                  <p class="publisher-card__description" style="color: {{ section.settings.description_color }};">
+                    {{ block.settings.description }}
+                  </p>
+                {% endif %}
+
+                <!-- Visit Link -->
+                {% if block.settings.link != blank %}
+                  <a
+                    href="{{ block.settings.link }}"
+                    class="publisher-card__link"
+                    style="color: {{ section.settings.accent_color }}; border-color: {{ section.settings.accent_color }};">
+                    자세히 보기 →
+                  </a>
+                {% endif %}
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% else %}
+      <!-- Empty State -->
+      <div class="publishers-spotlight__empty">
+        <p>출판사를 추가해주세요.</p>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .publishers-spotlight {
+    width: 100%;
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px 0;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  .publishers-spotlight__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* Header */
+  .publishers-spotlight__header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .publishers-spotlight__title {
+    margin: 0 0 0.5rem 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .publishers-spotlight__subtitle {
+    margin: 0;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  /* Grid */
+  .publishers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  /* Publisher Card */
+  .publisher-card {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .publisher-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px);
+  }
+
+  /* Image */
+  .publisher-card__image-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    overflow: hidden;
+    background-color: #f9fafb;
+  }
+
+  .publisher-card__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 1rem;
+    transition: transform 0.3s ease;
+  }
+
+  .publisher-card:hover .publisher-card__image {
+    transform: scale(1.05);
+  }
+
+  .publisher-card__image-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Content */
+  .publisher-card__content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 1.5rem;
+  }
+
+  .publisher-card__name {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .publisher-card__category {
+    margin: 0 0 0.75rem 0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .publisher-card__description {
+    margin: 0 0 1rem 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
+  }
+
+  .publisher-card__link {
+    align-self: flex-start;
+    display: inline-block;
+    padding: 0.5rem 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+  }
+
+  .publisher-card__link:hover {
+    border-bottom-color: currentColor;
+  }
+
+  /* Empty State */
+  .publishers-spotlight__empty {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: #999;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .publishers-spotlight__container {
+      padding: 0 1.5rem;
+    }
+
+    .publishers-spotlight__title {
+      font-size: 2rem;
+    }
+
+    .publishers-spotlight__subtitle {
+      font-size: 1rem;
+    }
+
+    .publishers-grid {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .publisher-card__name {
+      font-size: 1.1rem;
+    }
+
+    .publisher-card__description {
+      font-size: 0.9rem;
+      -webkit-line-clamp: 2;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .publishers-spotlight {
+      padding: 2rem 0;
+    }
+
+    .publishers-spotlight__container {
+      padding: 0 1rem;
+    }
+
+    .publishers-spotlight__title {
+      font-size: 1.5rem;
+    }
+
+    .publishers-spotlight__subtitle {
+      font-size: 0.95rem;
+    }
+
+    .publishers-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .publisher-card__name {
+      font-size: 1rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Publishers Spotlight",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "섹션 제목",
+      "default": "협력 출판사"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "섹션 부제목",
+      "default": "독립 출판의 가치를 함께 만들어가는 파트너들"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "제목 색상",
+      "default": "#2d2d2d"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "부제목 색상",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "텍스트 색상",
+      "default": "#2d2d2d"
+    },
+    {
+      "type": "color",
+      "id": "category_color",
+      "label": "카테고리 색상",
+      "default": "#999999"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "설명 색상",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "강조 색상 (링크)",
+      "default": "#c4a36a"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "배경 색상",
+      "default": "#f9fafb"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "위쪽 여백",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "아래쪽 여백",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 100
+    }
+  ],
+  "blocks": [
+    {
+      "type": "publisher",
+      "name": "출판사/크리에이터",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "이름",
+          "default": "출판사명"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "로고 이미지"
+        },
+        {
+          "type": "text",
+          "id": "category",
+          "label": "카테고리 (예: 예술, 문학, 소설)",
+          "default": "독립 출판사"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "설명",
+          "default": "출판사에 대한 간단한 소개를 작성해주세요."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "링크 URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Publishers Spotlight"
+    }
+  ]
+}
+{% endschema %}

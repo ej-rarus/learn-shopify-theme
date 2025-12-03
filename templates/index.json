@@ -88,10 +88,54 @@
         "view_all_text": "모든 도서 보기",
         "view_all_link": "/collections/all"
       }
+    },
+    "publishers_spotlight": {
+      "type": "publishers-spotlight",
+      "blocks": {
+        "publisher_1": {
+          "type": "publisher",
+          "settings": {
+            "name": "독립 예술 출판사",
+            "category": "예술",
+            "description": "현대 미술과 예술서를 전문으로 하는 독립 출판사입니다. 새로운 시각의 아티스트북을 발간합니다."
+          }
+        },
+        "publisher_2": {
+          "type": "publisher",
+          "settings": {
+            "name": "소설 공작소",
+            "category": "문학",
+            "description": "신진 소설가들의 작품을 발굴하고 지원하는 출판 커뮤니티입니다. 다양한 장르의 창작물을 선보입니다."
+          }
+        },
+        "publisher_3": {
+          "type": "publisher",
+          "settings": {
+            "name": "에세이 스튜디오",
+            "category": "에세이",
+            "description": "일상과 사유의 가치를 담은 에세이를 출판합니다. 독자와 작가가 만나는 공간입니다."
+          }
+        }
+      },
+      "block_order": ["publisher_1", "publisher_2", "publisher_3"],
+      "settings": {
+        "title": "협력 출판사",
+        "subtitle": "독립 출판의 가치를 함께 만들어가는 파트너들",
+        "title_color": "#2d2d2d",
+        "subtitle_color": "#666666",
+        "text_color": "#2d2d2d",
+        "category_color": "#999999",
+        "description_color": "#666666",
+        "accent_color": "#c4a36a",
+        "background_color": "#f9fafb",
+        "padding_top": 100,
+        "padding_bottom": 100
+      }
     }
   },
   "order": [
     "hero",
-    "featured_books"
+    "featured_books",
+    "publishers_spotlight"
   ]
 }
