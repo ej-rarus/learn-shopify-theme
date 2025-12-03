@@ -1,0 +1,389 @@
+{% comment %}
+  Custom list section for pages
+  Displays a list of articles/items with customizable content via settings
+  Can be used in page templates when blog data is not available
+{% endcomment %}
+
+<section class="custom-list-section">
+  <div class="custom-list-container">
+    <!-- Header -->
+    <div class="custom-list-header">
+      <h1 class="custom-list-title">{{ section.settings.title }}</h1>
+      {% if section.settings.subtitle != blank %}
+        <p class="custom-list-subtitle">{{ section.settings.subtitle }}</p>
+      {% endif %}
+    </div>
+
+    <!-- Articles List -->
+    {% if section.settings.show_sample_items %}
+      <div class="articles-list">
+        <!-- Sample Item 1 -->
+        <article class="article-item">
+          <div class="article-image-container">
+            <div class="article-image-placeholder">
+              <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                <rect width="400" height="300" fill="#e2e8f0"/>
+                <text x="200" y="150" font-size="24" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle">
+                  Sample Image
+                </text>
+              </svg>
+            </div>
+          </div>
+
+          <div class="article-content">
+            <h2 class="article-title">
+              <a href="#">첫 번째 게시물</a>
+            </h2>
+
+            <div class="article-meta">
+              <span class="article-date">
+                <time datetime="2024-12-03">December 3, 2024</time>
+              </span>
+              <span class="article-author">by Author</span>
+              <span class="article-comment-count">5 댓글</span>
+            </div>
+
+            <div class="article-excerpt">
+              <p>이것은 샘플 게시물입니다. 실제 블로그 데이터가 있으면 자동으로 표시됩니다. 지금은 테마의 리스트 레이아웃을 확인할 수 있습니다.</p>
+            </div>
+
+            <a href="#" class="article-read-more">
+              전체 읽기 →
+            </a>
+          </div>
+        </article>
+
+        <!-- Sample Item 2 -->
+        <article class="article-item">
+          <div class="article-image-container">
+            <div class="article-image-placeholder">
+              <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                <rect width="400" height="300" fill="#e2e8f0"/>
+                <text x="200" y="150" font-size="24" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle">
+                  Sample Image
+                </text>
+              </svg>
+            </div>
+          </div>
+
+          <div class="article-content">
+            <h2 class="article-title">
+              <a href="#">두 번째 게시물</a>
+            </h2>
+
+            <div class="article-meta">
+              <span class="article-date">
+                <time datetime="2024-12-02">December 2, 2024</time>
+              </span>
+              <span class="article-author">by Author</span>
+              <span class="article-comment-count">3 댓글</span>
+            </div>
+
+            <div class="article-excerpt">
+              <p>이 섹션은 페이지에서 사용될 수 있습니다. 블로그 기능이 없는 Shopify 스토어에서 블로그 같은 레이아웃을 구현할 수 있습니다.</p>
+            </div>
+
+            <a href="#" class="article-read-more">
+              전체 읽기 →
+            </a>
+          </div>
+        </article>
+
+        <!-- Sample Item 3 -->
+        <article class="article-item">
+          <div class="article-image-container">
+            <div class="article-image-placeholder">
+              <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                <rect width="400" height="300" fill="#e2e8f0"/>
+                <text x="200" y="150" font-size="24" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle">
+                  Sample Image
+                </text>
+              </svg>
+            </div>
+          </div>
+
+          <div class="article-content">
+            <h2 class="article-title">
+              <a href="#">세 번째 게시물</a>
+            </h2>
+
+            <div class="article-meta">
+              <span class="article-date">
+                <time datetime="2024-12-01">December 1, 2024</time>
+              </span>
+              <span class="article-author">by Author</span>
+              <span class="article-comment-count">8 댓글</span>
+            </div>
+
+            <div class="article-excerpt">
+              <p>리스트 레이아웃의 구조와 스타일을 미리 확인할 수 있습니다. 페이지 편집에서 이 섹션의 제목과 설명을 커스터마이징할 수 있습니다.</p>
+            </div>
+
+            <a href="#" class="article-read-more">
+              전체 읽기 →
+            </a>
+          </div>
+        </article>
+      </div>
+    {% else %}
+      <div class="custom-empty-state">
+        <div class="empty-state-icon">📝</div>
+        <h2>콘텐츠가 없습니다</h2>
+        <p>이 섹션에 콘텐츠를 추가해주세요.</p>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .custom-list-section {
+    width: 100%;
+    background-color: #f9fafb;
+    padding: 3rem 0;
+  }
+
+  .custom-list-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* Header */
+  .custom-list-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .custom-list-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a202c;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .custom-list-subtitle {
+    font-size: 1rem;
+    color: #718096;
+    margin: 0;
+  }
+
+  /* Articles List */
+  .articles-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .article-item {
+    display: flex;
+    gap: 2rem;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .article-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
+
+  /* Article Image */
+  .article-image-container {
+    flex-shrink: 0;
+    width: 300px;
+    height: 200px;
+    overflow: hidden;
+    background-color: #f0f0f0;
+  }
+
+  .article-image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .article-image-placeholder svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Article Content */
+  .article-content {
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .article-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1a202c;
+    margin: 0 0 1rem 0;
+    line-height: 1.4;
+  }
+
+  .article-title a {
+    color: #1a202c;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .article-title a:hover {
+    color: #667eea;
+  }
+
+  /* Metadata */
+  .article-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    color: #718096;
+    flex-wrap: wrap;
+  }
+
+  .article-date,
+  .article-author,
+  .article-comment-count {
+    display: flex;
+    align-items: center;
+  }
+
+  .article-date::after,
+  .article-author::after {
+    content: '•';
+    margin-left: 1rem;
+    color: #cbd5e0;
+  }
+
+  .article-author::after {
+    content: '•';
+  }
+
+  /* Excerpt */
+  .article-excerpt {
+    flex: 1;
+    color: #4a5568;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .article-excerpt p {
+    margin: 0;
+  }
+
+  /* Read More Link */
+  .article-read-more {
+    align-self: flex-start;
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    padding: 0.5rem 0;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+
+  .article-read-more:hover {
+    color: #5a67d8;
+    border-bottom-color: #667eea;
+  }
+
+  /* Empty State */
+  .custom-empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: white;
+    border-radius: 8px;
+  }
+
+  .empty-state-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .custom-empty-state h2 {
+    font-size: 1.5rem;
+    color: #1a202c;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .custom-empty-state p {
+    color: #718096;
+    margin: 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .custom-list-container {
+      padding: 0 1rem;
+    }
+
+    .custom-list-title {
+      font-size: 2rem;
+    }
+
+    .article-item {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .article-image-container {
+      width: 100%;
+      height: 250px;
+    }
+
+    .article-content {
+      padding: 1.5rem;
+    }
+
+    .article-title {
+      font-size: 1.25rem;
+    }
+
+    .article-meta {
+      gap: 0.5rem;
+    }
+
+    .article-date::after,
+    .article-author::after {
+      margin-left: 0.5rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Custom List",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "제목",
+      "default": "블로그"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "부제목",
+      "default": ""
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sample_items",
+      "label": "샘플 아이템 표시",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom List"
+    }
+  ]
+}
+{% endschema %}

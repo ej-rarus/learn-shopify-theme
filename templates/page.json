@@ -12,9 +12,18 @@
     "main": {
       "type": "page",
       "settings": {}
+    },
+    "custom_list": {
+      "type": "custom-list",
+      "settings": {
+        "title": "블로그",
+        "subtitle": "",
+        "show_sample_items": true
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "custom_list"
   ]
 }
