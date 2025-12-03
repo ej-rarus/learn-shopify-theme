@@ -1,7 +1,6 @@
 {% comment %}
-  Custom list section for pages
-  Displays a list of articles/items with customizable content via settings
-  Can be used in page templates when blog data is not available
+  Custom list section for pages with dynamic article management
+  Allows adding articles directly through Shopify admin customizer
 {% endcomment %}
 
 <section class="custom-list-section">
@@ -15,121 +14,80 @@
     </div>
 
     <!-- Articles List -->
-    {% if section.settings.show_sample_items %}
+    {% if section.blocks.size > 0 %}
       <div class="articles-list">
-        <!-- Sample Item 1 -->
-        <article class="article-item">
-          <div class="article-image-container">
-            <div class="article-image-placeholder">
-              <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                <rect width="400" height="300" fill="#e2e8f0"/>
-                <text x="200" y="150" font-size="24" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle">
-                  Sample Image
-                </text>
-              </svg>
-            </div>
-          </div>
+        {% for block in section.blocks %}
+          {% if block.type == 'article' %}
+            <article class="article-item" {{ block.shopify_attributes }}>
+              <!-- Article Image -->
+              {% if block.settings.image %}
+                <div class="article-image-container">
+                  <a href="{{ block.settings.link }}" class="article-image-link">
+                    {{ block.settings.image | image_url: width: 400 | image_tag: alt: block.settings.title, class: 'article-image' }}
+                  </a>
+                </div>
+              {% else %}
+                <div class="article-image-container">
+                  <div class="article-image-placeholder">
+                    <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="400" height="300" fill="#e2e8f0"/>
+                      <text x="200" y="150" font-size="24" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle">
+                        이미지 없음
+                      </text>
+                    </svg>
+                  </div>
+                </div>
+              {% endif %}
 
-          <div class="article-content">
-            <h2 class="article-title">
-              <a href="#">첫 번째 게시물</a>
-            </h2>
+              <!-- Article Content -->
+              <div class="article-content">
+                <!-- Title -->
+                <h2 class="article-title">
+                  {% if block.settings.link != blank %}
+                    <a href="{{ block.settings.link }}">{{ block.settings.title }}</a>
+                  {% else %}
+                    {{ block.settings.title }}
+                  {% endif %}
+                </h2>
 
-            <div class="article-meta">
-              <span class="article-date">
-                <time datetime="2024-12-03">December 3, 2024</time>
-              </span>
-              <span class="article-author">by Author</span>
-              <span class="article-comment-count">5 댓글</span>
-            </div>
+                <!-- Metadata -->
+                <div class="article-meta">
+                  {% if block.settings.date != blank %}
+                    <span class="article-date">
+                      <time datetime="{{ block.settings.date }}">
+                        {{ block.settings.date | date: '%B %d, %Y' }}
+                      </time>
+                    </span>
+                  {% endif %}
+                  {% if block.settings.author != blank %}
+                    <span class="article-author">by {{ block.settings.author }}</span>
+                  {% endif %}
+                </div>
 
-            <div class="article-excerpt">
-              <p>이것은 샘플 게시물입니다. 실제 블로그 데이터가 있으면 자동으로 표시됩니다. 지금은 테마의 리스트 레이아웃을 확인할 수 있습니다.</p>
-            </div>
+                <!-- Excerpt -->
+                {% if block.settings.excerpt != blank %}
+                  <div class="article-excerpt">
+                    <p>{{ block.settings.excerpt }}</p>
+                  </div>
+                {% endif %}
 
-            <a href="#" class="article-read-more">
-              전체 읽기 →
-            </a>
-          </div>
-        </article>
-
-        <!-- Sample Item 2 -->
-        <article class="article-item">
-          <div class="article-image-container">
-            <div class="article-image-placeholder">
-              <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                <rect width="400" height="300" fill="#e2e8f0"/>
-                <text x="200" y="150" font-size="24" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle">
-                  Sample Image
-                </text>
-              </svg>
-            </div>
-          </div>
-
-          <div class="article-content">
-            <h2 class="article-title">
-              <a href="#">두 번째 게시물</a>
-            </h2>
-
-            <div class="article-meta">
-              <span class="article-date">
-                <time datetime="2024-12-02">December 2, 2024</time>
-              </span>
-              <span class="article-author">by Author</span>
-              <span class="article-comment-count">3 댓글</span>
-            </div>
-
-            <div class="article-excerpt">
-              <p>이 섹션은 페이지에서 사용될 수 있습니다. 블로그 기능이 없는 Shopify 스토어에서 블로그 같은 레이아웃을 구현할 수 있습니다.</p>
-            </div>
-
-            <a href="#" class="article-read-more">
-              전체 읽기 →
-            </a>
-          </div>
-        </article>
-
-        <!-- Sample Item 3 -->
-        <article class="article-item">
-          <div class="article-image-container">
-            <div class="article-image-placeholder">
-              <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                <rect width="400" height="300" fill="#e2e8f0"/>
-                <text x="200" y="150" font-size="24" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle">
-                  Sample Image
-                </text>
-              </svg>
-            </div>
-          </div>
-
-          <div class="article-content">
-            <h2 class="article-title">
-              <a href="#">세 번째 게시물</a>
-            </h2>
-
-            <div class="article-meta">
-              <span class="article-date">
-                <time datetime="2024-12-01">December 1, 2024</time>
-              </span>
-              <span class="article-author">by Author</span>
-              <span class="article-comment-count">8 댓글</span>
-            </div>
-
-            <div class="article-excerpt">
-              <p>리스트 레이아웃의 구조와 스타일을 미리 확인할 수 있습니다. 페이지 편집에서 이 섹션의 제목과 설명을 커스터마이징할 수 있습니다.</p>
-            </div>
-
-            <a href="#" class="article-read-more">
-              전체 읽기 →
-            </a>
-          </div>
-        </article>
+                <!-- Read More Link -->
+                {% if block.settings.link != blank %}
+                  <a href="{{ block.settings.link }}" class="article-read-more">
+                    전체 읽기 →
+                  </a>
+                {% endif %}
+              </div>
+            </article>
+          {% endif %}
+        {% endfor %}
       </div>
     {% else %}
+      <!-- Empty State -->
       <div class="custom-empty-state">
         <div class="empty-state-icon">📝</div>
-        <h2>콘텐츠가 없습니다</h2>
-        <p>이 섹션에 콘텐츠를 추가해주세요.</p>
+        <h2>아직 게시물이 없습니다</h2>
+        <p>테마 커스터마이저에서 "블록 추가" → "게시물"을 선택하여 글을 추가하세요.</p>
       </div>
     {% endif %}
   </div>
@@ -198,6 +156,23 @@
     background-color: #f0f0f0;
   }
 
+  .article-image-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .article-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .article-item:hover .article-image {
+    transform: scale(1.05);
+  }
+
   .article-image-placeholder {
     width: 100%;
     height: 100%;
@@ -248,21 +223,15 @@
   }
 
   .article-date,
-  .article-author,
-  .article-comment-count {
+  .article-author {
     display: flex;
     align-items: center;
   }
 
-  .article-date::after,
-  .article-author::after {
+  .article-date::after {
     content: '•';
     margin-left: 1rem;
     color: #cbd5e0;
-  }
-
-  .article-author::after {
-    content: '•';
   }
 
   /* Excerpt */
@@ -275,6 +244,10 @@
 
   .article-excerpt p {
     margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   /* Read More Link */
@@ -349,8 +322,7 @@
       gap: 0.5rem;
     }
 
-    .article-date::after,
-    .article-author::after {
+    .article-date::after {
       margin-left: 0.5rem;
     }
   }
@@ -363,20 +335,56 @@
     {
       "type": "text",
       "id": "title",
-      "label": "제목",
+      "label": "섹션 제목",
       "default": "블로그"
     },
     {
       "type": "text",
       "id": "subtitle",
-      "label": "부제목",
+      "label": "섹션 부제목",
       "default": "최신 소식"
-    },
+    }
+  ],
+  "blocks": [
     {
-      "type": "checkbox",
-      "id": "show_sample_items",
-      "label": "샘플 아이템 표시",
-      "default": true
+      "type": "article",
+      "name": "게시물",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "제목",
+          "default": "새 게시물"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "이미지"
+        },
+        {
+          "type": "textarea",
+          "id": "excerpt",
+          "label": "요약",
+          "default": "게시물 내용을 작성해주세요."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "작성자",
+          "default": "Author"
+        },
+        {
+          "type": "text",
+          "id": "date",
+          "label": "날짜 (YYYY-MM-DD)",
+          "default": "2024-12-03"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "링크 URL"
+        }
+      ]
     }
   ],
   "presets": [
