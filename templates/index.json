@@ -84,7 +84,7 @@
         "badge_text_color": "#ffffff",
         "background_color": "#ffffff",
         "padding_top": 150,
-        "padding_bottom": 150,
+        "padding_bottom": 200,
         "view_all_text": "모든 도서 보기",
         "view_all_link": "/collections/all"
       }
