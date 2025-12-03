@@ -33,7 +33,7 @@
       }
     },
     "featured_books": {
-      "type": "featured-books",
+      "type": "featured_books",
       "blocks": {
         "book_1": {
           "type": "book",
