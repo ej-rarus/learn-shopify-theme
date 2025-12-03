@@ -131,11 +131,55 @@
         "padding_top": 180,
         "padding_bottom": 100
       }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "title": "뉴스레터 구독하기",
+        "subtitle": "새로운 도서와 기획전 소식을 받아보세요",
+        "description": "독립 출판의 최신 소식과 특별한 할인 정보를 이메일로 받으세요.",
+        "placeholder": "이메일 주소를 입력하세요",
+        "button_text": "구독하기",
+        "privacy_text": "개인정보 보호 약관에 동의합니다",
+        "title_color": "#ffffff",
+        "subtitle_color": "#f0f0f0",
+        "description_color": "#e0e0e0",
+        "privacy_color": "#c0c0c0",
+        "button_color": "#c4a36a",
+        "button_text_color": "#ffffff",
+        "background_color": "#2d2d2d",
+        "background_color_secondary": "#1a1a1a",
+        "padding_top": 100,
+        "padding_bottom": 100
+      }
+    },
+    "footer": {
+      "type": "footer-custom",
+      "settings": {
+        "store_name": "The Moved Mover",
+        "about_title": "소개",
+        "about_content": "독립 출판물의 가치를 전하는 온라인 스토어입니다. 창작자들의 다양한 목소리를 함께 나누고 있습니다.",
+        "contact_email": "hello@themovedmover.com",
+        "contact_phone": "",
+        "contact_address": "",
+        "instagram_url": "",
+        "facebook_url": "",
+        "twitter_url": "",
+        "background_color": "#1a1a1a",
+        "heading_color": "#ffffff",
+        "text_color": "#c0c0c0",
+        "link_color": "#c4a36a",
+        "padding_top": 100,
+        "padding_bottom": 100,
+        "show_payment_icons": true
+      }
     }
   },
   "order": [
     "hero",
     "featured_books",
-    "publishers_spotlight"
+    "publishers_spotlight",
+    "newsletter",
+    "footer"
   ]
 }

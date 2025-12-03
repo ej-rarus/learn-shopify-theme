@@ -1,0 +1,401 @@
+{% comment %}
+  Custom Footer Section
+  Information, links, social media, and contact details
+{% endcomment %}
+
+<footer class="footer">
+  <div class="footer__container">
+    <!-- Footer Grid -->
+    <div class="footer__grid">
+      <!-- About Section -->
+      <div class="footer__column">
+        <h3 class="footer__heading" style="color: {{ section.settings.heading_color }};">
+          {{ section.settings.about_title }}
+        </h3>
+        <p class="footer__text" style="color: {{ section.settings.text_color }};">
+          {{ section.settings.about_content }}
+        </p>
+      </div>
+
+      <!-- Links Section -->
+      <div class="footer__column">
+        <h3 class="footer__heading" style="color: {{ section.settings.heading_color }};">
+          링크
+        </h3>
+        <ul class="footer__links">
+          <li><a href="/collections/all" style="color: {{ section.settings.link_color }};">상품 보기</a></li>
+          <li><a href="/pages/about" style="color: {{ section.settings.link_color }};">소개</a></li>
+          <li><a href="/pages/contact" style="color: {{ section.settings.link_color }};">문의하기</a></li>
+          <li><a href="/policies/privacy-policy" style="color: {{ section.settings.link_color }};">개인정보 보호</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Section -->
+      <div class="footer__column">
+        <h3 class="footer__heading" style="color: {{ section.settings.heading_color }};">
+          연락처
+        </h3>
+        <div class="footer__contact">
+          {% if section.settings.contact_email != blank %}
+            <p style="color: {{ section.settings.text_color }};">
+              📧 <a href="mailto:{{ section.settings.contact_email }}" style="color: {{ section.settings.link_color }};">
+                {{ section.settings.contact_email }}
+              </a>
+            </p>
+          {% endif %}
+          {% if section.settings.contact_phone != blank %}
+            <p style="color: {{ section.settings.text_color }};">
+              📞 <a href="tel:{{ section.settings.contact_phone }}" style="color: {{ section.settings.link_color }};">
+                {{ section.settings.contact_phone }}
+              </a>
+            </p>
+          {% endif %}
+          {% if section.settings.contact_address != blank %}
+            <p style="color: {{ section.settings.text_color }};">
+              📍 {{ section.settings.contact_address }}
+            </p>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Social Media Section -->
+      <div class="footer__column">
+        <h3 class="footer__heading" style="color: {{ section.settings.heading_color }};">
+          팔로우
+        </h3>
+        <div class="footer__social">
+          {% if section.settings.instagram_url != blank %}
+            <a href="{{ section.settings.instagram_url }}" target="_blank" class="footer__social-link" style="color: {{ section.settings.link_color }};" title="Instagram">
+              f
+            </a>
+          {% endif %}
+          {% if section.settings.facebook_url != blank %}
+            <a href="{{ section.settings.facebook_url }}" target="_blank" class="footer__social-link" style="color: {{ section.settings.link_color }};" title="Facebook">
+              f
+            </a>
+          {% endif %}
+          {% if section.settings.twitter_url != blank %}
+            <a href="{{ section.settings.twitter_url }}" target="_blank" class="footer__social-link" style="color: {{ section.settings.link_color }};" title="Twitter">
+              𝕏
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="footer__bottom">
+      <p class="footer__copyright" style="color: {{ section.settings.text_color }};">
+        &copy; {{ 'now' | date: '%Y' }} {{ section.settings.store_name }}. 모든 권리 보유.
+      </p>
+      {% if section.settings.show_payment_icons %}
+        <div class="footer__payments">
+          <p style="color: {{ section.settings.text_color }}; font-size: 0.85rem;">
+            안전한 결제
+          </p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</footer>
+
+{% stylesheet %}
+  .footer {
+    width: 100%;
+    background-color: {{ section.settings.background_color }};
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .footer__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* Grid */
+  .footer__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .footer__column {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Heading */
+  .footer__heading {
+    margin: 0 0 1rem 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  /* Text */
+  .footer__text {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  /* Links */
+  .footer__links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .footer__links a {
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: opacity 0.3s ease;
+  }
+
+  .footer__links a:hover {
+    opacity: 0.7;
+    text-decoration: underline;
+  }
+
+  /* Contact */
+  .footer__contact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .footer__contact p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .footer__contact a {
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .footer__contact a:hover {
+    opacity: 0.7;
+    text-decoration: underline;
+  }
+
+  /* Social */
+  .footer__social {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .footer__social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 700;
+    transition: all 0.3s ease;
+  }
+
+  .footer__social-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+  }
+
+  /* Bottom Bar */
+  .footer__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .footer__copyright {
+    margin: 0;
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+  .footer__payments {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .footer__container {
+      padding: 0 1.5rem;
+    }
+
+    .footer__grid {
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer__heading {
+      font-size: 1rem;
+    }
+
+    .footer__bottom {
+      flex-direction: column;
+      text-align: center;
+      gap: 1rem;
+    }
+
+    .footer__social {
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer {
+      padding: 2rem 0;
+    }
+
+    .footer__container {
+      padding: 0 1rem;
+    }
+
+    .footer__grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .footer__heading {
+      font-size: 0.95rem;
+    }
+
+    .footer__text,
+    .footer__contact p {
+      font-size: 0.85rem;
+    }
+
+    .footer__links a {
+      font-size: 0.85rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "store_name",
+      "label": "상점명",
+      "default": "The Moved Mover"
+    },
+    {
+      "type": "text",
+      "id": "about_title",
+      "label": "소개 섹션 제목",
+      "default": "소개"
+    },
+    {
+      "type": "textarea",
+      "id": "about_content",
+      "label": "소개 내용",
+      "default": "독립 출판물의 가치를 전하는 온라인 스토어입니다. 창작자들의 다양한 목소리를 함께 나누고 있습니다."
+    },
+    {
+      "type": "text",
+      "id": "contact_email",
+      "label": "이메일",
+      "default": "hello@themovedmover.com"
+    },
+    {
+      "type": "text",
+      "id": "contact_phone",
+      "label": "전화번호"
+    },
+    {
+      "type": "text",
+      "id": "contact_address",
+      "label": "주소"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "url",
+      "id": "twitter_url",
+      "label": "Twitter/X URL"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "배경 색상",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "제목 색상",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "텍스트 색상",
+      "default": "#c0c0c0"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "링크 색상",
+      "default": "#c4a36a"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "위쪽 여백",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "아래쪽 여백",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "결제 아이콘 표시",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer"
+    }
+  ]
+}
+{% endschema %}
