@@ -25,6 +25,21 @@
     },
     "featured_books": {
       "type": "featured-books",
+      "settings": {
+        "title": "추천 도서",
+        "subtitle": "우리가 엄선한 독립 출판물",
+        "title_color": "#2d2d2d",
+        "subtitle_color": "#666666",
+        "text_color": "#2d2d2d",
+        "author_color": "#999999",
+        "accent_color": "#c4a36a",
+        "badge_text_color": "#ffffff",
+        "background_color": "#ffffff",
+        "padding_top": 150,
+        "padding_bottom": 150,
+        "view_all_text": "모든 도서 보기",
+        "view_all_link": "/collections/all"
+      },
       "blocks": {
         "book_1": {
           "type": "book",
@@ -57,22 +72,7 @@
           }
         }
       },
-      "block_order": ["book_1", "book_2", "book_3"],
-      "settings": {
-        "title": "추천 도서",
-        "subtitle": "우리가 엄선한 독립 출판물",
-        "title_color": "#2d2d2d",
-        "subtitle_color": "#666666",
-        "text_color": "#2d2d2d",
-        "author_color": "#999999",
-        "accent_color": "#c4a36a",
-        "badge_text_color": "#ffffff",
-        "background_color": "#ffffff",
-        "padding_top": 150,
-        "padding_bottom": 120,
-        "view_all_text": "모든 도서 보기",
-        "view_all_link": "/collections/all"
-      }
+      "block_order": ["book_1", "book_2", "book_3"]
     },
     "publishers_spotlight": {
       "type": "publishers-spotlight",
