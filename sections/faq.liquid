@@ -3,15 +3,30 @@
   자주 묻는 질문 섹션
 {% endcomment %}
 
-<section class="faq-section">
+<section 
+  class="faq-section"
+  style="
+    --background-color: {{ section.settings.background_color }};
+    --title-color: {{ section.settings.title_color }};
+    --subtitle-color: {{ section.settings.subtitle_color }};
+    --question-color: {{ section.settings.question_color }};
+    --answer-color: {{ section.settings.answer_color }};
+    --border-color: {{ section.settings.border_color }};
+    --accent-color: {{ section.settings.accent_color }};
+    --hover-bg-color: {{ section.settings.hover_bg_color }};
+    --answer-bg-color: {{ section.settings.answer_bg_color }};
+    --help-bg-color: {{ section.settings.help_bg_color }};
+    --help-text-color: {{ section.settings.help_text_color }};
+  "
+>
   <div class="faq-container">
     <!-- Header -->
     <div class="faq-header">
-      <h2 class="faq-title" style="color: {{ section.settings.title_color }};">
+      <h2 class="faq-title">
         {{ section.settings.title }}
       </h2>
       {% if section.settings.subtitle != blank %}
-        <p class="faq-subtitle" style="color: {{ section.settings.subtitle_color }};">
+        <p class="faq-subtitle">
           {{ section.settings.subtitle }}
         </p>
       {% endif %}
@@ -24,17 +39,17 @@
           <div class="faq-item" {{ block.shopify_attributes }}>
             <!-- Question -->
             <button class="faq-question" type="button">
-              <span class="faq-question-text" style="color: {{ section.settings.question_color }};">
+              <span class="faq-question-text">
                 {{ block.settings.question }}
               </span>
-              <span class="faq-toggle-icon" style="color: {{ section.settings.accent_color }};">
+              <span class="faq-toggle-icon">
                 +
               </span>
             </button>
 
             <!-- Answer -->
             <div class="faq-answer">
-              <div class="faq-answer-content" style="color: {{ section.settings.answer_color }};">
+              <div class="faq-answer-content">
                 {{ block.settings.answer }}
               </div>
             </div>
@@ -45,10 +60,10 @@
 
     <!-- Additional Help -->
     {% if section.settings.show_help_text and section.settings.help_text != blank %}
-      <div class="faq-help" style="background-color: {{ section.settings.help_bg_color }}; color: {{ section.settings.help_text_color }};">
+      <div class="faq-help">
         {{ section.settings.help_text }}
         {% if section.settings.help_link_text != blank and section.settings.help_link != blank %}
-          <a href="{{ section.settings.help_link }}" class="faq-help-link" style="color: {{ section.settings.accent_color }};">
+          <a href="{{ section.settings.help_link }}" class="faq-help-link">
             {{ section.settings.help_link_text }}
           </a>
         {% endif %}
@@ -60,7 +75,7 @@
 {% stylesheet %}
   .faq-section {
     padding: 4rem 2rem;
-    background-color: {{ section.settings.background_color }};
+    background-color: var(--background-color, #ffffff);
   }
 
   .faq-container {
@@ -79,6 +94,7 @@
     font-weight: 700;
     margin: 0 0 1rem 0;
     line-height: 1.2;
+    color: var(--title-color, #1a1a1a);
   }
 
   .faq-subtitle {
@@ -86,6 +102,7 @@
     line-height: 1.6;
     max-width: 600px;
     margin: 0 auto;
+    color: var(--subtitle-color, #666666);
   }
 
   /* Accordion */
@@ -97,7 +114,7 @@
 
   .faq-item {
     border: 2px solid;
-    border-color: {{ section.settings.border_color }};
+    border-color: var(--border-color, #e2e8f0);
     border-radius: 8px;
     overflow: hidden;
     transition: all 0.3s ease;
@@ -108,7 +125,7 @@
   }
 
   .faq-item.active {
-    border-color: {{ section.settings.accent_color }};
+    border-color: var(--accent-color, #c4a36a);
     box-shadow: 0 2px 12px rgba(196, 163, 106, 0.15);
   }
 
@@ -130,12 +147,13 @@
   }
 
   .faq-question:hover {
-    background-color: {{ section.settings.hover_bg_color }};
+    background-color: var(--hover-bg-color, #f9fafb);
   }
 
   .faq-question-text {
     flex: 1;
     line-height: 1.5;
+    color: var(--question-color, #1a1a1a);
   }
 
   .faq-toggle-icon {
@@ -143,6 +161,7 @@
     font-weight: 300;
     transition: transform 0.3s ease;
     flex-shrink: 0;
+    color: var(--accent-color, #c4a36a);
   }
 
   .faq-item.active .faq-toggle-icon {
@@ -163,7 +182,8 @@
   .faq-answer-content {
     padding: 0 1.5rem 1.5rem 1.5rem;
     line-height: 1.8;
-    background-color: {{ section.settings.answer_bg_color }};
+    background-color: var(--answer-bg-color, #f9fafb);
+    color: var(--answer-color, #4a5568);
   }
 
   /* Help Section */
@@ -173,6 +193,8 @@
     border-radius: 8px;
     text-align: center;
     line-height: 1.6;
+    background-color: var(--help-bg-color, #f0f4f8);
+    color: var(--help-text-color, #1a1a1a);
   }
 
   .faq-help-link {
@@ -181,6 +203,7 @@
     text-decoration: none;
     font-weight: 600;
     transition: opacity 0.3s ease;
+    color: var(--accent-color, #c4a36a);
   }
 
   .faq-help-link:hover {

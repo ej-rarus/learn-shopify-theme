@@ -69,12 +69,12 @@
           </a>
         {% endif %}
       </div>
+    </div>
 
-      <!-- Scroll Indicator -->
-      <div class="home-hero__scroll-indicator">
-        <div class="home-hero__scroll-icon"></div>
-        <p style="color: {{ section.settings.description_color }};">Scroll to explore</p>
-      </div>
+    <!-- Scroll Indicator -->
+    <div class="home-hero__scroll-indicator">
+      <div class="home-hero__scroll-icon"></div>
+      <p style="color: {{ section.settings.description_color }};">Scroll to explore</p>
     </div>
   </div>
 </section>
@@ -130,6 +130,7 @@
     flex-direction: column;
     gap: 1.5rem;
     align-items: center;
+    margin-bottom: 4rem;
   }
 
   .home-hero__badge {
@@ -233,7 +234,7 @@
 
   .home-hero__scroll-indicator {
     position: absolute;
-    bottom: 2rem;
+    bottom: 1rem;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -241,6 +242,8 @@
     align-items: center;
     gap: 0.5rem;
     animation: bounce 2s infinite;
+    z-index: 3;
+    margin-top: 3rem;
   }
 
   .home-hero__scroll-icon {

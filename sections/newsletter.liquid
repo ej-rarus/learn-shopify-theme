@@ -4,24 +4,38 @@
   Perfect for indie publishing communities
 {% endcomment %}
 
-<section class="newsletter">
+<section 
+  class="newsletter"
+  style="
+    --title-color: {{ section.settings.title_color }};
+    --subtitle-color: {{ section.settings.subtitle_color }};
+    --description-color: {{ section.settings.description_color }};
+    --privacy-color: {{ section.settings.privacy_color }};
+    --button-color: {{ section.settings.button_color }};
+    --button-text-color: {{ section.settings.button_text_color }};
+    --padding-top: {{ section.settings.padding_top }}px;
+    --padding-bottom: {{ section.settings.padding_bottom }}px;
+    --background-color: {{ section.settings.background_color }};
+    --background-color-secondary: {{ section.settings.background_color_secondary }};
+  "
+>
   <div class="newsletter__container">
     <!-- Content -->
     <div class="newsletter__content">
       {% if section.settings.title != blank %}
-        <h2 class="newsletter__title" style="color: {{ section.settings.title_color }} !important;">
+        <h2 class="newsletter__title">
           {{ section.settings.title }}
         </h2>
       {% endif %}
 
       {% if section.settings.subtitle != blank %}
-        <p class="newsletter__subtitle" style="color: {{ section.settings.subtitle_color }} !important;">
+        <p class="newsletter__subtitle">
           {{ section.settings.subtitle }}
         </p>
       {% endif %}
 
       {% if section.settings.description != blank %}
-        <p class="newsletter__description" style="color: {{ section.settings.description_color }} !important;">
+        <p class="newsletter__description">
           {{ section.settings.description }}
         </p>
       {% endif %}
@@ -38,12 +52,11 @@
           required>
         <button
           type="submit"
-          class="newsletter__button"
-          style="background-color: {{ section.settings.button_color }}; color: {{ section.settings.button_text_color }};">
+          class="newsletter__button">
           {{ section.settings.button_text }}
         </button>
       </div>
-      <p class="newsletter__privacy" style="color: {{ section.settings.privacy_color }} !important;">
+      <p class="newsletter__privacy">
         {{ section.settings.privacy_text }}
       </p>
     </form>
@@ -53,8 +66,8 @@
 {% stylesheet %}
   .newsletter {
     width: 100%;
-    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px 0;
-    background: linear-gradient(135deg, {{ section.settings.background_color }} 0%, {{ section.settings.background_color_secondary }} 100%);
+    padding: var(--padding-top, 100px) 0 var(--padding-bottom, 100px) 0;
+    background: linear-gradient(135deg, var(--background-color, #2d2d2d) 0%, var(--background-color-secondary, #1a1a1a) 100%);
   }
 
   .newsletter__container {
@@ -74,6 +87,7 @@
     font-size: 2rem;
     font-weight: 700;
     line-height: 1.3;
+    color: var(--title-color, #000000);
   }
 
   .newsletter__subtitle {
@@ -82,6 +96,7 @@
     font-weight: 700;
     line-height: 1.5;
     letter-spacing: 0.3px;
+    color: var(--subtitle-color, #000000);
   }
 
   .newsletter__description {
@@ -92,6 +107,7 @@
     margin-left: auto;
     margin-right: auto;
     font-weight: 500;
+    color: var(--description-color, #000000);
   }
 
   /* Form */
@@ -131,6 +147,8 @@
     cursor: pointer;
     transition: all 0.3s ease;
     white-space: nowrap;
+    background-color: var(--button-color, #c4a36a);
+    color: var(--button-text-color, #ffffff);
   }
 
   .newsletter__button:hover {
@@ -142,6 +160,7 @@
     margin: 0;
     font-size: 0.8rem;
     line-height: 1.4;
+    color: var(--privacy-color, #000000);
   }
 
   /* Responsive */
