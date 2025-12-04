@@ -1,0 +1,126 @@
+{% comment %}
+  Authors Hero Section
+  작가 소개 페이지용 Hero 배너
+{% endcomment %}
+
+<section class="authors-hero">
+  <div class="authors-hero__overlay" style="background-color: rgba(0, 0, 0, {{ section.settings.overlay_opacity | divided_by: 100.0 }});">
+  </div>
+
+  <div class="authors-hero__container">
+    <div class="authors-hero__content">
+      <h1 class="authors-hero__title" style="color: {{ section.settings.title_color }};">
+        {{ section.settings.title }}
+      </h1>
+      <p class="authors-hero__subtitle" style="color: {{ section.settings.subtitle_color }};">
+        {{ section.settings.subtitle }}
+      </p>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .authors-hero {
+    position: relative;
+    background: linear-gradient(135deg, {{ section.settings.accent_color }}, {{ section.settings.accent_color | color_darken: 10 }});
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .authors-hero__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .authors-hero__container {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 3rem 2rem;
+  }
+
+  .authors-hero__content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .authors-hero__title {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .authors-hero__subtitle {
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .authors-hero {
+      min-height: 300px;
+    }
+
+    .authors-hero__title {
+      font-size: 1.875rem;
+    }
+
+    .authors-hero__subtitle {
+      font-size: 1rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Authors Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "작가 소개"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "<p>The Moved Mover와 함께 작품을 만들어가는 작가들을 만나세요</p>"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay Opacity",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Background Color",
+      "default": "#c4a36a"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle Color",
+      "default": "#f0f0f0"
+    }
+  ]
+}
+{% endschema %}

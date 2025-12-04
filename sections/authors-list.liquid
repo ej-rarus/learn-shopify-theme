@@ -1,0 +1,462 @@
+{% comment %}
+  Authors List Section
+  작가 프로필 목록
+{% endcomment %}
+
+<section class="authors-list">
+  <div class="authors-list__container">
+    <!-- Header -->
+    <div class="authors-list__header">
+      <h2 class="authors-list__title" style="color: {{ section.settings.title_color }};">
+        {{ section.settings.title }}
+      </h2>
+      {% if section.settings.subtitle != blank %}
+        <p class="authors-list__subtitle" style="color: {{ section.settings.subtitle_color }};">
+          {{ section.settings.subtitle }}
+        </p>
+      {% endif %}
+    </div>
+
+    <!-- Authors Grid -->
+    <div class="authors-list__grid">
+      {% for block in section.blocks %}
+        {% if block.type == 'author' %}
+          <div class="author-card" {{ block.shopify_attributes }}>
+            <!-- Author Image -->
+            {% if block.settings.author_image %}
+              <div class="author-card__image">
+                <img
+                  src="{{ block.settings.author_image | image_url: width: 400 }}"
+                  alt="{{ block.settings.author_name }}"
+                  loading="lazy">
+              </div>
+            {% else %}
+              <div class="author-card__image author-card__image--placeholder">
+                <svg viewBox="0 0 100 100" fill="currentColor" style="color: {{ section.settings.placeholder_color }};">
+                  <circle cx="50" cy="35" r="15"/>
+                  <path d="M50 50 C30 50 20 65 20 75 L80 75 C80 65 70 50 50 50"/>
+                </svg>
+              </div>
+            {% endif %}
+
+            <!-- Author Content -->
+            <div class="author-card__content">
+              <!-- Name -->
+              <h3 class="author-card__name" style="color: {{ section.settings.text_color }};">
+                {{ block.settings.author_name }}
+              </h3>
+
+              <!-- Position/Role -->
+              {% if block.settings.author_role != blank %}
+                <p class="author-card__role" style="color: {{ section.settings.accent_color }};">
+                  {{ block.settings.author_role }}
+                </p>
+              {% endif %}
+
+              <!-- Published Works Count -->
+              {% if block.settings.published_works > 0 %}
+                <p class="author-card__works" style="color: {{ section.settings.meta_color }};">
+                  출간작 {{ block.settings.published_works }}권
+                </p>
+              {% endif %}
+
+              <!-- Bio -->
+              {% if block.settings.author_bio != blank %}
+                <p class="author-card__bio" style="color: {{ section.settings.description_color }};">
+                  {{ block.settings.author_bio }}
+                </p>
+              {% endif %}
+
+              <!-- Social Links -->
+              <div class="author-card__socials">
+                {% if block.settings.instagram_url != blank %}
+                  <a href="{{ block.settings.instagram_url }}" target="_blank" class="author-card__social-link" title="Instagram" style="color: {{ section.settings.social_color }};">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/>
+                      <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/>
+                      <circle cx="18" cy="6" r="1" fill="currentColor"/>
+                    </svg>
+                  </a>
+                {% endif %}
+
+                {% if block.settings.twitter_url != blank %}
+                  <a href="{{ block.settings.twitter_url }}" target="_blank" class="author-card__social-link" title="Twitter" style="color: {{ section.settings.social_color }};">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2s9 5 20 5a9.5 9.5 0 00-9-5.5c4.75-2.35 6-5 6-5s-1.5 2-7 3.4"/>
+                    </svg>
+                  </a>
+                {% endif %}
+
+                {% if block.settings.website_url != blank %}
+                  <a href="{{ block.settings.website_url }}" target="_blank" class="author-card__social-link" title="Website" style="color: {{ section.settings.social_color }};">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                    </svg>
+                  </a>
+                {% endif %}
+              </div>
+
+              <!-- Books -->
+              {% if block.settings.book_titles != blank %}
+                <div class="author-card__books">
+                  <p class="author-card__books-title" style="color: {{ section.settings.text_color }};">
+                    주요 저작
+                  </p>
+                  <ul class="author-card__books-list" style="color: {{ section.settings.description_color }};">
+                    {% assign books = block.settings.book_titles | split: "," %}
+                    {% for book in books %}
+                      <li>{{ book | strip }}</li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .authors-list {
+    padding: 4rem 2rem;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  .authors-list__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .authors-list__header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .authors-list__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .authors-list__subtitle {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .authors-list__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2.5rem;
+  }
+
+  .author-card {
+    border-radius: 0.75rem;
+    overflow: hidden;
+    background-color: {{ section.settings.card_background }};
+    border: 1px solid {{ section.settings.card_border }};
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .author-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  }
+
+  .author-card__image {
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    background-color: #f0f0f0;
+  }
+
+  .author-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s;
+  }
+
+  .author-card:hover .author-card__image img {
+    transform: scale(1.05);
+  }
+
+  .author-card__image--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .author-card__image--placeholder svg {
+    width: 60%;
+    height: 60%;
+  }
+
+  .author-card__content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    flex: 1;
+  }
+
+  .author-card__name {
+    font-size: 1.375rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .author-card__role {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .author-card__works {
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .author-card__bio {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0.5rem 0 0 0;
+    flex: 1;
+  }
+
+  .author-card__socials {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .author-card__social-link {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .author-card__social-link:hover {
+    background-color: {{ section.settings.accent_color }};
+    color: #ffffff;
+  }
+
+  .author-card__books {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid {{ section.settings.card_border }};
+  }
+
+  .author-card__books-title {
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 0 0 0.75rem 0;
+    letter-spacing: 0.5px;
+  }
+
+  .author-card__books-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  .author-card__books-list li {
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .author-card__books-list li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: {{ section.settings.accent_color }};
+  }
+
+  @media (max-width: 768px) {
+    .authors-list {
+      padding: 2rem 1rem;
+    }
+
+    .authors-list__title {
+      font-size: 1.875rem;
+    }
+
+    .authors-list__grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .author-card__content {
+      padding: 1rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Authors List",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "The Moved Mover의 작가들"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Section Subtitle",
+      "default": "<p>독립 출판의 가치를 함께 만들어가는 작가들입니다</p>"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle Color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#c4a36a"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description Color",
+      "default": "#555555"
+    },
+    {
+      "type": "color",
+      "id": "meta_color",
+      "label": "Meta Color",
+      "default": "#999999"
+    },
+    {
+      "type": "color",
+      "id": "social_color",
+      "label": "Social Icon Color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "placeholder_color",
+      "label": "Placeholder Icon Color",
+      "default": "#cccccc"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_border",
+      "label": "Card Border Color",
+      "default": "#e8e8e8"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "author",
+      "name": "Author",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "author_image",
+          "label": "Author Photo"
+        },
+        {
+          "type": "text",
+          "id": "author_name",
+          "label": "Author Name",
+          "default": "작가명"
+        },
+        {
+          "type": "text",
+          "id": "author_role",
+          "label": "Author Role/Title",
+          "default": "소설가"
+        },
+        {
+          "type": "textarea",
+          "id": "author_bio",
+          "label": "Author Bio",
+          "default": "작가에 대한 간단한 소개를 입력하세요."
+        },
+        {
+          "type": "range",
+          "id": "published_works",
+          "label": "Published Works Count",
+          "min": 0,
+          "max": 20,
+          "step": 1,
+          "default": 0
+        },
+        {
+          "type": "text",
+          "id": "book_titles",
+          "label": "Book Titles (comma separated)",
+          "default": "책 제목 1, 책 제목 2, 책 제목 3"
+        },
+        {
+          "type": "url",
+          "id": "instagram_url",
+          "label": "Instagram URL"
+        },
+        {
+          "type": "url",
+          "id": "twitter_url",
+          "label": "Twitter URL"
+        },
+        {
+          "type": "url",
+          "id": "website_url",
+          "label": "Website URL"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

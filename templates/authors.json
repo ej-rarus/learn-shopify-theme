@@ -1,0 +1,109 @@
+{
+  "sections": {
+    "hero": {
+      "type": "authors-hero",
+      "settings": {
+        "title": "The Moved Mover의 작가들",
+        "subtitle": "독립 출판의 가치를 함께 만들어가는 작가들입니다",
+        "overlay_opacity": 20,
+        "accent_color": "#c4a36a"
+      }
+    },
+    "authors": {
+      "type": "authors-list",
+      "settings": {
+        "title": "작가 프로필",
+        "subtitle": "The Moved Mover과 함께하는 저자들을 만나세요",
+        "background_color": "#ffffff",
+        "title_color": "#000000",
+        "subtitle_color": "#666666",
+        "text_color": "#000000",
+        "accent_color": "#c4a36a",
+        "description_color": "#555555",
+        "meta_color": "#999999",
+        "social_color": "#666666",
+        "placeholder_color": "#cccccc",
+        "card_background": "#ffffff",
+        "card_border": "#e8e8e8"
+      },
+      "blocks": {
+        "author_1": {
+          "type": "author",
+          "settings": {
+            "author_name": "박미란",
+            "author_role": "소설가 | 에세이스트",
+            "author_bio": "제12회 한겨레문학상 수상. 일상 속 흔한 순간들을 깊이 있게 포착하는 것으로 알려져 있다. 가족, 사랑, 시간의 흐름에 대한 아름다운 성찰이 특징.",
+            "published_works": 6,
+            "book_titles": "밤의 언어, 창문 너머, 그 계절의 끝자락",
+            "instagram_url": "https://instagram.com/parkmi.ran",
+            "twitter_url": "https://twitter.com/parkmi_ran",
+            "website_url": "https://parkmiranwriter.com"
+          }
+        },
+        "author_2": {
+          "type": "author",
+          "settings": {
+            "author_name": "이준호",
+            "author_role": "시인",
+            "author_bio": "현대시의 정서적 표현을 새롭게 정의하는 작가. 2010년부터 활동해온 경험 많은 시인으로, 자연과 도시 풍경에서 찾은 영감을 섬세한 언어로 표현한다.",
+            "published_works": 8,
+            "book_titles": "도시의 속삭임, 빗소리에 물든 마음, 별을 헤다가",
+            "instagram_url": "https://instagram.com/lee.junho.poet",
+            "website_url": "https://leejunho-poetry.com"
+          }
+        },
+        "author_3": {
+          "type": "author",
+          "settings": {
+            "author_name": "최소영",
+            "author_role": "에세이스트 | 칼럼니스트",
+            "author_bio": "현대 사회의 다양한 이슈들을 통찰력 있게 분석하는 저자. 사회 변화와 개인의 삶의 방식에 대해 깊이 있는 질문을 던지는 글들로 주목받고 있다.",
+            "published_works": 4,
+            "book_titles": "혼자가 되는 시간의 가치, 작은 것들의 위대함",
+            "instagram_url": "https://instagram.com/choi.soyoung.writer",
+            "twitter_url": "https://twitter.com/choisy_writer"
+          }
+        },
+        "author_4": {
+          "type": "author",
+          "settings": {
+            "author_name": "김준혁",
+            "author_role": "소설가",
+            "author_bio": "미스터리와 심리 스릴러 장르의 새로운 목소리. 복잡한 인물관계와 반전의 맛으로 독자들에게 깊은 인상을 남기는 작가이다.",
+            "published_works": 5,
+            "book_titles": "마지막 증거, 거울 속의 거울, 검은 시간",
+            "instagram_url": "https://instagram.com/kim.junhyuk.novels"
+          }
+        },
+        "author_5": {
+          "type": "author",
+          "settings": {
+            "author_name": "오서연",
+            "author_role": "일러스트레이터 | 그래픽 노블 작가",
+            "author_bio": "시각 예술과 문학을 결합한 독특한 작업으로 주목받는 아티스트. 그림으로 이야기하는 그녀의 작품들은 언어를 초월한 감정 전달의 새로운 가능성을 보여준다.",
+            "published_works": 3,
+            "book_titles": "선으로 그린 감정, 빛과 그림자의 대화",
+            "website_url": "https://oseoyeon-art.com"
+          }
+        },
+        "author_6": {
+          "type": "author",
+          "settings": {
+            "author_name": "허윤정",
+            "author_role": "논픽션 저자 | 문화평론가",
+            "author_bio": "예술, 문화, 역사의 교차점에서 새로운 의미를 발견하는 저자. 깊이 있는 연구와 사려 깊은 분석으로 다양한 문화 현상을 조명한다.",
+            "published_works": 5,
+            "book_titles": "문화의 장벽을 넘어서, 역사 속의 숨겨진 목소리",
+            "instagram_url": "https://instagram.com/heo.yunjeong.critic",
+            "twitter_url": "https://twitter.com/heo_yunjeong"
+          }
+        }
+      },
+      "block_order": ["author_1", "author_2", "author_3", "author_4", "author_5", "author_6"]
+    }
+  },
+  "order": [
+    "hero",
+    "authors"
+  ]
+}
