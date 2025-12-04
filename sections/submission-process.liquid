@@ -1,0 +1,267 @@
+{% comment %}
+  Submission Process Section
+  투고 절차 및 진행 단계 설명
+{% endcomment %}
+
+<section class="submission-process">
+  <div class="submission-process__container">
+    <!-- Header -->
+    <div class="submission-process__header">
+      <h2 class="submission-process__title" style="color: {{ section.settings.title_color }};">
+        {{ section.settings.title }}
+      </h2>
+      {% if section.settings.subtitle != blank %}
+        <p class="submission-process__subtitle" style="color: {{ section.settings.subtitle_color }};">
+          {{ section.settings.subtitle }}
+        </p>
+      {% endif %}
+    </div>
+
+    <!-- Steps -->
+    <div class="submission-process__steps">
+      {% for block in section.blocks %}
+        {% if block.type == 'step' %}
+          <div class="process-step" {{ block.shopify_attributes }}>
+            <!-- Step Number -->
+            <div class="process-step__number" style="background-color: {{ section.settings.accent_color }}; color: {{ section.settings.step_number_color }};">
+              {{ forloop.index }}
+            </div>
+
+            <!-- Step Content -->
+            <div class="process-step__content">
+              <h3 class="process-step__title" style="color: {{ section.settings.text_color }};">
+                {{ block.settings.step_title }}
+              </h3>
+              <p class="process-step__description" style="color: {{ section.settings.description_color }};">
+                {{ block.settings.step_description }}
+              </p>
+            </div>
+
+            <!-- Connector Line -->
+            {% if forloop.index < section.blocks.size %}
+              <div class="process-step__connector" style="background-color: {{ section.settings.accent_color }};"></div>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .submission-process {
+    padding: 4rem 2rem;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  .submission-process__container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .submission-process__header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .submission-process__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .submission-process__subtitle {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .submission-process__steps {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .process-step {
+    position: relative;
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+
+  .process-step__number {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    font-weight: 700;
+    position: relative;
+    z-index: 2;
+  }
+
+  .process-step__content {
+    flex: 1;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    background-color: {{ section.settings.card_background }};
+    border: 1px solid {{ section.settings.card_border }};
+  }
+
+  .process-step__title {
+    font-size: 1.375rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+  }
+
+  .process-step__description {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .process-step__connector {
+    position: absolute;
+    left: 29px;
+    top: 60px;
+    width: 2px;
+    height: calc(100% + 2rem);
+    z-index: 1;
+  }
+
+  .process-step:last-child .process-step__connector {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .submission-process {
+      padding: 2rem 1rem;
+    }
+
+    .submission-process__title {
+      font-size: 1.875rem;
+    }
+
+    .process-step {
+      gap: 1.5rem;
+    }
+
+    .process-step__number {
+      width: 50px;
+      height: 50px;
+      font-size: 1.5rem;
+    }
+
+    .process-step__content {
+      padding: 1rem;
+    }
+
+    .process-step__title {
+      font-size: 1.125rem;
+    }
+
+    .process-step__connector {
+      left: 24px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Submission Process",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "투고 절차"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Section Subtitle",
+      "default": "<p>The Moved Mover의 투고 절차는 투명하고 공정합니다</p>"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle Color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Step Title Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description Color",
+      "default": "#555555"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#c4a36a"
+    },
+    {
+      "type": "color",
+      "id": "step_number_color",
+      "label": "Step Number Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card Background",
+      "default": "#f9f9f9"
+    },
+    {
+      "type": "color",
+      "id": "card_border",
+      "label": "Card Border Color",
+      "default": "#e0e0e0"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "step_title",
+          "label": "Step Title",
+          "default": "원고 제출"
+        },
+        {
+          "type": "textarea",
+          "id": "step_description",
+          "label": "Step Description",
+          "default": "원고를 이메일로 제출하거나 온라인 폼을 통해 업로드합니다."
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,397 @@
+{% comment %}
+  Submission Form Section
+  원고 투고 폼
+{% endcomment %}
+
+<section class="submission-form">
+  <div class="submission-form__container">
+    <!-- Header -->
+    <div class="submission-form__header">
+      <h2 class="submission-form__title" style="color: {{ section.settings.title_color }};">
+        {{ section.settings.title }}
+      </h2>
+      {% if section.settings.subtitle != blank %}
+        <p class="submission-form__subtitle" style="color: {{ section.settings.subtitle_color }};">
+          {{ section.settings.subtitle }}
+        </p>
+      {% endif %}
+    </div>
+
+    <!-- Form -->
+    <form class="submission-form__form" method="POST" action="{{ section.settings.form_action }}">
+      <!-- Name Field -->
+      <div class="form-group">
+        <label for="author-name" class="form-label" style="color: {{ section.settings.text_color }};">
+          이름 *
+        </label>
+        <input
+          type="text"
+          id="author-name"
+          name="author_name"
+          class="form-input"
+          placeholder="작가명"
+          required
+          style="border-color: {{ section.settings.border_color }};">
+      </div>
+
+      <!-- Email Field -->
+      <div class="form-group">
+        <label for="author-email" class="form-label" style="color: {{ section.settings.text_color }};">
+          이메일 *
+        </label>
+        <input
+          type="email"
+          id="author-email"
+          name="author_email"
+          class="form-input"
+          placeholder="your@email.com"
+          required
+          style="border-color: {{ section.settings.border_color }};">
+      </div>
+
+      <!-- Phone Field -->
+      <div class="form-group">
+        <label for="author-phone" class="form-label" style="color: {{ section.settings.text_color }};">
+          연락처
+        </label>
+        <input
+          type="tel"
+          id="author-phone"
+          name="author_phone"
+          class="form-input"
+          placeholder="010-1234-5678"
+          style="border-color: {{ section.settings.border_color }};">
+      </div>
+
+      <!-- Genre Dropdown -->
+      <div class="form-group">
+        <label for="manuscript-genre" class="form-label" style="color: {{ section.settings.text_color }};">
+          장르 *
+        </label>
+        <select
+          id="manuscript-genre"
+          name="manuscript_genre"
+          class="form-select"
+          required
+          style="border-color: {{ section.settings.border_color }};">
+          <option value="">장르를 선택하세요</option>
+          <option value="essay">에세이</option>
+          <option value="novel">소설</option>
+          <option value="poetry">시</option>
+          <option value="art">예술</option>
+          <option value="philosophy">철학</option>
+          <option value="other">기타</option>
+        </select>
+      </div>
+
+      <!-- Title Field -->
+      <div class="form-group">
+        <label for="manuscript-title" class="form-label" style="color: {{ section.settings.text_color }};">
+          원고 제목 *
+        </label>
+        <input
+          type="text"
+          id="manuscript-title"
+          name="manuscript_title"
+          class="form-input"
+          placeholder="원고 제목"
+          required
+          style="border-color: {{ section.settings.border_color }};">
+      </div>
+
+      <!-- Description -->
+      <div class="form-group">
+        <label for="manuscript-description" class="form-label" style="color: {{ section.settings.text_color }};">
+          원고 설명 *
+        </label>
+        <textarea
+          id="manuscript-description"
+          name="manuscript_description"
+          class="form-textarea"
+          placeholder="원고에 대한 간단한 설명을 입력하세요"
+          rows="5"
+          required
+          style="border-color: {{ section.settings.border_color }};"></textarea>
+      </div>
+
+      <!-- File Upload -->
+      <div class="form-group">
+        <label for="manuscript-file" class="form-label" style="color: {{ section.settings.text_color }};">
+          원고 파일 (PDF, DOCX) *
+        </label>
+        <div class="form-file-input">
+          <input
+            type="file"
+            id="manuscript-file"
+            name="manuscript_file"
+            class="form-file"
+            accept=".pdf,.doc,.docx"
+            required>
+          <span class="form-file-label" style="border-color: {{ section.settings.border_color }};">
+            파일을 선택하거나 드래그하세요
+          </span>
+        </div>
+      </div>
+
+      <!-- Checkbox -->
+      <div class="form-group form-group--checkbox">
+        <label class="form-checkbox" style="color: {{ section.settings.text_color }};">
+          <input type="checkbox" name="agree_terms" required>
+          <span>이용약관에 동의합니다 *</span>
+        </label>
+      </div>
+
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        class="form-submit"
+        style="background-color: {{ section.settings.button_color }}; color: {{ section.settings.button_text_color }};">
+        {{ section.settings.submit_text }}
+      </button>
+
+      <!-- Info Text -->
+      <p class="submission-form__info" style="color: {{ section.settings.subtitle_color }};">
+        {{ section.settings.info_text }}
+      </p>
+    </form>
+  </div>
+</section>
+
+{% stylesheet %}
+  .submission-form {
+    padding: 4rem 2rem;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  .submission-form__container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .submission-form__header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .submission-form__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .submission-form__subtitle {
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+
+  .submission-form__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-label {
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    padding: 0.75rem 1rem;
+    border: 2px solid;
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.2s;
+  }
+
+  .form-input:focus,
+  .form-select:focus,
+  .form-textarea:focus {
+    outline: none;
+    border-color: {{ section.settings.accent_color }};
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  /* File Input */
+  .form-file-input {
+    position: relative;
+  }
+
+  .form-file {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .form-file-label {
+    display: block;
+    padding: 2rem 1rem;
+    text-align: center;
+    border: 2px dashed;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    background-color: #f9f9f9;
+  }
+
+  .form-file:hover + .form-file-label {
+    background-color: #f0f0f0;
+  }
+
+  /* Checkbox */
+  .form-group--checkbox {
+    padding: 1rem 0;
+  }
+
+  .form-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    font-weight: 500;
+  }
+
+  .form-checkbox input {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: {{ section.settings.accent_color }};
+  }
+
+  /* Submit Button */
+  .form-submit {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    margin-top: 1rem;
+  }
+
+  .form-submit:hover {
+    opacity: 0.9;
+  }
+
+  .submission-form__info {
+    text-align: center;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    margin: 1rem 0 0 0;
+  }
+
+  @media (max-width: 768px) {
+    .submission-form {
+      padding: 2rem 1rem;
+    }
+
+    .submission-form__title {
+      font-size: 1.875rem;
+    }
+
+    .submission-form__form {
+      gap: 1.25rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Submission Form",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Form Title",
+      "default": "원고 제출"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Form Subtitle",
+      "default": "<p>아래 양식을 작성하여 원고를 제출해주세요</p>"
+    },
+    {
+      "type": "text",
+      "id": "submit_text",
+      "label": "Submit Button Text",
+      "default": "제출하기"
+    },
+    {
+      "type": "url",
+      "id": "form_action",
+      "label": "Form Action URL",
+      "default": "/submissions"
+    },
+    {
+      "type": "richtext",
+      "id": "info_text",
+      "label": "Info Text",
+      "default": "<p>제출된 원고는 2-4주 내에 검토되며 결과를 이메일로 안내드립니다.</p>"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle Color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Input Border Color",
+      "default": "#d0d0d0"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#c4a36a"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button Color",
+      "default": "#c4a36a"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#ffffff"
+    }
+  ]
+}
+{% endschema %}

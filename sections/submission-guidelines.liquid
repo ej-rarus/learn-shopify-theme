@@ -1,0 +1,286 @@
+{% comment %}
+  Submission Guidelines Section
+  투고 가이드라인 및 규격 안내
+{% endcomment %}
+
+<section class="submission-guidelines">
+  <div class="submission-guidelines__container">
+    <!-- Header -->
+    <div class="submission-guidelines__header">
+      <h2 class="submission-guidelines__title" style="color: {{ section.settings.title_color }};">
+        {{ section.settings.title }}
+      </h2>
+    </div>
+
+    <!-- Guidelines Grid -->
+    <div class="submission-guidelines__grid">
+      {% for block in section.blocks %}
+        {% if block.type == 'guideline' %}
+          <div class="guideline-card" {{ block.shopify_attributes }}>
+            <!-- Icon -->
+            <div class="guideline-card__icon" style="color: {{ section.settings.accent_color }};">
+              {{ block.settings.icon }}
+            </div>
+
+            <!-- Content -->
+            <h3 class="guideline-card__title" style="color: {{ section.settings.text_color }};">
+              {{ block.settings.guideline_title }}
+            </h3>
+            <p class="guideline-card__description" style="color: {{ section.settings.description_color }};">
+              {{ block.settings.guideline_description }}
+            </p>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <!-- Requirements Section -->
+    {% if section.settings.show_requirements %}
+      <div class="submission-guidelines__requirements">
+        <h3 class="submission-guidelines__requirements-title" style="color: {{ section.settings.title_color }};">
+          {{ section.settings.requirements_title }}
+        </h3>
+        <ul class="submission-guidelines__requirements-list" style="color: {{ section.settings.text_color }};">
+          {% for block in section.blocks %}
+            {% if block.type == 'requirement' %}
+              <li>{{ block.settings.requirement_text }}</li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .submission-guidelines {
+    padding: 4rem 2rem;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  .submission-guidelines__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .submission-guidelines__header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .submission-guidelines__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .submission-guidelines__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .guideline-card {
+    padding: 2rem;
+    border-radius: 0.75rem;
+    background-color: {{ section.settings.card_background }};
+    border: 1px solid {{ section.settings.card_border }};
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .guideline-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  .guideline-card__icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .guideline-card__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+  }
+
+  .guideline-card__description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .submission-guidelines__requirements {
+    background-color: {{ section.settings.requirement_bg }};
+    padding: 2rem;
+    border-radius: 0.75rem;
+    border-left: 4px solid {{ section.settings.accent_color }};
+  }
+
+  .submission-guidelines__requirements-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+  }
+
+  .submission-guidelines__requirements-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .submission-guidelines__requirements-list li {
+    padding-left: 2rem;
+    position: relative;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .submission-guidelines__requirements-list li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: {{ section.settings.accent_color }};
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+
+  @media (max-width: 768px) {
+    .submission-guidelines {
+      padding: 2rem 1rem;
+    }
+
+    .submission-guidelines__title {
+      font-size: 1.875rem;
+    }
+
+    .submission-guidelines__grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .guideline-card {
+      padding: 1.5rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Submission Guidelines",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "투고 가이드라인"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description Color",
+      "default": "#555555"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#c4a36a"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card Background",
+      "default": "#f9f9f9"
+    },
+    {
+      "type": "color",
+      "id": "card_border",
+      "label": "Card Border Color",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_requirements",
+      "label": "Show Requirements Section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "requirements_title",
+      "label": "Requirements Section Title",
+      "default": "필수 요구사항"
+    },
+    {
+      "type": "color",
+      "id": "requirement_bg",
+      "label": "Requirements Background Color",
+      "default": "#f5f5f5"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "guideline",
+      "name": "Guideline",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (emoji)",
+          "default": "📝"
+        },
+        {
+          "type": "text",
+          "id": "guideline_title",
+          "label": "Guideline Title",
+          "default": "장르"
+        },
+        {
+          "type": "text",
+          "id": "guideline_description",
+          "label": "Guideline Description",
+          "default": "에세이, 소설, 시, 논픽션 등 모든 장르의 원고를 환영합니다."
+        }
+      ]
+    },
+    {
+      "type": "requirement",
+      "name": "Requirement",
+      "settings": [
+        {
+          "type": "text",
+          "id": "requirement_text",
+          "label": "Requirement Text",
+          "default": "원고는 미출판 작품이어야 합니다"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

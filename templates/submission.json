@@ -1,0 +1,140 @@
+{
+  "sections": {
+    "hero": {
+      "type": "submission-hero",
+      "settings": {
+        "title": "원고를 투고하세요",
+        "subtitle": "당신의 이야기를 The Moved Mover와 함께 나누고 싶으신가요? 투고 안내를 확인하고 원고를 보내주세요.",
+        "overlay_opacity": 20,
+        "accent_color": "#c4a36a"
+      }
+    },
+    "process": {
+      "type": "submission-process",
+      "settings": {
+        "title": "투고 절차",
+        "subtitle": "The Moved Mover의 투고 절차는 투명하고 공정합니다"
+      },
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "step_title": "원고 제출",
+            "step_description": "아래 투고 폼을 작성하여 원고를 제출합니다. 이메일로 제출하거나 파일을 업로드할 수 있습니다."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "step_title": "초기 검토",
+            "step_description": "제출된 원고가 기본 요구사항(미출판, 형식 등)을 충족하는지 확인합니다. 약 1주일 소요됩니다."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "step_title": "편집팀 심사",
+            "step_description": "편집팀이 원고의 질, 내용, The Moved Mover의 기획 의도와의 부합성을 평가합니다. 약 2-3주 소요됩니다."
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "step_title": "결과 안내",
+            "step_description": "심사 결과를 이메일로 안내해드립니다. 수락된 경우 출판 일정을 협의합니다."
+          }
+        }
+      },
+      "block_order": ["step_1", "step_2", "step_3", "step_4"]
+    },
+    "guidelines": {
+      "type": "submission-guidelines",
+      "settings": {
+        "title": "투고 가이드라인",
+        "show_requirements": true,
+        "requirements_title": "필수 요구사항"
+      },
+      "blocks": {
+        "guideline_1": {
+          "type": "guideline",
+          "settings": {
+            "icon": "📝",
+            "guideline_title": "장르",
+            "guideline_description": "에세이, 소설, 시, 논픽션 등 모든 장르의 원고를 환영합니다."
+          }
+        },
+        "guideline_2": {
+          "type": "guideline",
+          "settings": {
+            "icon": "📄",
+            "guideline_title": "형식",
+            "guideline_description": "Word (.docx) 또는 PDF 형식으로 제출하며, 기본 글꼴(한글 11pt, 영문 12pt)을 사용해주세요."
+          }
+        },
+        "guideline_3": {
+          "type": "guideline",
+          "settings": {
+            "icon": "📖",
+            "guideline_title": "분량",
+            "guideline_description": "최소 5,000자 이상의 완성도 있는 원고를 환영합니다. 최대 분량 제한은 없습니다."
+          }
+        },
+        "guideline_4": {
+          "type": "guideline",
+          "settings": {
+            "icon": "⚖️",
+            "guideline_title": "저작권",
+            "guideline_description": "본인이 저작한 미출판 작품이어야 하며, 제3자의 저작권을 침해하지 않아야 합니다."
+          }
+        },
+        "requirement_1": {
+          "type": "requirement",
+          "settings": {
+            "requirement_text": "미출판 작품 (온라인 게시 포함)"
+          }
+        },
+        "requirement_2": {
+          "type": "requirement",
+          "settings": {
+            "requirement_text": "작가명, 연락처, 이메일 기재"
+          }
+        },
+        "requirement_3": {
+          "type": "requirement",
+          "settings": {
+            "requirement_text": "원고 제목 및 장르 명시"
+          }
+        },
+        "requirement_4": {
+          "type": "requirement",
+          "settings": {
+            "requirement_text": "저작권 동의 및 이용약관 동의"
+          }
+        },
+        "requirement_5": {
+          "type": "requirement",
+          "settings": {
+            "requirement_text": "한국어 또는 영문 작품"
+          }
+        }
+      },
+      "block_order": ["guideline_1", "guideline_2", "guideline_3", "guideline_4", "requirement_1", "requirement_2", "requirement_3", "requirement_4", "requirement_5"]
+    },
+    "form": {
+      "type": "submission-form",
+      "settings": {
+        "title": "원고 제출",
+        "subtitle": "아래 양식을 작성하여 원고를 제출해주세요",
+        "submit_text": "제출하기",
+        "form_action": "/submissions",
+        "info_text": "제출된 원고는 2-4주 내에 검토되며 결과를 이메일로 안내드립니다."
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "process",
+    "guidelines",
+    "form"
+  ]
+}
