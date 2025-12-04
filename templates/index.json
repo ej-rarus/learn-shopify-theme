@@ -10,7 +10,21 @@
 {
   "sections": {
     "hero": {
-      "type": "hero",
+      "type": "home-hero",
+      "settings": {
+        "badge": "The Moved Mover에 오신 것을 환영합니다",
+        "title": "우리는 부동의 신이 아닙니다",
+        "subtitle": "매 순간 흔들리고, 움직이며, 변합니다. 그리고 그 흔들림은 다시 누군가를 움직입니다.",
+        "description": "<p>The Moved Mover는 그 파동을 기록으로 남깁니다.</p><p>독립 출판물, 아티스트북, 그리고 창작자들의 목소리를 담은 책들을 만나세요.</p>",
+        "button_1_text": "도서 보기",
+        "button_1_link": "/collections/all",
+        "button_2_text": "더 알아보기",
+        "button_2_link": "/pages/about",
+        "overlay_opacity": 40
+      }
+    },
+    "old_hero": {
+      "type": "hero_disabled",
       "blocks": {
         "slide_1": {
           "type": "slide",
@@ -132,6 +146,44 @@
         "padding_bottom": 100
       }
     },
+    "latest_news": {
+      "type": "latest-news",
+      "settings": {
+        "title": "최신 뉴스",
+        "subtitle": "The Moved Mover의 최신 소식과 이벤트",
+        "search_placeholder": "뉴스 검색..."
+      },
+      "blocks": {
+        "news_1": {
+          "type": "news_item",
+          "settings": {
+            "news_title": "새로운 도서 시리즈 출간",
+            "news_excerpt": "독립 출판의 가치를 담은 새로운 도서 시리즈가 출간되었습니다. 창작자들의 다양한 목소리를 만나보세요.",
+            "news_date": "2025-12-01",
+            "news_badge": "New"
+          }
+        },
+        "news_2": {
+          "type": "news_item",
+          "settings": {
+            "news_title": "겨울 기획전 시작",
+            "news_excerpt": "겨울을 맞이하여 특별한 할인과 함께 기획전이 시작되었습니다. 따뜻한 마음을 담은 책들을 추천합니다.",
+            "news_date": "2025-11-28",
+            "news_badge": "Event"
+          }
+        },
+        "news_3": {
+          "type": "news_item",
+          "settings": {
+            "news_title": "저자 인터뷰 시리즈 오픈",
+            "news_excerpt": "The Moved Mover에 소속된 저자들과의 특별한 인터뷰 시리즈가 시작되었습니다. 창작의 배경과 이야기를 들어보세요.",
+            "news_date": "2025-11-25",
+            "news_badge": "Featured"
+          }
+        }
+      },
+      "block_order": ["news_1", "news_2", "news_3"]
+    },
     "newsletter": {
       "type": "newsletter",
       "settings": {
@@ -179,6 +231,7 @@
     "hero",
     "featured_books",
     "publishers_spotlight",
+    "latest_news",
     "newsletter",
     "footer"
   ]

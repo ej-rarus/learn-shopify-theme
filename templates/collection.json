@@ -9,12 +9,63 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "collection",
-      "settings": {}
+    "hero": {
+      "type": "about-hero",
+      "settings": {
+        "title": "Books Collection",
+        "subtitle": "모든 도서를 탐색하세요",
+        "overlay_opacity": 0.4
+      }
+    },
+    "catalog": {
+      "type": "books-catalog",
+      "settings": {
+        "title": "우리의 모든 도서",
+        "subtitle": "카테고리별로 원하는 책을 찾아보세요",
+        "search_placeholder": "책 제목이나 저자명으로 검색..."
+      },
+      "blocks": {
+        "category_1": {
+          "type": "category",
+          "settings": {
+            "category_name": "Essay (에세이)",
+            "category_slug": "essay"
+          }
+        },
+        "category_2": {
+          "type": "category",
+          "settings": {
+            "category_name": "Novel (소설)",
+            "category_slug": "novel"
+          }
+        },
+        "category_3": {
+          "type": "category",
+          "settings": {
+            "category_name": "Poetry (시)",
+            "category_slug": "poetry"
+          }
+        },
+        "category_4": {
+          "type": "category",
+          "settings": {
+            "category_name": "Art (예술)",
+            "category_slug": "art"
+          }
+        },
+        "category_5": {
+          "type": "category",
+          "settings": {
+            "category_name": "Philosophy (철학)",
+            "category_slug": "philosophy"
+          }
+        }
+      },
+      "block_order": ["category_1", "category_2", "category_3", "category_4", "category_5"]
     }
   },
   "order": [
-    "main"
+    "hero",
+    "catalog"
   ]
 }
