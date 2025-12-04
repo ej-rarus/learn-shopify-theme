@@ -17,7 +17,9 @@
         "overlay_opacity": 0.4
       }
     },
-    "blocks": {
+    "catalog": {
+      "type": "books-catalog",
+      "blocks": {
         "category_1": {
           "type": "category",
           "settings": {
