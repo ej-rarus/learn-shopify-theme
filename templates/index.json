@@ -20,7 +20,10 @@
         "button_1_link": "/collections/all",
         "button_2_text": "더 알아보기",
         "button_2_link": "/pages/about",
-        "overlay_opacity": 40
+        "overlay_opacity": 40,
+        "title_color": "#ffffff",
+        "subtitle_color": "#ffffff",
+        "description_color": "#f0f0f0"
       }
     },
     "featured_books": {
