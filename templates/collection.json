@@ -22,7 +22,8 @@
       "settings": {
         "title": "우리의 모든 도서",
         "subtitle": "<p>카테고리별로 원하는 책을 찾아보세요</p>",
-        "search_placeholder": "책 제목이나 저자명으로 검색..."
+        "search_placeholder": "책 제목이나 저자명으로 검색...",
+        "background_color": "#f5f7fa"
       },
       "blocks": {
         "category_1": {
