@@ -15,10 +15,24 @@
     },
     "custom_list": {
       "type": "custom-list",
+      "blocks": {
+        "article_fBji6w": {
+          "type": "article",
+          "settings": {
+            "title": "소개",
+            "excerpt": "게시물 내용을 작성해주세요.",
+            "author": "Author",
+            "date": "2024-12-03",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "article_fBji6w"
+      ],
       "settings": {
         "title": "블로그",
-        "subtitle": "최신 소식",
-        "show_sample_items": true
+        "subtitle": "최신 소식"
       }
     }
   },
