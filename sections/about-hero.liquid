@@ -10,6 +10,7 @@
       background-image: url('{{ section.settings.hero_image | image_url: width: 1600 }}');
     {% endif %}
     background-color: {{ section.settings.background_color }};
+    --subtitle-color: {{ section.settings.subtitle_color }};
   "
 >
   {% if section.settings.hero_image %}
@@ -20,9 +21,9 @@
         <h1 class="about-hero__title" style="color: {{ section.settings.title_color }};">
           {{ section.settings.title }}
         </h1>
-        <p class="about-hero__subtitle" style="color: {{ section.settings.subtitle_color }};">
+        <div class="about-hero__subtitle">
           {{ section.settings.subtitle }}
-        </p>
+        </div>
         {% if section.settings.button_text != blank and section.settings.button_link != blank %}
           <a href="{{ section.settings.button_link }}" class="about-hero__button" style="background-color: {{ section.settings.button_color }}; color: {{ section.settings.button_text_color }};">
             {{ section.settings.button_text }}
@@ -81,6 +82,12 @@
     font-weight: 400;
     line-height: 1.6;
     margin: 0;
+    color: var(--subtitle-color, #ffffff);
+  }
+
+  .about-hero__subtitle p,
+  .about-hero__subtitle * {
+    color: var(--subtitle-color, #ffffff);
   }
 
   .about-hero__button {
