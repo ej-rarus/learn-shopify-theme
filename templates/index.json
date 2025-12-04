@@ -14,7 +14,7 @@
       "settings": {
         "badge": "The Moved Mover에 오신 것을 환영합니다",
         "title": "우리는 부동의 신이 아닙니다",
-        "subtitle": "매 순간 흔들리고, 움직이며, 변합니다. 그리고 그 흔들림은 다시 누군가를 움직입니다.",
+        "subtitle": "<p>매 순간 흔들리고, 움직이며, 변합니다.</p><p>그리고 그 흔들림은 다시 누군가를 움직입니다.</p>",
         "description": "<p>The Moved Mover는 그 파동을 기록으로 남깁니다.</p><p>독립 출판물, 아티스트북, 그리고 창작자들의 목소리를 담은 책들을 만나세요.</p>",
         "button_1_text": "도서 보기",
         "button_1_link": "/collections/all",
