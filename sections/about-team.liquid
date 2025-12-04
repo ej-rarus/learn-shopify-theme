@@ -1,0 +1,325 @@
+{% comment %}
+  About Team Section
+  Display team members with photos, names, and roles
+{% endcomment %}
+
+<section class="about-team">
+  <div class="about-team__container">
+    <!-- Header -->
+    <div class="about-team__header">
+      {% if section.settings.title != blank %}
+        <h2 class="about-team__title" style="color: {{ section.settings.title_color }};">
+          {{ section.settings.title }}
+        </h2>
+      {% endif %}
+      {% if section.settings.subtitle != blank %}
+        <p class="about-team__subtitle" style="color: {{ section.settings.subtitle_color }};">
+          {{ section.settings.subtitle }}
+        </p>
+      {% endif %}
+    </div>
+
+    <!-- Team Members Grid -->
+    <div class="about-team__grid">
+      {% for block in section.blocks %}
+        {% if block.type == 'member' %}
+          <div class="team-member" {{ block.shopify_attributes }}>
+            <!-- Member Image -->
+            {% if block.settings.member_image %}
+              <div class="team-member__image">
+                <img
+                  src="{{ block.settings.member_image | image_url: width: 400 }}"
+                  alt="{{ block.settings.member_name }}"
+                  loading="lazy">
+              </div>
+            {% else %}
+              <div class="team-member__image team-member__image--placeholder">
+                <svg viewBox="0 0 100 100" fill="currentColor" style="color: {{ section.settings.placeholder_color }};">
+                  <circle cx="50" cy="35" r="15"/>
+                  <path d="M50 50 C30 50 20 65 20 75 L80 75 C80 65 70 50 50 50"/>
+                </svg>
+              </div>
+            {% endif %}
+
+            <!-- Member Info -->
+            <div class="team-member__info">
+              <h3 class="team-member__name" style="color: {{ section.settings.text_color }};">
+                {{ block.settings.member_name }}
+              </h3>
+              <p class="team-member__role" style="color: {{ section.settings.role_color }};">
+                {{ block.settings.member_role }}
+              </p>
+              {% if block.settings.member_bio != blank %}
+                <p class="team-member__bio" style="color: {{ section.settings.bio_color }};">
+                  {{ block.settings.member_bio }}
+                </p>
+              {% endif %}
+
+              <!-- Social Links -->
+              {% if block.settings.linkedin_url != blank or block.settings.twitter_url != blank %}
+                <div class="team-member__socials">
+                  {% if block.settings.linkedin_url != blank %}
+                    <a href="{{ block.settings.linkedin_url }}" class="team-member__social-link" title="LinkedIn" style="color: {{ section.settings.social_color }};">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                      </svg>
+                    </a>
+                  {% endif %}
+                  {% if block.settings.twitter_url != blank %}
+                    <a href="{{ block.settings.twitter_url }}" class="team-member__social-link" title="Twitter" style="color: {{ section.settings.social_color }};">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2s9 5 20 5a9.5 9.5 0 00-9-5.5c4.75-2.35 6-5 6-5s-1.5 2-7 3.4"/>
+                      </svg>
+                    </a>
+                  {% endif %}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .about-team {
+    padding: 4rem 2rem;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  .about-team__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .about-team__header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .about-team__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .about-team__subtitle {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .about-team__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+  }
+
+  .team-member {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .team-member__image {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background-color: #f0f0f0;
+  }
+
+  .team-member__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .team-member__image--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .team-member__image--placeholder svg {
+    width: 60%;
+    height: 60%;
+  }
+
+  .team-member__info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .team-member__name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .team-member__role {
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .team-member__bio {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin: 0.5rem 0 0 0;
+  }
+
+  .team-member__socials {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+
+  .team-member__social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    transition: background-color 0.2s, transform 0.2s;
+    text-decoration: none;
+  }
+
+  .team-member__social-link:hover {
+    transform: translateY(-2px);
+    background-color: #e0e0e0;
+  }
+
+  @media (max-width: 768px) {
+    .about-team {
+      padding: 2rem 1rem;
+    }
+
+    .about-team__title {
+      font-size: 1.875rem;
+    }
+
+    .about-team__grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "About Team",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Meet Our Team"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Section Subtitle",
+      "default": "<p>Talented people dedicated to your success</p>"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle Color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Name Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "role_color",
+      "label": "Role Color",
+      "default": "#0066cc"
+    },
+    {
+      "type": "color",
+      "id": "bio_color",
+      "label": "Bio Color",
+      "default": "#555555"
+    },
+    {
+      "type": "color",
+      "id": "social_color",
+      "label": "Social Icon Color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "placeholder_color",
+      "label": "Placeholder Icon Color",
+      "default": "#cccccc"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "member",
+      "name": "Team Member",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "member_image",
+          "label": "Member Photo"
+        },
+        {
+          "type": "text",
+          "id": "member_name",
+          "label": "Member Name",
+          "default": "John Doe"
+        },
+        {
+          "type": "text",
+          "id": "member_role",
+          "label": "Member Role",
+          "default": "Founder & CEO"
+        },
+        {
+          "type": "text",
+          "id": "member_bio",
+          "label": "Member Bio"
+        },
+        {
+          "type": "url",
+          "id": "linkedin_url",
+          "label": "LinkedIn URL"
+        },
+        {
+          "type": "url",
+          "id": "twitter_url",
+          "label": "Twitter URL"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

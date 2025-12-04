@@ -1,0 +1,242 @@
+{% comment %}
+  About Values Section
+  Display company values or core principles in a grid layout
+{% endcomment %}
+
+<section class="about-values">
+  <div class="about-values__container">
+    <!-- Header -->
+    <div class="about-values__header">
+      {% if section.settings.title != blank %}
+        <h2 class="about-values__title" style="color: {{ section.settings.title_color }};">
+          {{ section.settings.title }}
+        </h2>
+      {% endif %}
+      {% if section.settings.subtitle != blank %}
+        <p class="about-values__subtitle" style="color: {{ section.settings.subtitle_color }};">
+          {{ section.settings.subtitle }}
+        </p>
+      {% endif %}
+    </div>
+
+    <!-- Values Grid -->
+    <div class="about-values__grid">
+      {% for block in section.blocks %}
+        {% if block.type == 'value' %}
+          <div class="value-card" {{ block.shopify_attributes }}>
+            <!-- Icon -->
+            {% if block.settings.icon %}
+              <div class="value-card__icon" style="background-color: {{ section.settings.icon_background }}; color: {{ section.settings.icon_color }};">
+                {{ block.settings.icon }}
+              </div>
+            {% endif %}
+
+            <!-- Title -->
+            <h3 class="value-card__title" style="color: {{ section.settings.text_color }};">
+              {{ block.settings.value_title }}
+            </h3>
+
+            <!-- Description -->
+            <p class="value-card__description" style="color: {{ section.settings.description_color }};">
+              {{ block.settings.value_description }}
+            </p>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .about-values {
+    padding: 4rem 2rem;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  .about-values__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .about-values__header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .about-values__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .about-values__subtitle {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .about-values__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .value-card {
+    padding: 2rem;
+    border-radius: 0.5rem;
+    background-color: {{ section.settings.card_background }};
+    border: 1px solid {{ section.settings.card_border }};
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .value-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  .value-card__icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    margin: 0 auto 1rem;
+  }
+
+  .value-card__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+  }
+
+  .value-card__description {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .about-values {
+      padding: 2rem 1rem;
+    }
+
+    .about-values__title {
+      font-size: 1.875rem;
+    }
+
+    .about-values__grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .value-card {
+      padding: 1.5rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "About Values",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section Background Color",
+      "default": "#f9f9f9"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Our Core Values"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Section Subtitle",
+      "default": "<p>The principles that guide us every day</p>"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle Color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Card Title Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description Color",
+      "default": "#555555"
+    },
+    {
+      "type": "color",
+      "id": "icon_background",
+      "label": "Icon Background Color",
+      "default": "#e8f4f8"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon Color",
+      "default": "#0066cc"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_border",
+      "label": "Card Border Color",
+      "default": "#e0e0e0"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "value",
+      "name": "Value",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (emoji or symbol)",
+          "default": "⭐"
+        },
+        {
+          "type": "text",
+          "id": "value_title",
+          "label": "Value Title",
+          "default": "Quality"
+        },
+        {
+          "type": "text",
+          "id": "value_description",
+          "label": "Value Description",
+          "default": "We are committed to delivering the highest quality products and services."
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
