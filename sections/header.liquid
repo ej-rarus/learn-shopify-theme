@@ -1,54 +1,270 @@
-<header>
-  <h2 class="header__title">
-    {{ shop.name | link_to: routes.root_url }}
-  </h2>
+<header class="header" style="background-color: {{ section.settings.background_color }}; border-bottom: 1px solid {{ section.settings.border_color }};">
+  <div class="header__container">
+    <!-- Logo -->
+    <div class="header__logo">
+      <a href="{{ routes.root_url }}" class="header__logo-link" style="color: {{ section.settings.text_color }};">
+        {{ shop.name }}
+      </a>
+    </div>
 
-  <div class="header__menu">
-    {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
-    {% endfor %}
-  </div>
+    <!-- Main Navigation Menu -->
+    <nav class="header__nav">
+      <ul class="header__menu">
+        <!-- Home -->
+        <li class="header__menu-item">
+          <a href="{{ routes.root_url }}" class="header__menu-link" style="color: {{ section.settings.text_color }};">
+            홈
+          </a>
+        </li>
 
-  <div class="header__icons">
-    {% if shop.customer_accounts_enabled %}
-      {{ 'icon-account.svg' | inline_asset_content | link_to: routes.account_url }}
-    {% endif %}
+        <!-- Collections -->
+        <li class="header__menu-item header__menu-item--has-dropdown">
+          <button class="header__menu-link header__dropdown-toggle" style="color: {{ section.settings.text_color }};">
+            도서
+            <span class="header__dropdown-icon">▼</span>
+          </button>
+          <ul class="header__dropdown" style="background-color: {{ section.settings.background_color }};">
+            <li><a href="/collections/all" style="color: {{ section.settings.text_color }};">전체 도서</a></li>
+            <li><a href="/collections/essay" style="color: {{ section.settings.text_color }};">에세이</a></li>
+            <li><a href="/collections/novel" style="color: {{ section.settings.text_color }};">소설</a></li>
+            <li><a href="/collections/poetry" style="color: {{ section.settings.text_color }};">시</a></li>
+            <li><a href="/collections/art" style="color: {{ section.settings.text_color }};">예술</a></li>
+            <li><a href="/collections/philosophy" style="color: {{ section.settings.text_color }};">철학</a></li>
+          </ul>
+        </li>
 
-    <a href="{{ routes.cart_url }}">
-      {% if cart.item_count > 0 %}
-        <sup>{{ cart.item_count }}</sup>
+        <!-- About -->
+        <li class="header__menu-item">
+          <a href="/pages/about" class="header__menu-link" style="color: {{ section.settings.text_color }};">
+            소개
+          </a>
+        </li>
+
+        <!-- Custom Menu Links from Settings -->
+        {% for link in section.settings.menu.links %}
+          <li class="header__menu-item">
+            <a href="{{ link.url }}" class="header__menu-link" style="color: {{ section.settings.text_color }};">
+              {{ link.title }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+
+    <!-- Right Icons -->
+    <div class="header__icons">
+      <!-- Account -->
+      {% if shop.customer_accounts_enabled %}
+        <a href="{{ routes.account_url }}" class="header__icon-link" title="계정" style="color: {{ section.settings.text_color }};">
+          {{ 'icon-account.svg' | inline_asset_content }}
+        </a>
       {% endif %}
 
-      {{ 'icon-cart.svg' | inline_asset_content }}
-    </a>
+      <!-- Cart -->
+      <a href="{{ routes.cart_url }}" class="header__icon-link header__cart-link" title="장바구니" style="color: {{ section.settings.text_color }};">
+        {% if cart.item_count > 0 %}
+          <span class="header__cart-count" style="background-color: {{ section.settings.accent_color }};">
+            {{ cart.item_count }}
+          </span>
+        {% endif %}
+        {{ 'icon-cart.svg' | inline_asset_content }}
+      </a>
+    </div>
   </div>
 </header>
 
 {% stylesheet %}
-  header {
-    height: 5rem;
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header__container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 2rem;
   }
-  header a {
-    position: relative;
+
+  .header__logo {
+    flex-shrink: 0;
+  }
+
+  .header__logo-link {
+    font-size: 1.5rem;
+    font-weight: 700;
     text-decoration: none;
-    color: var(--color-foreground);
+    transition: opacity 0.2s;
   }
-  header a sup {
-    position: absolute;
-    left: 100%;
-    overflow: hidden;
-    max-width: var(--page-margin);
+
+  .header__logo-link:hover {
+    opacity: 0.8;
   }
-  header svg {
-    width: 2rem;
-  }
-  header .header__menu,
-  header .header__icons {
+
+  /* Navigation */
+  .header__nav {
+    flex: 1;
     display: flex;
-    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .header__menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .header__menu-item {
+    position: relative;
+  }
+
+  .header__menu-link {
+    display: block;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-radius: 0.375rem;
+  }
+
+  .header__menu-link:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  /* Dropdown Menu */
+  .header__menu-item--has-dropdown {
+    position: relative;
+  }
+
+  .header__dropdown-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .header__dropdown-icon {
+    font-size: 0.65rem;
+    transition: transform 0.2s;
+  }
+
+  .header__menu-item--has-dropdown:hover .header__dropdown-icon {
+    transform: rotate(180deg);
+  }
+
+  .header__dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 200px;
+    list-style: none;
+    margin: 0.5rem 0 0 0;
+    padding: 0.5rem 0;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s;
+  }
+
+  .header__menu-item--has-dropdown:hover .header__dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .header__dropdown li {
+    margin: 0;
+  }
+
+  .header__dropdown a {
+    display: block;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    transition: background-color 0.2s;
+  }
+
+  .header__dropdown a:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  /* Icons */
+  .header__icons {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .header__icon-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    border-radius: 0.375rem;
+  }
+
+  .header__icon-link:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  .header__icon-link svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .header__cart-link {
+    position: relative;
+  }
+
+  .header__cart-count {
+    position: absolute;
+    top: -0.5rem;
+    right: -0.5rem;
+    min-width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #ffffff;
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .header__container {
+      padding: 0.75rem 1rem;
+      gap: 1rem;
+    }
+
+    .header__nav {
+      display: none;
+    }
+
+    .header__logo-link {
+      font-size: 1.25rem;
+    }
+
+    .header__icons {
+      gap: 1rem;
+    }
   }
 {% endstylesheet %}
 
@@ -57,9 +273,33 @@
   "name": "t:general.header",
   "settings": [
     {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color (Cart Badge)",
+      "default": "#ff6b6b"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border Color",
+      "default": "#e0e0e0"
+    },
+    {
       "type": "link_list",
       "id": "menu",
-      "label": "t:labels.menu"
+      "label": "Additional Menu Links"
     }
   ]
 }
