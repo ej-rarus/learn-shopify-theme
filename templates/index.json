@@ -121,7 +121,7 @@
       "type": "latest-news",
       "settings": {
         "title": "최신 뉴스",
-        "subtitle": "The Moved Mover의 최신 소식과 이벤트",
+        "subtitle": "<p>The Moved Mover의 최신 소식과 이벤트</p>",
         "search_placeholder": "뉴스 검색..."
       },
       "blocks": {
