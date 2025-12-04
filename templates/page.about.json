@@ -1,0 +1,134 @@
+{
+  "sections": {
+    "hero": {
+      "type": "about-hero",
+      "settings": {
+        "title": "About Us",
+        "subtitle": "Discover our story, values, and the amazing people behind our brand",
+        "overlay_opacity": 0.3
+      }
+    },
+    "story": {
+      "type": "about-story",
+      "settings": {
+        "section_title": "Our Story",
+        "section_description": "<p>Founded with a passion for excellence, our company has grown from a small startup to a trusted brand recognized worldwide. We believe in creating products and experiences that make a real difference in people's lives.</p><p>Our journey has been shaped by the dedication of our team, the loyalty of our customers, and our unwavering commitment to quality and innovation.</p>",
+        "background_color": "#ffffff"
+      },
+      "blocks": [
+        {
+          "type": "point",
+          "settings": {
+            "text": "Founded in 2015 with a mission to innovate"
+          }
+        },
+        {
+          "type": "point",
+          "settings": {
+            "text": "Serving thousands of satisfied customers worldwide"
+          }
+        },
+        {
+          "type": "point",
+          "settings": {
+            "text": "Committed to sustainable and ethical practices"
+          }
+        },
+        {
+          "type": "point",
+          "settings": {
+            "text": "Continuously improving and evolving our offerings"
+          }
+        }
+      ]
+    },
+    "values": {
+      "type": "about-values",
+      "settings": {
+        "title": "Our Core Values",
+        "subtitle": "The principles that guide us in everything we do",
+        "background_color": "#f9f9f9"
+      },
+      "blocks": [
+        {
+          "type": "value",
+          "settings": {
+            "icon": "🎯",
+            "value_title": "Excellence",
+            "value_description": "We strive for excellence in every aspect of our business, from product quality to customer service."
+          }
+        },
+        {
+          "type": "value",
+          "settings": {
+            "icon": "💡",
+            "value_title": "Innovation",
+            "value_description": "We embrace creativity and innovation to develop solutions that meet evolving customer needs."
+          }
+        },
+        {
+          "type": "value",
+          "settings": {
+            "icon": "🤝",
+            "value_title": "Integrity",
+            "value_description": "We operate with honesty and transparency, building trust with our customers and partners."
+          }
+        },
+        {
+          "type": "value",
+          "settings": {
+            "icon": "🌍",
+            "value_title": "Sustainability",
+            "value_description": "We are committed to environmental responsibility and sustainable business practices."
+          }
+        }
+      ]
+    },
+    "team": {
+      "type": "about-team",
+      "settings": {
+        "title": "Meet Our Team",
+        "subtitle": "Exceptional people dedicated to delivering exceptional results",
+        "background_color": "#ffffff"
+      },
+      "blocks": [
+        {
+          "type": "member",
+          "settings": {
+            "member_name": "Sarah Johnson",
+            "member_role": "Founder & CEO",
+            "member_bio": "Visionary leader with 15+ years of industry experience",
+            "linkedin_url": "https://linkedin.com",
+            "twitter_url": "https://twitter.com"
+          }
+        },
+        {
+          "type": "member",
+          "settings": {
+            "member_name": "Michael Chen",
+            "member_role": "Chief Product Officer",
+            "member_bio": "Passionate about creating innovative and user-friendly products",
+            "linkedin_url": "https://linkedin.com",
+            "twitter_url": "https://twitter.com"
+          }
+        },
+        {
+          "type": "member",
+          "settings": {
+            "member_name": "Emma Davis",
+            "member_role": "Head of Design",
+            "member_bio": "Award-winning designer with a focus on user experience",
+            "linkedin_url": "https://linkedin.com",
+            "twitter_url": "https://twitter.com"
+          }
+        }
+      ]
+    }
+  },
+  "order": [
+    "hero",
+    "story",
+    "values",
+    "team"
+  ]
+}
