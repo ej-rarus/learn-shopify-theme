@@ -37,9 +37,9 @@
       </h1>
 
       <!-- Subtitle -->
-      <p class="home-hero__subtitle" style="color: {{ section.settings.subtitle_color }};">
+      <div class="home-hero__subtitle" style="color: {{ section.settings.subtitle_color }};">
         {{ section.settings.subtitle }}
-      </p>
+      </div>
 
       <!-- Description -->
       {% if section.settings.description != blank %}
@@ -165,6 +165,11 @@
     animation: fadeInDown 0.8s ease-out 0.4s both;
   }
 
+  .home-hero__subtitle p {
+    margin: 0;
+    color: inherit;
+  }
+
   .home-hero__description {
     font-size: clamp(0.85rem, 1.6vw, 0.95rem);
     line-height: 1.7;
@@ -172,6 +177,11 @@
     margin: 0;
     font-weight: 400;
     animation: fadeInDown 0.8s ease-out 0.6s both;
+  }
+
+  .home-hero__description p {
+    margin: 0;
+    color: inherit;
   }
 
   .home-hero__buttons {
