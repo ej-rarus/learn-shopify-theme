@@ -12,7 +12,7 @@
     "hero": {
       "type": "home-hero",
       "settings": {
-        "hero_video_asset": "video.mp4",
+        "hero_video_url": "https://cdn.shopify.com/videos/c/o/v/bb37e2c1a5c34d8ab30c3568194be6a1.mp4",
         "overlay_opacity": 30,
         "badge": "The Moved Mover에 오신 것을 환영합니다",
         "title": "우리는 움직일 때 아름답다",
