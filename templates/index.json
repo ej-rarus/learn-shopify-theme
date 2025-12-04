@@ -12,7 +12,8 @@
     "hero": {
       "type": "home-hero",
       "settings": {
-        "overlay_opacity": 40,
+        "hero_video_asset": "video.mp4",
+        "overlay_opacity": 30,
         "badge": "The Moved Mover에 오신 것을 환영합니다",
         "title": "우리는 움직일 때 아름답다",
         "subtitle": "<p>매 순간 흔들리고, 움직이며, 변합니다.</p><p>그리고 그 흔들림은 다시 누군가를 움직입니다.</p>",

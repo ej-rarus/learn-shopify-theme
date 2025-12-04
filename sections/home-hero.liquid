@@ -6,9 +6,13 @@
 
 <section class="home-hero">
   <!-- Background Video or Image -->
-  {% if section.settings.hero_video_url %}
+  {% if section.settings.hero_video_url != blank %}
     <video class="home-hero__video" autoplay muted loop playsinline>
       <source src="{{ section.settings.hero_video_url }}" type="video/mp4">
+    </video>
+  {% elsif section.settings.hero_video_asset != blank %}
+    <video class="home-hero__video" autoplay muted loop playsinline>
+      <source src="{{ section.settings.hero_video_asset | asset_url }}" type="video/mp4">
     </video>
   {% elsif section.settings.hero_image %}
     <img
@@ -82,8 +86,7 @@
 {% stylesheet %}
   .home-hero {
     position: relative;
-    min-height: 50vh;
-    max-height: 600px;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -313,8 +316,7 @@
 
   @media (max-width: 768px) {
     .home-hero {
-      min-height: 45vh;
-      max-height: 550px;
+      min-height: 100vh;
     }
 
     .home-hero__buttons {
@@ -359,6 +361,12 @@
       "type": "image_picker",
       "id": "hero_image",
       "label": "Hero Background Image"
+    },
+    {
+      "type": "text",
+      "id": "hero_video_asset",
+      "label": "Hero Video Asset (filename in assets folder, e.g., video.mp4)",
+      "info": "Enter the filename of video in assets folder"
     },
     {
       "type": "url",
