@@ -1,0 +1,196 @@
+{% comment %}
+  FAQ Hero Section
+  자주 묻는 질문 페이지 영웅 배너 섹션
+{% endcomment %}
+
+<section class="faq-hero">
+  <!-- Background -->
+  {% if section.settings.hero_image %}
+    <img
+      src="{{ section.settings.hero_image | image_url: width: 1920 }}"
+      alt="Hero Banner"
+      class="faq-hero__image">
+  {% endif %}
+
+  <!-- Overlay -->
+  <div class="faq-hero__overlay" style="background-color: rgba(0, 0, 0, {{ section.settings.overlay_opacity | divided_by: 100.0 }});"></div>
+
+  <!-- Content -->
+  <div class="faq-hero__container">
+    <div class="faq-hero__content">
+      <!-- Icon -->
+      <div class="faq-hero__icon" style="color: {{ section.settings.icon_color }};">
+        ❓
+      </div>
+
+      <!-- Title -->
+      <h1 class="faq-hero__title" style="color: {{ section.settings.title_color }};">
+        {{ section.settings.title }}
+      </h1>
+
+      <!-- Subtitle -->
+      {% if section.settings.subtitle != blank %}
+        <div class="faq-hero__subtitle" style="color: {{ section.settings.subtitle_color }};">
+          {{ section.settings.subtitle }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .faq-hero {
+    position: relative;
+    min-height: 35vh;
+    max-height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  }
+
+  .faq-hero__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+
+  .faq-hero__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .faq-hero__container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .faq-hero__content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .faq-hero__icon {
+    font-size: 3rem;
+    animation: fadeInDown 0.8s ease-out;
+  }
+
+  .faq-hero__title {
+    font-size: clamp(1.75rem, 5vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.35;
+    margin: 0;
+    letter-spacing: -0.3px;
+    color: #ffffff !important;
+    animation: fadeInDown 0.8s ease-out 0.1s both;
+  }
+
+  .faq-hero__subtitle {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    font-weight: 500;
+    line-height: 1.6;
+    margin: 0;
+    max-width: 650px;
+    color: #e8e8e8 !important;
+    animation: fadeInDown 0.8s ease-out 0.2s both;
+  }
+
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .faq-hero {
+      min-height: 30vh;
+      max-height: 400px;
+    }
+
+    .faq-hero__icon {
+      font-size: 2.5rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .faq-hero__icon,
+    .faq-hero__title,
+    .faq-hero__subtitle {
+      animation: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "FAQ Hero",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay Opacity",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "default": 40,
+      "unit": "%"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "제목",
+      "default": "자주 묻는 질문"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "부제목",
+      "default": "<p>The Moved Mover에 대해 자주 묻는 질문들의 답변을 찾아보세요</p>"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "아이콘 색상",
+      "default": "#c4a36a"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "제목 색상",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "부제목 색상",
+      "default": "#e0e0e0"
+    }
+  ]
+}
+{% endschema %}

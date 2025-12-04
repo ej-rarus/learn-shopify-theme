@@ -1,0 +1,410 @@
+{% comment %}
+  FAQ Section
+  자주 묻는 질문 섹션
+{% endcomment %}
+
+<section class="faq-section">
+  <div class="faq-container">
+    <!-- Header -->
+    <div class="faq-header">
+      <h2 class="faq-title" style="color: {{ section.settings.title_color }};">
+        {{ section.settings.title }}
+      </h2>
+      {% if section.settings.subtitle != blank %}
+        <p class="faq-subtitle" style="color: {{ section.settings.subtitle_color }};">
+          {{ section.settings.subtitle }}
+        </p>
+      {% endif %}
+    </div>
+
+    <!-- FAQ Accordion -->
+    <div class="faq-accordion">
+      {% for block in section.blocks %}
+        {% if block.type == 'faq_item' %}
+          <div class="faq-item" {{ block.shopify_attributes }}>
+            <!-- Question -->
+            <button class="faq-question" type="button">
+              <span class="faq-question-text" style="color: {{ section.settings.question_color }};">
+                {{ block.settings.question }}
+              </span>
+              <span class="faq-toggle-icon" style="color: {{ section.settings.accent_color }};">
+                +
+              </span>
+            </button>
+
+            <!-- Answer -->
+            <div class="faq-answer">
+              <div class="faq-answer-content" style="color: {{ section.settings.answer_color }};">
+                {{ block.settings.answer }}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <!-- Additional Help -->
+    {% if section.settings.show_help_text and section.settings.help_text != blank %}
+      <div class="faq-help" style="background-color: {{ section.settings.help_bg_color }}; color: {{ section.settings.help_text_color }};">
+        {{ section.settings.help_text }}
+        {% if section.settings.help_link_text != blank and section.settings.help_link != blank %}
+          <a href="{{ section.settings.help_link }}" class="faq-help-link" style="color: {{ section.settings.accent_color }};">
+            {{ section.settings.help_link_text }}
+          </a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .faq-section {
+    padding: 4rem 2rem;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  .faq-container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .faq-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .faq-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+    line-height: 1.2;
+  }
+
+  .faq-subtitle {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* Accordion */
+  .faq-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .faq-item {
+    border: 2px solid;
+    border-color: {{ section.settings.border_color }};
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .faq-item:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .faq-item.active {
+    border-color: {{ section.settings.accent_color }};
+    box-shadow: 0 2px 12px rgba(196, 163, 106, 0.15);
+  }
+
+  /* Question */
+  .faq-question {
+    width: 100%;
+    padding: 1.5rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+    text-align: left;
+    font-weight: 600;
+  }
+
+  .faq-question:hover {
+    background-color: {{ section.settings.hover_bg_color }};
+  }
+
+  .faq-question-text {
+    flex: 1;
+    line-height: 1.5;
+  }
+
+  .faq-toggle-icon {
+    font-size: 1.5rem;
+    font-weight: 300;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .faq-item.active .faq-toggle-icon {
+    transform: rotate(45deg);
+  }
+
+  /* Answer */
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .faq-item.active .faq-answer {
+    max-height: 1000px;
+  }
+
+  .faq-answer-content {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+    line-height: 1.8;
+    background-color: {{ section.settings.answer_bg_color }};
+  }
+
+  /* Help Section */
+  .faq-help {
+    margin-top: 3rem;
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  .faq-help-link {
+    display: inline-block;
+    margin-top: 1rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: opacity 0.3s ease;
+  }
+
+  .faq-help-link:hover {
+    opacity: 0.8;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .faq-section {
+      padding: 2rem 1rem;
+    }
+
+    .faq-title {
+      font-size: 1.75rem;
+    }
+
+    .faq-question {
+      padding: 1.25rem;
+    }
+
+    .faq-answer-content {
+      padding: 0 1.25rem 1.25rem 1.25rem;
+    }
+  }
+{% endstylesheet %}
+
+<!-- FAQ Accordion Script -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+      const question = item.querySelector('.faq-question');
+
+      question.addEventListener('click', function() {
+        // Close all other items
+        faqItems.forEach(otherItem => {
+          if (otherItem !== item) {
+            otherItem.classList.remove('active');
+          }
+        });
+
+        // Toggle current item
+        item.classList.toggle('active');
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "FAQ Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "제목",
+      "default": "자주 묻는 질문"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "부제목",
+      "default": "<p>자주 묻는 질문과 답변입니다</p>"
+    },
+    {
+      "type": "header",
+      "content": "추가 도움말"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_help_text",
+      "label": "도움말 섹션 표시",
+      "default": true
+    },
+    {
+      "type": "richtext",
+      "id": "help_text",
+      "label": "도움말 텍스트",
+      "default": "<p>더 궁금하신 점이 있으신가요?</p>"
+    },
+    {
+      "type": "text",
+      "id": "help_link_text",
+      "label": "도움말 링크 텍스트",
+      "default": "우리에게 연락하세요"
+    },
+    {
+      "type": "url",
+      "id": "help_link",
+      "label": "도움말 링크"
+    },
+    {
+      "type": "header",
+      "content": "색상"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "배경색",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "제목 색상",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "부제목 색상",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "question_color",
+      "label": "질문 텍스트 색상",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "answer_color",
+      "label": "답변 텍스트 색상",
+      "default": "#4a5568"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "테두리 색상",
+      "default": "#e2e8f0"
+    },
+    {
+      "type": "color",
+      "id": "hover_bg_color",
+      "label": "호버 배경색",
+      "default": "#f9fafb"
+    },
+    {
+      "type": "color",
+      "id": "answer_bg_color",
+      "label": "답변 배경색",
+      "default": "#f9fafb"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "강조 색상",
+      "default": "#c4a36a"
+    },
+    {
+      "type": "color",
+      "id": "help_bg_color",
+      "label": "도움말 배경색",
+      "default": "#f0f4f8"
+    },
+    {
+      "type": "color",
+      "id": "help_text_color",
+      "label": "도움말 텍스트 색상",
+      "default": "#1a1a1a"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "질문",
+          "default": "이것은 자주 묻는 질문입니다"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "답변",
+          "default": "<p>이것은 해당 질문에 대한 답변입니다.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Section",
+      "blocks": [
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "The Moved Mover는 어떤 출판사인가요?",
+            "answer": "<p>The Moved Mover는 독립 출판물, 아티스트북, 그리고 창작자들의 목소리를 담은 책들을 만드는 온라인 출판 플랫폼입니다. 우리는 흔들림과 움직임을 기록하는 곳입니다.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "원고를 투고하려면 어떻게 해야 하나요?",
+            "answer": "<p>저희 투고 페이지에 방문하셔서 투고 안내와 가이드라인을 확인하신 후, 온라인 양식을 통해 원고를 제출하시면 됩니다. 제출 후 2-4주 내에 검토 결과를 알려드립니다.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "배송은 얼마나 걸리나요?",
+            "answer": "<p>국내 배송은 주문 후 2-3일 이내에, 해외 배송은 5-7일 정도 소요됩니다. 더 자세한 배송 정보는 구매 페이지에서 확인하실 수 있습니다.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "환불 정책은 어떻게 되나요?",
+            "answer": "<p>상품 수령 후 7일 이내에 환불을 신청하실 수 있습니다. 책의 상태가 새 책과 같아야 하며, 교환이나 환불 신청은 고객 센터로 연락 주시면 됩니다.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "구독 서비스는 무엇인가요?",
+            "answer": "<p>뉴스레터 구독을 통해 새로운 도서, 기획전, 저자 인터뷰 등의 최신 소식을 이메일로 받아보실 수 있습니다. 구독은 언제든지 취소할 수 있습니다.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
