@@ -4,7 +4,7 @@
       "type": "authors-hero",
       "settings": {
         "title": "The Moved Mover의 작가들",
-        "subtitle": "독립 출판의 가치를 함께 만들어가는 작가들입니다",
+        "subtitle": "<p>독립 출판의 가치를 함께 만들어가는 작가들입니다</p>",
         "overlay_opacity": 20,
         "accent_color": "#c4a36a"
       }

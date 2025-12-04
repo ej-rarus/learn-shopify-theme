@@ -4,7 +4,7 @@
       "type": "about-hero",
       "settings": {
         "title": "About Us",
-        "subtitle": "Discover our story, values, and the amazing people behind our brand",
+        "subtitle": "<p>Discover our story, values, and the amazing people behind our brand</p>",
         "overlay_opacity": 0.3
       }
     },
@@ -47,7 +47,7 @@
       "type": "about-values",
       "settings": {
         "title": "Our Core Values",
-        "subtitle": "The principles that guide us in everything we do",
+        "subtitle": "<p>The principles that guide us in everything we do</p>",
         "background_color": "#f9f9f9"
       },
       "blocks": {
@@ -90,7 +90,7 @@
       "type": "about-team",
       "settings": {
         "title": "Meet Our Team",
-        "subtitle": "Exceptional people dedicated to delivering exceptional results",
+        "subtitle": "<p>Exceptional people dedicated to delivering exceptional results</p>",
         "background_color": "#ffffff"
       },
       "blocks": {

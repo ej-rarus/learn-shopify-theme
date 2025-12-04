@@ -13,7 +13,7 @@
       "type": "about-hero",
       "settings": {
         "title": "Books Collection",
-        "subtitle": "모든 도서를 탐색하세요",
+        "subtitle": "<p>모든 도서를 탐색하세요</p>",
         "overlay_opacity": 0.4
       }
     },
