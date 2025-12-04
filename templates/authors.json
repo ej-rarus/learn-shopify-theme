@@ -13,7 +13,7 @@
       "type": "authors-list",
       "settings": {
         "title": "작가 프로필",
-        "subtitle": "The Moved Mover과 함께하는 저자들을 만나세요",
+        "subtitle": "<p>The Moved Mover과 함께하는 저자들을 만나세요</p>",
         "background_color": "#ffffff",
         "title_color": "#000000",
         "subtitle_color": "#666666",

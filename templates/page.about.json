@@ -15,32 +15,33 @@
         "section_description": "<p>Founded with a passion for excellence, our company has grown from a small startup to a trusted brand recognized worldwide. We believe in creating products and experiences that make a real difference in people's lives.</p><p>Our journey has been shaped by the dedication of our team, the loyalty of our customers, and our unwavering commitment to quality and innovation.</p>",
         "background_color": "#ffffff"
       },
-      "blocks": [
-        {
+      "blocks": {
+        "point_1": {
           "type": "point",
           "settings": {
             "text": "Founded in 2015 with a mission to innovate"
           }
         },
-        {
+        "point_2": {
           "type": "point",
           "settings": {
             "text": "Serving thousands of satisfied customers worldwide"
           }
         },
-        {
+        "point_3": {
           "type": "point",
           "settings": {
             "text": "Committed to sustainable and ethical practices"
           }
         },
-        {
+        "point_4": {
           "type": "point",
           "settings": {
             "text": "Continuously improving and evolving our offerings"
           }
         }
-      ]
+      },
+      "block_order": ["point_1", "point_2", "point_3", "point_4"]
     },
     "values": {
       "type": "about-values",
@@ -49,8 +50,8 @@
         "subtitle": "The principles that guide us in everything we do",
         "background_color": "#f9f9f9"
       },
-      "blocks": [
-        {
+      "blocks": {
+        "value_1": {
           "type": "value",
           "settings": {
             "icon": "🎯",
@@ -58,7 +59,7 @@
             "value_description": "We strive for excellence in every aspect of our business, from product quality to customer service."
           }
         },
-        {
+        "value_2": {
           "type": "value",
           "settings": {
             "icon": "💡",
@@ -66,7 +67,7 @@
             "value_description": "We embrace creativity and innovation to develop solutions that meet evolving customer needs."
           }
         },
-        {
+        "value_3": {
           "type": "value",
           "settings": {
             "icon": "🤝",
@@ -74,7 +75,7 @@
             "value_description": "We operate with honesty and transparency, building trust with our customers and partners."
           }
         },
-        {
+        "value_4": {
           "type": "value",
           "settings": {
             "icon": "🌍",
@@ -82,7 +83,8 @@
             "value_description": "We are committed to environmental responsibility and sustainable business practices."
           }
         }
-      ]
+      },
+      "block_order": ["value_1", "value_2", "value_3", "value_4"]
     },
     "team": {
       "type": "about-team",
@@ -91,8 +93,8 @@
         "subtitle": "Exceptional people dedicated to delivering exceptional results",
         "background_color": "#ffffff"
       },
-      "blocks": [
-        {
+      "blocks": {
+        "member_1": {
           "type": "member",
           "settings": {
             "member_name": "Sarah Johnson",
@@ -102,7 +104,7 @@
             "twitter_url": "https://twitter.com"
           }
         },
-        {
+        "member_2": {
           "type": "member",
           "settings": {
             "member_name": "Michael Chen",
@@ -112,7 +114,7 @@
             "twitter_url": "https://twitter.com"
           }
         },
-        {
+        "member_3": {
           "type": "member",
           "settings": {
             "member_name": "Emma Davis",
@@ -122,7 +124,8 @@
             "twitter_url": "https://twitter.com"
           }
         }
-      ]
+      },
+      "block_order": ["member_1", "member_2", "member_3"]
     }
   },
   "order": [

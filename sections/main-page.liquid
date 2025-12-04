@@ -1,0 +1,89 @@
+{% comment %}
+  Main Page Section
+  기본 페이지 콘텐츠 표시 섹션
+{% endcomment %}
+
+<section class="main-page">
+  <div class="main-page__container">
+    {% if page.title != blank %}
+      <h1 class="main-page__title">{{ page.title }}</h1>
+    {% endif %}
+
+    {% if page.content != blank %}
+      <div class="main-page__content">
+        {{ page.content }}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .main-page {
+    width: 100%;
+    padding: 4rem 2rem;
+  }
+
+  .main-page__container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .main-page__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    line-height: 1.2;
+  }
+
+  .main-page__content {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #333;
+  }
+
+  .main-page__content h1,
+  .main-page__content h2,
+  .main-page__content h3,
+  .main-page__content h4,
+  .main-page__content h5,
+  .main-page__content h6 {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+
+  .main-page__content p {
+    margin-bottom: 1rem;
+  }
+
+  .main-page__content ul,
+  .main-page__content ol {
+    margin: 1rem 0;
+    padding-left: 2rem;
+  }
+
+  .main-page__content li {
+    margin-bottom: 0.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .main-page {
+      padding: 2rem 1rem;
+    }
+
+    .main-page__title {
+      font-size: 1.875rem;
+    }
+
+    .main-page__content {
+      font-size: 0.95rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Main Page",
+  "settings": []
+}
+{% endschema %}

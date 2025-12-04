@@ -21,7 +21,7 @@
       "type": "books-catalog",
       "settings": {
         "title": "우리의 모든 도서",
-        "subtitle": "카테고리별로 원하는 책을 찾아보세요",
+        "subtitle": "<p>카테고리별로 원하는 책을 찾아보세요</p>",
         "search_placeholder": "책 제목이나 저자명으로 검색..."
       },
       "blocks": {
