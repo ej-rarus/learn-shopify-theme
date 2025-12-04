@@ -13,10 +13,12 @@
   "sections": {
     "header": {
       "type": "header",
-      "settings": {}
+      "settings": {
+        "logo_text": "The Moved Mover"
+      }
     }
   },
   "order": [
     "header"
-  ],
+  ]
 }

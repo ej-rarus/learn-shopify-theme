@@ -3,7 +3,11 @@
     <!-- Logo -->
     <div class="header__logo">
       <a href="{{ routes.root_url }}" class="header__logo-link" style="color: {{ section.settings.text_color }};">
-        {{ shop.name }}
+        {% if section.settings.logo_text != blank %}
+          {{ section.settings.logo_text }}
+        {% else %}
+          {{ shop.name }}
+        {% endif %}
       </a>
     </div>
 
@@ -286,6 +290,13 @@
 {
   "name": "t:general.header",
   "settings": [
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo Text",
+      "default": "The Moved Mover",
+      "info": "Leave blank to use shop name"
+    },
     {
       "type": "color",
       "id": "background_color",
