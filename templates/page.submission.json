@@ -13,7 +13,7 @@
       "type": "submission-process",
       "settings": {
         "title": "투고 절차",
-        "subtitle": "The Moved Mover의 투고 절차는 투명하고 공정합니다"
+        "subtitle": "<p>The Moved Mover의 투고 절차는 투명하고 공정합니다</p>"
       },
       "blocks": {
         "step_1": {
