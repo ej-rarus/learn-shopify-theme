@@ -15,13 +15,13 @@
       {% endif %}
 
       {% if section.settings.subtitle != blank %}
-        <p class="newsletter__subtitle" style="color: {{ section.settings.subtitle_color }};">
+        <p class="newsletter__subtitle" style="color: {{ section.settings.subtitle_color }} !important;">
           {{ section.settings.subtitle }}
         </p>
       {% endif %}
 
       {% if section.settings.description != blank %}
-        <p class="newsletter__description" style="color: {{ section.settings.description_color }};">
+        <p class="newsletter__description" style="color: {{ section.settings.description_color }} !important;">
           {{ section.settings.description }}
         </p>
       {% endif %}
@@ -43,7 +43,7 @@
           {{ section.settings.button_text }}
         </button>
       </div>
-      <p class="newsletter__privacy" style="color: {{ section.settings.privacy_color }};">
+      <p class="newsletter__privacy" style="color: {{ section.settings.privacy_color }} !important;">
         {{ section.settings.privacy_text }}
       </p>
     </form>
@@ -82,7 +82,6 @@
     font-weight: 700;
     line-height: 1.5;
     letter-spacing: 0.3px;
-    color: {{ section.settings.subtitle_color }} !important;
   }
 
   .newsletter__description {
@@ -93,7 +92,6 @@
     margin-left: auto;
     margin-right: auto;
     font-weight: 500;
-    color: {{ section.settings.description_color }} !important;
   }
 
   /* Form */
@@ -144,7 +142,6 @@
     margin: 0;
     font-size: 0.8rem;
     line-height: 1.4;
-    color: {{ section.settings.privacy_color }} !important;
   }
 
   /* Responsive */
