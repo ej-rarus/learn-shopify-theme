@@ -1,0 +1,418 @@
+{% comment %}
+  Contact Information Section
+  연락처 정보 섹션
+{% endcomment %}
+
+<section class="contact-info">
+  <div class="contact-info__container">
+    <!-- Header -->
+    <div class="contact-info__header">
+      <h2 class="contact-info__title" style="color: {{ section.settings.title_color }};">
+        {{ section.settings.title }}
+      </h2>
+      {% if section.settings.subtitle != blank %}
+        <p class="contact-info__subtitle" style="color: {{ section.settings.subtitle_color }};">
+          {{ section.settings.subtitle }}
+        </p>
+      {% endif %}
+    </div>
+
+    <!-- Info Grid -->
+    <div class="contact-info__grid">
+      <!-- Email -->
+      {% if section.settings.show_email and section.settings.email != blank %}
+        <div class="contact-info__item">
+          <div class="contact-info__icon" style="color: {{ section.settings.accent_color }};">
+            📧
+          </div>
+          <h3 class="contact-info__item-title" style="color: {{ section.settings.text_color }};">
+            {{ section.settings.email_label }}
+          </h3>
+          <a href="mailto:{{ section.settings.email }}" class="contact-info__link" style="color: {{ section.settings.accent_color }};">
+            {{ section.settings.email }}
+          </a>
+        </div>
+      {% endif %}
+
+      <!-- Phone -->
+      {% if section.settings.show_phone and section.settings.phone != blank %}
+        <div class="contact-info__item">
+          <div class="contact-info__icon" style="color: {{ section.settings.accent_color }};">
+            📱
+          </div>
+          <h3 class="contact-info__item-title" style="color: {{ section.settings.text_color }};">
+            {{ section.settings.phone_label }}
+          </h3>
+          <a href="tel:{{ section.settings.phone }}" class="contact-info__link" style="color: {{ section.settings.accent_color }};">
+            {{ section.settings.phone }}
+          </a>
+        </div>
+      {% endif %}
+
+      <!-- Address -->
+      {% if section.settings.show_address and section.settings.address != blank %}
+        <div class="contact-info__item">
+          <div class="contact-info__icon" style="color: {{ section.settings.accent_color }};">
+            📍
+          </div>
+          <h3 class="contact-info__item-title" style="color: {{ section.settings.text_color }};">
+            {{ section.settings.address_label }}
+          </h3>
+          <p class="contact-info__text" style="color: {{ section.settings.description_color }};">
+            {{ section.settings.address }}
+          </p>
+        </div>
+      {% endif %}
+
+      <!-- Business Hours -->
+      {% if section.settings.show_hours and section.settings.hours != blank %}
+        <div class="contact-info__item">
+          <div class="contact-info__icon" style="color: {{ section.settings.accent_color }};">
+            🕒
+          </div>
+          <h3 class="contact-info__item-title" style="color: {{ section.settings.text_color }};">
+            {{ section.settings.hours_label }}
+          </h3>
+          <div class="contact-info__hours" style="color: {{ section.settings.description_color }};">
+            {{ section.settings.hours }}
+          </div>
+        </div>
+      {% endif %}
+
+      <!-- Social Media -->
+      {% if section.settings.show_social %}
+        <div class="contact-info__item contact-info__item--social">
+          <div class="contact-info__icon" style="color: {{ section.settings.accent_color }};">
+            🌐
+          </div>
+          <h3 class="contact-info__item-title" style="color: {{ section.settings.text_color }};">
+            {{ section.settings.social_label }}
+          </h3>
+          <div class="contact-info__socials">
+            {% if section.settings.instagram_url != blank %}
+              <a href="{{ section.settings.instagram_url }}" target="_blank" rel="noopener noreferrer" class="contact-info__social-link" style="color: {{ section.settings.accent_color }};" title="Instagram">
+                📷
+              </a>
+            {% endif %}
+            {% if section.settings.facebook_url != blank %}
+              <a href="{{ section.settings.facebook_url }}" target="_blank" rel="noopener noreferrer" class="contact-info__social-link" style="color: {{ section.settings.accent_color }};" title="Facebook">
+                f
+              </a>
+            {% endif %}
+            {% if section.settings.twitter_url != blank %}
+              <a href="{{ section.settings.twitter_url }}" target="_blank" rel="noopener noreferrer" class="contact-info__social-link" style="color: {{ section.settings.accent_color }};" title="Twitter">
+                𝕏
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .contact-info {
+    padding: 4rem 2rem;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  .contact-info__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .contact-info__header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .contact-info__title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+    line-height: 1.3;
+  }
+
+  .contact-info__subtitle {
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* Grid */
+  .contact-info__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  /* Item */
+  .contact-info__item {
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .contact-info__item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
+
+  /* Icon */
+  .contact-info__icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Item Title */
+  .contact-info__item-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 0.75rem 0;
+    line-height: 1.4;
+  }
+
+  /* Link & Text */
+  .contact-info__link {
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.3s ease;
+    display: block;
+  }
+
+  .contact-info__link:hover {
+    opacity: 0.8;
+  }
+
+  .contact-info__text {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .contact-info__hours {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    white-space: pre-wrap;
+  }
+
+  /* Social */
+  .contact-info__item--social {
+    grid-column: 1 / -1;
+  }
+
+  .contact-info__socials {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 0.75rem;
+  }
+
+  .contact-info__social-link {
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+    display: inline-block;
+  }
+
+  .contact-info__social-link:hover {
+    transform: scale(1.2);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .contact-info {
+      padding: 2rem 1rem;
+    }
+
+    .contact-info__title {
+      font-size: 1.5rem;
+    }
+
+    .contact-info__grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .contact-info__item--social {
+      grid-column: 1;
+    }
+
+    .contact-info__item {
+      padding: 1.5rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Contact Information",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "제목",
+      "default": "연락처 정보"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "부제목",
+      "default": "<p>다양한 방법으로 우리와 연락할 수 있습니다</p>"
+    },
+    {
+      "type": "header",
+      "content": "연락처 정보"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_email",
+      "label": "이메일 표시",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "email_label",
+      "label": "이메일 레이블",
+      "default": "이메일"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "이메일 주소",
+      "default": "hello@themovedmover.com"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_phone",
+      "label": "전화번호 표시",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "phone_label",
+      "label": "전화번호 레이블",
+      "default": "전화번호"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "전화번호",
+      "default": "+82 (2) 1234-5678"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_address",
+      "label": "주소 표시",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "address_label",
+      "label": "주소 레이블",
+      "default": "주소"
+    },
+    {
+      "type": "text",
+      "id": "address",
+      "label": "주소",
+      "default": "서울시 강남구 테헤란로 123, 5층"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_hours",
+      "label": "영업시간 표시",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "hours_label",
+      "label": "영업시간 레이블",
+      "default": "영업시간"
+    },
+    {
+      "type": "textarea",
+      "id": "hours",
+      "label": "영업시간",
+      "default": "월~금: 9:00 AM - 6:00 PM\n토: 10:00 AM - 4:00 PM\n일: 휴무"
+    },
+    {
+      "type": "header",
+      "content": "소셜 미디어"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "label": "소셜 미디어 표시",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "social_label",
+      "label": "소셜 미디어 레이블",
+      "default": "소셜 미디어"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "url",
+      "id": "twitter_url",
+      "label": "Twitter / X URL"
+    },
+    {
+      "type": "header",
+      "content": "색상"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "배경색",
+      "default": "#f9fafb"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "제목 색상",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "부제목 색상",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "항목 제목 색상",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "설명 텍스트 색상",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "강조 색상 (링크, 아이콘)",
+      "default": "#c4a36a"
+    }
+  ]
+}
+{% endschema %}

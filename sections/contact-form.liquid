@@ -1,0 +1,471 @@
+{% comment %}
+  Contact Form Section
+  연락처 폼 섹션
+{% endcomment %}
+
+<section class="contact-form">
+  <div class="contact-form__container">
+    <!-- Header -->
+    <div class="contact-form__header">
+      <h2 class="contact-form__title" style="color: {{ section.settings.title_color }};">
+        {{ section.settings.title }}
+      </h2>
+      {% if section.settings.subtitle != blank %}
+        <div class="contact-form__subtitle" style="color: {{ section.settings.subtitle_color }};">
+          {{ section.settings.subtitle }}
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Form -->
+    <form method="POST" action="/contact#contact-form" id="contact-form" class="contact-form__form" accept-charset="UTF-8">
+      <input type="hidden" name="form_type" value="contact">
+      <input type="hidden" name="utf8" value="✓">
+
+      <!-- Name Field -->
+      <div class="contact-form__field">
+        <label for="contact-name" class="contact-form__label" style="color: {{ section.settings.label_color }};">
+          {{ section.settings.name_label }}
+        </label>
+        <input
+          type="text"
+          id="contact-name"
+          name="contact[name]"
+          class="contact-form__input"
+          placeholder="{{ section.settings.name_placeholder }}"
+          style="border-color: {{ section.settings.input_border_color }}; color: {{ section.settings.input_text_color }};"
+          required>
+      </div>
+
+      <!-- Email Field -->
+      <div class="contact-form__field">
+        <label for="contact-email" class="contact-form__label" style="color: {{ section.settings.label_color }};">
+          {{ section.settings.email_label }}
+        </label>
+        <input
+          type="email"
+          id="contact-email"
+          name="contact[email]"
+          class="contact-form__input"
+          placeholder="{{ section.settings.email_placeholder }}"
+          style="border-color: {{ section.settings.input_border_color }}; color: {{ section.settings.input_text_color }};"
+          required>
+      </div>
+
+      <!-- Phone Field (Optional) -->
+      {% if section.settings.show_phone %}
+        <div class="contact-form__field">
+          <label for="contact-phone" class="contact-form__label" style="color: {{ section.settings.label_color }};">
+            {{ section.settings.phone_label }}
+          </label>
+          <input
+            type="tel"
+            id="contact-phone"
+            name="contact[phone]"
+            class="contact-form__input"
+            placeholder="{{ section.settings.phone_placeholder }}"
+            style="border-color: {{ section.settings.input_border_color }}; color: {{ section.settings.input_text_color }};">
+        </div>
+      {% endif %}
+
+      <!-- Subject Field -->
+      <div class="contact-form__field">
+        <label for="contact-subject" class="contact-form__label" style="color: {{ section.settings.label_color }};">
+          {{ section.settings.subject_label }}
+        </label>
+        <input
+          type="text"
+          id="contact-subject"
+          name="contact[subject]"
+          class="contact-form__input"
+          placeholder="{{ section.settings.subject_placeholder }}"
+          style="border-color: {{ section.settings.input_border_color }}; color: {{ section.settings.input_text_color }};"
+          required>
+      </div>
+
+      <!-- Message Field -->
+      <div class="contact-form__field">
+        <label for="contact-body" class="contact-form__label" style="color: {{ section.settings.label_color }};">
+          {{ section.settings.message_label }}
+        </label>
+        <textarea
+          id="contact-body"
+          name="contact[body]"
+          class="contact-form__textarea"
+          placeholder="{{ section.settings.message_placeholder }}"
+          style="border-color: {{ section.settings.input_border_color }}; color: {{ section.settings.input_text_color }};"
+          rows="5"
+          required></textarea>
+      </div>
+
+      <!-- Privacy Notice (Optional) -->
+      {% if section.settings.show_privacy %}
+        <div class="contact-form__privacy">
+          <label class="contact-form__privacy-label">
+            <input type="checkbox" name="privacy" id="privacy" required>
+            <span style="color: {{ section.settings.privacy_color }};">
+              {{ section.settings.privacy_text }}
+            </span>
+          </label>
+        </div>
+      {% endif %}
+
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        class="contact-form__submit"
+        style="background-color: {{ section.settings.button_color }}; color: {{ section.settings.button_text_color }};">
+        {{ section.settings.submit_text }}
+      </button>
+    </form>
+
+    <!-- Success Message -->
+    <div class="contact-form__message contact-form__message--success" id="contact-success" style="color: #10b981; border-color: #10b981;">
+      {{ section.settings.success_message }}
+    </div>
+
+    <!-- Error Message -->
+    <div class="contact-form__message contact-form__message--error" id="contact-error" style="color: #ef4444; border-color: #ef4444;">
+      {{ section.settings.error_message }}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .contact-form {
+    padding: 4rem 2rem;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  .contact-form__container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .contact-form__header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .contact-form__title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+    line-height: 1.3;
+  }
+
+  .contact-form__subtitle {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  /* Form */
+  .contact-form__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  /* Field */
+  .contact-form__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .contact-form__label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    display: block;
+  }
+
+  /* Input */
+  .contact-form__input,
+  .contact-form__textarea {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 2px solid;
+    border-radius: 6px;
+    font-family: inherit;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: white;
+  }
+
+  .contact-form__input:focus,
+  .contact-form__textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(196, 163, 106, 0.1);
+    border-color: #c4a36a;
+  }
+
+  .contact-form__textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  /* Privacy */
+  .contact-form__privacy {
+    margin-top: 1rem;
+  }
+
+  .contact-form__privacy-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+
+  .contact-form__privacy-label input[type="checkbox"] {
+    margin-top: 0.35rem;
+    cursor: pointer;
+  }
+
+  /* Submit Button */
+  .contact-form__submit {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 1rem;
+  }
+
+  .contact-form__submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(196, 163, 106, 0.3);
+  }
+
+  .contact-form__submit:active {
+    transform: translateY(0);
+  }
+
+  /* Messages */
+  .contact-form__message {
+    padding: 1rem;
+    border-left: 4px solid;
+    border-radius: 4px;
+    display: none;
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .contact-form__message.show {
+    display: block;
+  }
+
+  .contact-form__message--success {
+    background-color: rgba(16, 185, 129, 0.1);
+  }
+
+  .contact-form__message--error {
+    background-color: rgba(239, 68, 68, 0.1);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .contact-form {
+      padding: 2rem 1rem;
+    }
+
+    .contact-form__title {
+      font-size: 1.5rem;
+    }
+
+    .contact-form__form {
+      gap: 1.25rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Contact Form",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "제목",
+      "default": "연락처"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "부제목",
+      "default": "<p>문의사항이 있으신가요? 아래 양식을 작성하여 우리에게 연락주세요.</p>"
+    },
+    {
+      "type": "header",
+      "content": "폼 레이블 및 플레이스홀더"
+    },
+    {
+      "type": "text",
+      "id": "name_label",
+      "label": "이름 레이블",
+      "default": "이름"
+    },
+    {
+      "type": "text",
+      "id": "name_placeholder",
+      "label": "이름 플레이스홀더",
+      "default": "당신의 이름을 입력하세요"
+    },
+    {
+      "type": "text",
+      "id": "email_label",
+      "label": "이메일 레이블",
+      "default": "이메일"
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "이메일 플레이스홀더",
+      "default": "your.email@example.com"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_phone",
+      "label": "전화번호 필드 표시",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "phone_label",
+      "label": "전화번호 레이블",
+      "default": "전화번호 (선택사항)"
+    },
+    {
+      "type": "text",
+      "id": "phone_placeholder",
+      "label": "전화번호 플레이스홀더",
+      "default": "+82 10-1234-5678"
+    },
+    {
+      "type": "text",
+      "id": "subject_label",
+      "label": "제목 레이블",
+      "default": "문의 주제"
+    },
+    {
+      "type": "text",
+      "id": "subject_placeholder",
+      "label": "제목 플레이스홀더",
+      "default": "문의 주제를 선택하세요"
+    },
+    {
+      "type": "text",
+      "id": "message_label",
+      "label": "메시지 레이블",
+      "default": "메시지"
+    },
+    {
+      "type": "text",
+      "id": "message_placeholder",
+      "label": "메시지 플레이스홀더",
+      "default": "상세한 메시지를 입력하세요"
+    },
+    {
+      "type": "text",
+      "id": "submit_text",
+      "label": "제출 버튼 텍스트",
+      "default": "메시지 보내기"
+    },
+    {
+      "type": "header",
+      "content": "개인정보 처리"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_privacy",
+      "label": "개인정보 보호 동의 표시",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "privacy_text",
+      "label": "개인정보 보호 텍스트",
+      "default": "개인정보 보호 정책에 동의합니다"
+    },
+    {
+      "type": "header",
+      "content": "메시지"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "성공 메시지",
+      "default": "메시지가 성공적으로 전송되었습니다! 곧 연락드리겠습니다."
+    },
+    {
+      "type": "text",
+      "id": "error_message",
+      "label": "오류 메시지",
+      "default": "메시지 전송에 실패했습니다. 다시 시도해주세요."
+    },
+    {
+      "type": "header",
+      "content": "색상"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "배경색",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "제목 색상",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "부제목 색상",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "레이블 색상",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "input_text_color",
+      "label": "입력 텍스트 색상",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "input_border_color",
+      "label": "입력 테두리 색상",
+      "default": "#d0d0d0"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "버튼 배경색",
+      "default": "#c4a36a"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "버튼 텍스트 색상",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "privacy_color",
+      "label": "개인정보 텍스트 색상",
+      "default": "#666666"
+    }
+  ]
+}
+{% endschema %}
