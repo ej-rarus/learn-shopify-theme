@@ -38,12 +38,6 @@
       <!-- Category Filter -->
       {% if section.blocks.size > 0 %}
         <div class="books-catalog__filters">
-          <button
-            class="books-catalog__filter-btn books-catalog__filter-btn--active"
-            data-filter="all"
-            style="color: {{ section.settings.accent_color }};">
-            All
-          </button>
           {% for block in section.blocks %}
             {% if block.type == 'category' %}
               <button
