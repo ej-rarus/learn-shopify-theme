@@ -12,6 +12,7 @@
     "hero": {
       "type": "home-hero",
       "settings": {
+        "overlay_opacity": 40,
         "badge": "The Moved Mover에 오신 것을 환영합니다",
         "title": "우리는 움직일 때 아름답다",
         "subtitle": "<p>매 순간 흔들리고, 움직이며, 변합니다.</p><p>그리고 그 흔들림은 다시 누군가를 움직입니다.</p>",
@@ -20,7 +21,6 @@
         "button_1_link": "/collections/all",
         "button_2_text": "더 알아보기",
         "button_2_link": "/pages/about",
-        "overlay_opacity": 40,
         "title_color": "#ffffff",
         "subtitle_color": "#ffffff",
         "description_color": "#f0f0f0"
@@ -28,21 +28,6 @@
     },
     "featured_books": {
       "type": "featured-books",
-      "settings": {
-        "title": "추천 도서",
-        "subtitle": "우리가 엄선한 독립 출판물",
-        "title_color": "#2d2d2d",
-        "subtitle_color": "#666666",
-        "text_color": "#2d2d2d",
-        "author_color": "#999999",
-        "accent_color": "#c4a36a",
-        "badge_text_color": "#ffffff",
-        "background_color": "#ffffff",
-        "padding_top": 150,
-        "padding_bottom": 150,
-        "view_all_text": "모든 도서 보기",
-        "view_all_link": "/collections/all"
-      },
       "blocks": {
         "book_1": {
           "type": "book",
@@ -75,7 +60,26 @@
           }
         }
       },
-      "block_order": ["book_1", "book_2", "book_3"]
+      "block_order": [
+        "book_1",
+        "book_2",
+        "book_3"
+      ],
+      "settings": {
+        "title": "추천 도서",
+        "subtitle": "우리가 엄선한 독립 출판물",
+        "title_color": "#2d2d2d",
+        "subtitle_color": "#666666",
+        "text_color": "#2d2d2d",
+        "author_color": "#999999",
+        "accent_color": "#c4a36a",
+        "badge_text_color": "#ffffff",
+        "background_color": "#ffffff",
+        "padding_top": 150,
+        "padding_bottom": 150,
+        "view_all_text": "모든 도서 보기",
+        "view_all_link": "/collections/all"
+      }
     },
     "publishers_spotlight": {
       "type": "publishers-spotlight",
@@ -105,7 +109,11 @@
           }
         }
       },
-      "block_order": ["publisher_1", "publisher_2", "publisher_3"],
+      "block_order": [
+        "publisher_1",
+        "publisher_2",
+        "publisher_3"
+      ],
       "settings": {
         "title": "협력 출판사",
         "subtitle": "독립 출판의 가치를 함께 만들어가는 파트너들",
@@ -122,11 +130,6 @@
     },
     "latest_news": {
       "type": "latest-news",
-      "settings": {
-        "title": "최신 뉴스",
-        "subtitle": "<p>The Moved Mover의 최신 소식과 이벤트</p>",
-        "search_placeholder": "뉴스 검색..."
-      },
       "blocks": {
         "news_1": {
           "type": "news_item",
@@ -156,7 +159,15 @@
           }
         }
       },
-      "block_order": ["news_1", "news_2", "news_3"]
+      "block_order": [
+        "news_1",
+        "news_2",
+        "news_3"
+      ],
+      "settings": {
+        "title": "최신 뉴스",
+        "subtitle": "<p>The Moved Mover의 최신 소식과 이벤트</p>"
+      }
     },
     "newsletter": {
       "type": "newsletter",
