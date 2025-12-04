@@ -1,0 +1,388 @@
+{% comment %}
+  Latest News Section
+  공지사항 및 최신 뉴스 섹션
+{% endcomment %}
+
+<section class="latest-news">
+  <div class="latest-news__container">
+    <!-- Header -->
+    <div class="latest-news__header">
+      <h2 class="latest-news__title" style="color: {{ section.settings.title_color }};">
+        {{ section.settings.title }}
+      </h2>
+      {% if section.settings.subtitle != blank %}
+        <p class="latest-news__subtitle" style="color: {{ section.settings.subtitle_color }};">
+          {{ section.settings.subtitle }}
+        </p>
+      {% endif %}
+    </div>
+
+    <!-- News Grid -->
+    <div class="latest-news__grid">
+      {% for block in section.blocks %}
+        {% if block.type == 'news_item' %}
+          <article class="news-card" {{ block.shopify_attributes }}>
+            <!-- News Image -->
+            {% if block.settings.news_image %}
+              <div class="news-card__image">
+                <img
+                  src="{{ block.settings.news_image | image_url: width: 600 }}"
+                  alt="{{ block.settings.news_title }}"
+                  loading="lazy">
+                {% if block.settings.news_badge != blank %}
+                  <span class="news-card__badge" style="background-color: {{ section.settings.accent_color }};">
+                    {{ block.settings.news_badge }}
+                  </span>
+                {% endif %}
+              </div>
+            {% endif %}
+
+            <!-- News Content -->
+            <div class="news-card__content">
+              <!-- Date -->
+              <time class="news-card__date" style="color: {{ section.settings.meta_color }};">
+                {{ block.settings.news_date | date: "%Y. %m. %d" }}
+              </time>
+
+              <!-- Title -->
+              <h3 class="news-card__title" style="color: {{ section.settings.text_color }};">
+                {% if block.settings.news_link != blank %}
+                  <a href="{{ block.settings.news_link }}" class="news-card__link">
+                    {{ block.settings.news_title }}
+                  </a>
+                {% else %}
+                  {{ block.settings.news_title }}
+                {% endif %}
+              </h3>
+
+              <!-- Excerpt -->
+              <p class="news-card__excerpt" style="color: {{ section.settings.description_color }};">
+                {{ block.settings.news_excerpt }}
+              </p>
+
+              <!-- Read More Link -->
+              {% if block.settings.news_link != blank %}
+                <a href="{{ block.settings.news_link }}" class="news-card__read-more" style="color: {{ section.settings.accent_color }};">
+                  더 읽기 →
+                </a>
+              {% endif %}
+            </div>
+          </article>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <!-- View All Link -->
+    {% if section.settings.view_all_text != blank and section.settings.view_all_link != blank %}
+      <div class="latest-news__footer">
+        <a
+          href="{{ section.settings.view_all_link }}"
+          class="latest-news__view-all"
+          style="color: {{ section.settings.accent_color }}; border-color: {{ section.settings.accent_color }};">
+          {{ section.settings.view_all_text }}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .latest-news {
+    padding: 4rem 2rem;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  .latest-news__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .latest-news__header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .latest-news__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .latest-news__subtitle {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .latest-news__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .news-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    background-color: {{ section.settings.card_background }};
+    border: 1px solid {{ section.settings.card_border }};
+    transition: all 0.3s ease;
+  }
+
+  .news-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  }
+
+  .news-card__image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background-color: #f0f0f0;
+  }
+
+  .news-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .news-card:hover .news-card__image img {
+    transform: scale(1.05);
+  }
+
+  .news-card__badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #ffffff;
+  }
+
+  .news-card__content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    flex: 1;
+  }
+
+  .news-card__date {
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .news-card__title {
+    font-size: 1.375rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  .news-card__link {
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.2s;
+  }
+
+  .news-card__link:hover {
+    opacity: 0.7;
+  }
+
+  .news-card__excerpt {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+    flex: 1;
+  }
+
+  .news-card__read-more {
+    display: inline-block;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .news-card__read-more:hover {
+    transform: translateX(4px);
+  }
+
+  .latest-news__footer {
+    text-align: center;
+  }
+
+  .latest-news__view-all {
+    display: inline-block;
+    padding: 0.875rem 2rem;
+    border: 2px solid;
+    border-radius: 0.375rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+
+  .latest-news__view-all:hover {
+    background-color: {{ section.settings.accent_color }};
+    color: #ffffff !important;
+  }
+
+  @media (max-width: 768px) {
+    .latest-news {
+      padding: 2rem 1rem;
+    }
+
+    .latest-news__title {
+      font-size: 1.875rem;
+    }
+
+    .latest-news__grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .news-card__title {
+      font-size: 1.25rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Latest News",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Latest News"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Section Subtitle",
+      "default": "<p>출판 소식과 이벤트 정보</p>"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle Color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description Color",
+      "default": "#555555"
+    },
+    {
+      "type": "color",
+      "id": "meta_color",
+      "label": "Meta Color (Date)",
+      "default": "#999999"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#c4a36a"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_border",
+      "label": "Card Border Color",
+      "default": "#e8e8e8"
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "label": "View All Text",
+      "default": "모든 뉴스 보기"
+    },
+    {
+      "type": "url",
+      "id": "view_all_link",
+      "label": "View All Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "news_item",
+      "name": "News Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "news_image",
+          "label": "News Image"
+        },
+        {
+          "type": "text",
+          "id": "news_title",
+          "label": "News Title",
+          "default": "새로운 도서 출간 소식"
+        },
+        {
+          "type": "textarea",
+          "id": "news_excerpt",
+          "label": "News Excerpt",
+          "default": "새로운 도서가 출간되었습니다. 여기서 더 알아보세요."
+        },
+        {
+          "type": "text",
+          "id": "news_date",
+          "label": "News Date",
+          "default": "2025-12-04"
+        },
+        {
+          "type": "text",
+          "id": "news_badge",
+          "label": "Badge Text",
+          "default": "New"
+        },
+        {
+          "type": "url",
+          "id": "news_link",
+          "label": "News Link"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

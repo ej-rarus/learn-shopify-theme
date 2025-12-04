@@ -1,0 +1,545 @@
+{% comment %}
+  Books Catalog Section
+  도서 카탈로그 - 카테고리별 필터링 및 책 목록 표시
+{% endcomment %}
+
+<section class="books-catalog">
+  <div class="books-catalog__container">
+    <!-- Header -->
+    <div class="books-catalog__header">
+      <h1 class="books-catalog__title" style="color: {{ section.settings.title_color }};">
+        {{ section.settings.title }}
+      </h1>
+      {% if section.settings.subtitle != blank %}
+        <p class="books-catalog__subtitle" style="color: {{ section.settings.subtitle_color }};">
+          {{ section.settings.subtitle }}
+        </p>
+      {% endif %}
+    </div>
+
+    <!-- Filters and Search -->
+    <div class="books-catalog__controls">
+      <!-- Search Bar -->
+      <div class="books-catalog__search">
+        <input
+          type="text"
+          id="book-search"
+          class="books-catalog__search-input"
+          placeholder="{{ section.settings.search_placeholder }}"
+          style="border-color: {{ section.settings.border_color }};">
+        <button class="books-catalog__search-button" style="background-color: {{ section.settings.accent_color }};">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Category Filter -->
+      {% if section.blocks.size > 0 %}
+        <div class="books-catalog__filters">
+          <button
+            class="books-catalog__filter-btn books-catalog__filter-btn--active"
+            data-filter="all"
+            style="color: {{ section.settings.accent_color }};">
+            All
+          </button>
+          {% for block in section.blocks %}
+            {% if block.type == 'category' %}
+              <button
+                class="books-catalog__filter-btn"
+                data-filter="{{ block.settings.category_slug }}"
+                style="color: {{ section.settings.accent_color }};">
+                {{ block.settings.category_name }}
+              </button>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Books Grid -->
+    <div class="books-catalog__grid">
+      <!-- Sample Book Cards (In production, these would be dynamic products) -->
+      {% assign sample_books = "새로운 시작,숨겨진 이야기,더 나은 내일,마음의 소리,삶의 의미" | split: "," %}
+      {% assign book_authors = "김작가,박저자,이필자,최예술가,정창작자" | split: "," %}
+      {% assign book_categories = "essay,novel,poetry,art,philosophy" | split: "," %}
+
+      {% for i in (1..9) %}
+        {% assign mod = i | modulo: sample_books.size %}
+        <div class="book-card" data-category="{{ book_categories[mod] }}">
+          <!-- Book Cover Placeholder -->
+          <div class="book-card__cover">
+            <div class="book-card__cover-image" style="background: linear-gradient(135deg, {{ section.settings.accent_color }}, {{ section.settings.accent_color | color_lighten: 20 }});">
+              <div class="book-card__cover-text">
+                <h3>{{ sample_books[mod] }}</h3>
+                <p>{{ book_authors[mod] }}</p>
+              </div>
+            </div>
+            <div class="book-card__overlay">
+              <button class="book-card__add-to-cart" style="background-color: {{ section.settings.accent_color }};">
+                Add to Cart
+              </button>
+              <a href="#" class="book-card__view-details" style="color: {{ section.settings.accent_color }};">
+                View Details
+              </a>
+            </div>
+          </div>
+
+          <!-- Book Info -->
+          <div class="book-card__info">
+            <h3 class="book-card__title" style="color: {{ section.settings.text_color }};">
+              {{ sample_books[mod] }}
+            </h3>
+            <p class="book-card__author" style="color: {{ section.settings.author_color }};">
+              {{ book_authors[mod] }}
+            </p>
+            <div class="book-card__footer">
+              <span class="book-card__price" style="color: {{ section.settings.accent_color }};">
+                ${{ i | plus: 14 }}.99
+              </span>
+              <div class="book-card__rating">
+                {% for star in (1..5) %}
+                  <span class="book-card__star" style="color: {{ section.settings.accent_color }};">★</span>
+                {% endfor %}
+                <span class="book-card__review-count" style="color: {{ section.settings.meta_color }};">
+                  ({{ i | plus: 5 }})
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- No Results Message -->
+    <div class="books-catalog__empty" style="display: none;">
+      <p style="color: {{ section.settings.text_color }};">
+        검색 결과가 없습니다. 다른 키워드를 시도해보세요.
+      </p>
+    </div>
+
+    <!-- Load More Button -->
+    {% if section.settings.show_load_more %}
+      <div class="books-catalog__footer">
+        <button
+          class="books-catalog__load-more"
+          style="background-color: {{ section.settings.accent_color }}; color: {{ section.settings.button_text_color }};">
+          {{ section.settings.load_more_text }}
+        </button>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .books-catalog {
+    padding: 4rem 2rem;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  .books-catalog__container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .books-catalog__header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .books-catalog__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .books-catalog__subtitle {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .books-catalog__controls {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .books-catalog__search {
+    display: flex;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    border: 2px solid;
+  }
+
+  .books-catalog__search-input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: none;
+    font-size: 1rem;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  .books-catalog__search-input::placeholder {
+    color: {{ section.settings.meta_color }};
+  }
+
+  .books-catalog__search-button {
+    padding: 0.75rem 1.25rem;
+    border: none;
+    cursor: pointer;
+    color: #ffffff;
+    transition: opacity 0.2s;
+  }
+
+  .books-catalog__search-button:hover {
+    opacity: 0.9;
+  }
+
+  .books-catalog__filters {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .books-catalog__filter-btn {
+    padding: 0.75rem 1.5rem;
+    border: 2px solid;
+    border-color: {{ section.settings.border_color }};
+    border-radius: 50px;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s;
+  }
+
+  .books-catalog__filter-btn--active {
+    background-color: currentColor;
+    color: #ffffff !important;
+    border-color: currentColor;
+  }
+
+  .books-catalog__filter-btn:hover:not(.books-catalog__filter-btn--active) {
+    border-color: currentColor;
+  }
+
+  .books-catalog__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .book-card {
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+  }
+
+  .book-card__cover {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background-color: #f0f0f0;
+    margin-bottom: 1rem;
+  }
+
+  .book-card__cover-image {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    padding: 2rem 1rem;
+    color: #ffffff;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .book-card__cover-text {
+    width: 100%;
+  }
+
+  .book-card__cover-text h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.3;
+  }
+
+  .book-card__cover-text p {
+    font-size: 0.9rem;
+    margin: 0;
+    opacity: 0.9;
+  }
+
+  .book-card__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 2;
+  }
+
+  .book-card:hover .book-card__overlay {
+    opacity: 1;
+  }
+
+  .book-card__add-to-cart {
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 0.375rem;
+    color: #ffffff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .book-card__add-to-cart:hover {
+    transform: scale(1.05);
+  }
+
+  .book-card__view-details {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: opacity 0.2s;
+  }
+
+  .book-card__view-details:hover {
+    opacity: 0.8;
+  }
+
+  .book-card__info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .book-card__title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  .book-card__author {
+    font-size: 0.9rem;
+    margin: 0;
+  }
+
+  .book-card__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+    gap: 1rem;
+  }
+
+  .book-card__price {
+    font-size: 1.125rem;
+    font-weight: 700;
+  }
+
+  .book-card__rating {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .book-card__star {
+    font-size: 0.9rem;
+  }
+
+  .book-card__review-count {
+    font-size: 0.8rem;
+    margin-left: 0.25rem;
+  }
+
+  .books-catalog__empty {
+    text-align: center;
+    padding: 2rem;
+    grid-column: 1 / -1;
+  }
+
+  .books-catalog__footer {
+    text-align: center;
+  }
+
+  .books-catalog__load-more {
+    padding: 1rem 3rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  .books-catalog__load-more:hover {
+    opacity: 0.9;
+  }
+
+  @media (max-width: 768px) {
+    .books-catalog {
+      padding: 2rem 1rem;
+    }
+
+    .books-catalog__title {
+      font-size: 1.875rem;
+    }
+
+    .books-catalog__controls {
+      gap: 1rem;
+    }
+
+    .books-catalog__search {
+      max-width: 100%;
+    }
+
+    .books-catalog__filters {
+      width: 100%;
+      justify-content: flex-start;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+    }
+
+    .books-catalog__grid {
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Books Catalog",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Books Catalog"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Section Subtitle",
+      "default": "<p>모든 도서를 카테고리별로 탐색하세요</p>"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle Color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "author_color",
+      "label": "Author Color",
+      "default": "#999999"
+    },
+    {
+      "type": "color",
+      "id": "meta_color",
+      "label": "Meta Color",
+      "default": "#cccccc"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#c4a36a"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border Color",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "search_placeholder",
+      "label": "Search Placeholder",
+      "default": "도서 검색..."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_load_more",
+      "label": "Show Load More Button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "load_more_text",
+      "label": "Load More Button Text",
+      "default": "더 많은 책 보기"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "category_name",
+          "label": "Category Name",
+          "default": "Category"
+        },
+        {
+          "type": "text",
+          "id": "category_slug",
+          "label": "Category Slug",
+          "default": "category"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

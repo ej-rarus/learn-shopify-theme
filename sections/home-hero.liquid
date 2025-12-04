@@ -1,0 +1,444 @@
+{% comment %}
+  Home Hero Section
+  출판사 철학을 담은 메인 영웅 배너
+  "The Moved Mover" - 흔들림과 움직임을 기록하는 곳
+{% endcomment %}
+
+<section class="home-hero">
+  <!-- Background Video or Image -->
+  {% if section.settings.hero_video_url %}
+    <video class="home-hero__video" autoplay muted loop playsinline>
+      <source src="{{ section.settings.hero_video_url }}" type="video/mp4">
+    </video>
+  {% elsif section.settings.hero_image %}
+    <img
+      src="{{ section.settings.hero_image | image_url: width: 1920 }}"
+      alt="Hero Banner"
+      class="home-hero__image">
+  {% endif %}
+
+  <!-- Overlay -->
+  <div class="home-hero__overlay" style="background-color: rgba(0, 0, 0, {{ section.settings.overlay_opacity | divided_by: 100.0 }});">
+  </div>
+
+  <!-- Content -->
+  <div class="home-hero__container">
+    <div class="home-hero__content">
+      <!-- Badge -->
+      {% if section.settings.badge != blank %}
+        <div class="home-hero__badge" style="color: {{ section.settings.accent_color }};">
+          {{ section.settings.badge }}
+        </div>
+      {% endif %}
+
+      <!-- Main Title -->
+      <h1 class="home-hero__title" style="color: {{ section.settings.title_color }};">
+        {{ section.settings.title }}
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="home-hero__subtitle" style="color: {{ section.settings.subtitle_color }};">
+        {{ section.settings.subtitle }}
+      </p>
+
+      <!-- Description -->
+      {% if section.settings.description != blank %}
+        <div class="home-hero__description" style="color: {{ section.settings.description_color }};">
+          {{ section.settings.description }}
+        </div>
+      {% endif %}
+
+      <!-- CTA Buttons -->
+      <div class="home-hero__buttons">
+        {% if section.settings.button_1_text != blank and section.settings.button_1_link != blank %}
+          <a
+            href="{{ section.settings.button_1_link }}"
+            class="home-hero__button home-hero__button--primary"
+            style="background-color: {{ section.settings.button_color }}; color: {{ section.settings.button_text_color }};">
+            {{ section.settings.button_1_text }}
+            <span class="home-hero__button-icon">→</span>
+          </a>
+        {% endif %}
+
+        {% if section.settings.button_2_text != blank and section.settings.button_2_link != blank %}
+          <a
+            href="{{ section.settings.button_2_link }}"
+            class="home-hero__button home-hero__button--secondary"
+            style="color: {{ section.settings.button_2_color }}; border-color: {{ section.settings.button_2_color }};">
+            {{ section.settings.button_2_text }}
+          </a>
+        {% endif %}
+      </div>
+
+      <!-- Scroll Indicator -->
+      <div class="home-hero__scroll-indicator">
+        <div class="home-hero__scroll-icon"></div>
+        <p style="color: {{ section.settings.description_color }};">Scroll to explore</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .home-hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .home-hero__video,
+  .home-hero__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+
+  .home-hero__video {
+    object-position: center;
+  }
+
+  .home-hero__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .home-hero__container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .home-hero__content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .home-hero__badge {
+    display: inline-block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.5rem 1rem;
+    border: 1px solid currentColor;
+    border-radius: 50px;
+    animation: fadeInDown 0.8s ease-out;
+  }
+
+  .home-hero__title {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+    letter-spacing: -0.5px;
+    animation: fadeInDown 0.8s ease-out 0.2s both;
+  }
+
+  .home-hero__subtitle {
+    font-size: clamp(1.125rem, 3vw, 1.5rem);
+    font-weight: 400;
+    line-height: 1.6;
+    margin: 0;
+    max-width: 700px;
+    animation: fadeInDown 0.8s ease-out 0.4s both;
+  }
+
+  .home-hero__description {
+    font-size: clamp(0.95rem, 2vw, 1.125rem);
+    line-height: 1.8;
+    max-width: 600px;
+    margin: 0;
+    animation: fadeInDown 0.8s ease-out 0.6s both;
+  }
+
+  .home-hero__buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    animation: fadeInDown 0.8s ease-out 0.8s both;
+  }
+
+  .home-hero__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2.5rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    cursor: pointer;
+  }
+
+  .home-hero__button--primary {
+    border-color: transparent;
+  }
+
+  .home-hero__button--primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+  }
+
+  .home-hero__button--secondary {
+    background-color: transparent;
+    border-color: currentColor;
+  }
+
+  .home-hero__button--secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-4px);
+  }
+
+  .home-hero__button-icon {
+    transition: transform 0.3s ease;
+  }
+
+  .home-hero__button--primary:hover .home-hero__button-icon {
+    transform: translateX(4px);
+  }
+
+  .home-hero__scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    animation: bounce 2s infinite;
+  }
+
+  .home-hero__scroll-icon {
+    width: 24px;
+    height: 40px;
+    border: 2px solid currentColor;
+    border-radius: 12px;
+    position: relative;
+  }
+
+  .home-hero__scroll-icon::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 8px;
+    background-color: currentColor;
+    border-radius: 1px;
+    animation: scroll-bounce 1.5s infinite;
+  }
+
+  .home-hero__scroll-indicator p {
+    font-size: 0.875rem;
+    margin: 0;
+    letter-spacing: 0.5px;
+  }
+
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateX(-50%) translateY(0);
+    }
+    50% {
+      transform: translateX(-50%) translateY(8px);
+    }
+  }
+
+  @keyframes scroll-bounce {
+    0%, 100% {
+      opacity: 0;
+      transform: translateY(0);
+    }
+    50% {
+      opacity: 1;
+      transform: translateY(8px);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .home-hero {
+      min-height: 80vh;
+    }
+
+    .home-hero__buttons {
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .home-hero__button {
+      width: 100%;
+      max-width: 400px;
+      justify-content: center;
+    }
+
+    .home-hero__scroll-indicator {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .home-hero__badge,
+    .home-hero__title,
+    .home-hero__subtitle,
+    .home-hero__description,
+    .home-hero__buttons,
+    .home-hero__scroll-indicator {
+      animation: none;
+    }
+
+    .home-hero__button,
+    .home-hero__button--secondary {
+      transition: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Home Hero",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Background Image"
+    },
+    {
+      "type": "url",
+      "id": "hero_video_url",
+      "label": "Hero Video URL (MP4) - Optional"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay Opacity",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "default": 40,
+      "unit": "%"
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge Text",
+      "default": "Welcome to The Moved Mover"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Main Title",
+      "default": "우리는 부동의 신이 아닙니다"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "<p>매 순간 흔들리고, 움직이며, 변합니다.</p><p>그리고 그 흔들림은 다시 누군가를 움직입니다.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>The Moved Mover는 그 파동을 기록으로 남깁니다. 독립 출판물, 아티스트북, 그리고 창작자들의 목소리를 담은 책들을 만나세요.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_1_text",
+      "label": "Primary Button Text",
+      "default": "도서 보기"
+    },
+    {
+      "type": "url",
+      "id": "button_1_link",
+      "label": "Primary Button Link"
+    },
+    {
+      "type": "text",
+      "id": "button_2_text",
+      "label": "Secondary Button Text",
+      "default": "더 알아보기"
+    },
+    {
+      "type": "url",
+      "id": "button_2_link",
+      "label": "Secondary Button Link"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle Color",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description Color",
+      "default": "#c0c0c0"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Primary Button Background",
+      "default": "#c4a36a"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Primary Button Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_2_color",
+      "label": "Secondary Button Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color (Badge)",
+      "default": "#c4a36a"
+    }
+  ]
+}
+{% endschema %}
